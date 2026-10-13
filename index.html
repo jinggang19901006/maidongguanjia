@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>川麦冬管家 · 高保真原型（适老化·合规版）</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  :root{
+    --green:#1a9d4e; --green-d:#0f7a3a; --green-l:#e8f6ee;
+    --amber:#e8881a; --red:#d8392f; --ink:#16201b; --sub:#5f6f66;
+    --line:#e9ede9; --bg:#f3f6f3; --card:#ffffff; --disabled:#c2ccc4;
+    --fs:17px; /* 适老化基准字号 */
+  }
+  body.elder{ --fs:20px; }
+  body{ background:#2b2f2c; font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; font-size:var(--fs); display:flex; justify-content:center; padding:24px 0; line-height:1.5;}
+  /* phone */
+  .phone{ width:390px; height:844px; background:#000; border-radius:46px; padding:12px; box-shadow:0 30px 70px rgba(0,0,0,.5); position:relative; }
+  .screen{ width:100%; height:100%; background:var(--bg); border-radius:36px; overflow:hidden; position:relative; display:flex; flex-direction:column; }
+  .statusbar{ height:34px; display:flex; align-items:center; justify-content:space-between; padding:0 22px; font-size:13px; color:var(--ink); font-weight:600; background:#fff; flex:0 0 auto;}
+  .statusbar .dots{ display:flex; gap:4px; align-items:center;}
+  .statusbar .dots i{ width:6px; height:6px; border-radius:50%; background:var(--ink); display:block;}
+  /* nav tabs */
+  .tabs{ position:absolute; bottom:0; left:0; right:0; height:72px; background:#fff; border-top:1px solid var(--line); display:flex; z-index:30; padding-bottom:10px; flex:0 0 auto;}
+  .tab{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; font-size:12.5px; color:var(--sub); }
+  .tab.active{ color:var(--green); }
+  .tab svg{ width:26px; height:26px; }
+  /* content scroll area */
+  .view{ flex:1; overflow-y:auto; padding:0 0 84px; }
+  .view::-webkit-scrollbar{ display:none; }
+  .topbar{ background:#fff; padding:16px 18px 14px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:10; border-bottom:1px solid var(--line);}
+  .topbar h1{ font-size:21px; color:var(--ink); font-weight:700;}
+  .topbar .sub{ font-size:13px; color:var(--sub); }
+  .badge-geo{ font-size:12.5px; color:var(--green-d); background:var(--green-l); padding:5px 11px; border-radius:20px; font-weight:600;}
+  /* cards */
+  .card{ background:var(--card); border-radius:18px; padding:18px; margin:14px; box-shadow:0 2px 12px rgba(31,42,36,.05); }
+  .card.tight{ margin:12px 14px; padding:15px; }
+  .row{ display:flex; align-items:center; gap:11px; }
+  .col{ display:flex; flex-direction:column; }
+  .between{ justify-content:space-between; }
+  .mtx{ margin-top:12px; } .mts{ margin-top:7px; }
+  .muted{ color:var(--sub); font-size:15px; }
+  .sm{ font-size:14px; } .xs{ font-size:13px; }
+  .bold{ font-weight:700; } .ink{ color:var(--ink); }
+  .green{ color:var(--green); } .red{ color:var(--red); } .amber{ color:var(--amber); }
+  .btn{ background:var(--green); color:#fff; border:none; border-radius:26px; padding:14px 20px; font-size:17px; font-weight:700; cursor:pointer; min-height:52px; }
+  .btn.amber{ background:var(--amber); } .btn.ghost{ background:var(--green-l); color:var(--green-d); }
+  .btn:active{ transform:scale(.97); }
+  .btn.block{ width:100%; }
+  .pill{ font-size:13px; padding:4px 11px; border-radius:20px; background:var(--green-l); color:var(--green-d); font-weight:600;}
+  .pill.amber{ background:#fdeede; color:#b9740a; } .pill.red{ background:#fbe9e7; color:#c62f2f; } .pill.gray{ background:#eef1ee; color:#5f6f66; } .pill.blue{background:#e7f0fb;color:#1f5fb0;}
+  /* progress */
+  .bar{ height:10px; background:#e2e9e2; border-radius:8px; overflow:hidden; }
+  .bar > i{ display:block; height:100%; background:var(--green); border-radius:8px; }
+  /* disclaimer footer (persistent) */
+  .disc-bar{ background:#fff8e9; border:1px solid #f3e2bf; border-radius:12px; padding:9px 12px; margin:0 14px 6px; font-size:12.5px; color:#8a6d2f; line-height:1.45;}
+  /* land cards */
+  .land{ background:linear-gradient(135deg,#1a9d4e,#0f7a3a); color:#fff; border-radius:20px; padding:18px; margin:14px; position:relative; overflow:hidden; }
+  .land .stage{ position:absolute; right:14px; top:14px; background:rgba(255,255,255,.22); padding:5px 12px; border-radius:20px; font-size:13px;}
+  .land h3{ font-size:19px; font-weight:700;} .land .meta{ font-size:14px; opacity:.92; margin-top:7px;}
+  .land .next{ background:rgba(255,255,255,.18); border-radius:14px; padding:12px 14px; margin-top:13px; font-size:14.5px; display:flex; align-items:center; gap:9px; line-height:1.4;}
+  .land .progress{ margin-top:13px; }
+  .land .bar{ background:rgba(255,255,255,.32);} .land .bar>i{ background:#ffe08a;}
+  /* policy opportunity banner carousel */
+  .banner{ margin:12px 14px; border-radius:18px; overflow:hidden; position:relative; box-shadow:0 4px 16px rgba(31,42,36,.1);}
+  .banner-track{ display:flex; width:200%; transition:transform .4s ease; }
+  .banner-track .slide{ width:50%; flex:0 0 50%; position:relative; overflow:hidden; cursor:pointer; color:#fff; padding:18px 18px 22px; min-height:156px;}
+  .slide.a{ background:linear-gradient(135deg,#2e9e6b,#157a45);}
+  .slide.b{ background:linear-gradient(135deg,#d9772e,#b9541a);}
+  .slide h3{ font-size:18px; font-weight:700; display:flex; align-items:center; gap:8px; max-width:82%;}
+  .slide p{ font-size:14px; opacity:.94; margin-top:8px; line-height:1.5; max-width:92%;}
+  .slide .go{ margin-top:12px; display:inline-block; background:rgba(255,255,255,.22); padding:7px 14px; border-radius:20px; font-size:14px; font-weight:700;}
+  .tag-hot{ position:absolute; right:12px; top:12px; background:#ff5b4d; color:#fff; font-size:12px; padding:3px 9px; border-radius:14px; font-weight:700; z-index:3;}
+  .banner-dots{ position:absolute; right:14px; bottom:12px; display:flex; gap:6px; z-index:3;}
+  .banner-dots i{ width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,.5); transition:.2s; cursor:pointer;}
+  .banner-dots i.on{ background:#fff; width:18px; border-radius:4px;}
+  /* timeline */
+  .tl{ padding:6px 16px 20px; }
+  .tl-item{ position:relative; padding:0 0 4px 32px; }
+  .tl-item::before{ content:""; position:absolute; left:10px; top:24px; bottom:-4px; width:2px; background:var(--line);}
+  .tl-item:last-child::before{ display:none; }
+  .tl-dot{ position:absolute; left:3px; top:7px; width:16px; height:16px; border-radius:50%; background:#fff; border:3px solid var(--disabled); z-index:2;}
+  .tl-item.done .tl-dot{ background:var(--green); border-color:var(--green);}
+  .tl-item.cur .tl-dot{ background:var(--amber); border-color:var(--amber); box-shadow:0 0 0 5px #fdeede;}
+  .tl-item.cur::before{ background:var(--green); }
+  .tl-card{ background:#fff; border-radius:16px; padding:13px 15px; margin:7px 0 15px; border:1px solid var(--line); cursor:pointer; }
+  .tl-item.cur .tl-card{ border-color:var(--amber); box-shadow:0 4px 16px rgba(232,136,26,.14);}
+  .tl-card .t{ font-size:16px; font-weight:700; color:var(--ink);}
+  .tl-card .d{ font-size:13.5px; color:var(--sub); margin-top:4px;}
+  .tl-card .go{ float:right; color:var(--green); font-size:13.5px; font-weight:700;}
+  /* solution card */
+  .sol{ border:1px solid var(--line); border-radius:16px; padding:13px; margin-top:11px; background:#fbfdfb;}
+  .sol .h{ font-size:15px; font-weight:700; color:var(--ink); display:flex; align-items:center; gap:6px;}
+  .sol .item{ display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px dashed var(--line);}
+  .sol .item:last-child{ border-bottom:none; }
+  .sol .name{ font-size:15px; color:var(--ink); font-weight:600;} .sol .spec{ font-size:13px; color:var(--sub);}
+  .sol .buy{ font-size:14px; color:var(--green); font-weight:700; padding:8px 12px; background:var(--green-l); border-radius:18px;}
+  .risk{ background:#fff5f4; border:1px solid #f6cfca; border-radius:12px; padding:9px 11px; margin-top:11px; font-size:13px; color:#b23b32; line-height:1.45;}
+  /* modal / sheet */
+  .mask{ position:absolute; inset:0; background:rgba(0,0,0,.45); z-index:40; display:none; }
+  .sheet{ position:absolute; left:0; right:0; bottom:0; background:#fff; border-radius:24px 24px 0 0; z-index:50; transform:translateY(100%); transition:transform .25s; max-height:82%; overflow-y:auto; padding:20px 18px 34px;}
+  .sheet.show{ transform:translateY(0); }
+  .sheet h2{ font-size:20px; color:var(--ink); font-weight:700;}
+  .sheet .closex{ position:absolute; right:18px; top:16px; font-size:26px; color:var(--sub); cursor:pointer; line-height:1;}
+  .seg{ display:flex; gap:8px; margin:12px 0; flex-wrap:wrap;}
+  /* recognize */
+  .cam{ height:240px; background:linear-gradient(135deg,#dff3e6,#bfe6cd); border-radius:18px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; color:var(--green-d); cursor:pointer; border:3px dashed var(--green); font-size:16px;}
+  .cam svg{ width:52px; height:52px; }
+  .diag{ display:none; }
+  .diag .dcard{ background:#fff; border-radius:18px; padding:17px; margin-top:15px; box-shadow:0 2px 12px rgba(31,42,36,.06);}
+  .conf{ font-size:13px; }
+  /* mall */
+  .shelf-tabs{ display:flex; gap:8px; overflow-x:auto; padding:11px 14px; background:#fff; position:sticky; top:58px; z-index:9;}
+  .shelf-tabs::-webkit-scrollbar{display:none;}
+  .stab{ white-space:nowrap; font-size:13.5px; padding:8px 13px; border-radius:20px; background:var(--bg); color:var(--sub); font-weight:600;}
+  .stab.active{ background:var(--green); color:#fff; }
+  .prod{ display:flex; gap:13px; background:#fff; border-radius:16px; padding:14px; margin:11px 14px; }
+  .prod .thumb{ width:66px; height:66px; border-radius:12px; background:linear-gradient(135deg,#e8f6ee,#cdeed8); display:flex; align-items:center; justify-content:center; font-size:30px; flex:0 0 auto;}
+  .prod .info{ flex:1; }
+  .prod .pname{ font-size:15.5px; font-weight:700; color:var(--ink);}
+  .prod .price{ color:var(--red); font-weight:700; font-size:17px; }
+  .prod .price small{ font-size:12px; font-weight:400;}
+  /* expert */
+  .field{ border:1px solid var(--line); border-radius:14px; padding:13px 14px; margin-top:11px; font-size:16px; color:var(--ink); background:#fff; width:100%;}
+  textarea.field{ height:92px; resize:none; }
+  .mic{ width:50px; height:50px; border-radius:50%; background:var(--green-l); color:var(--green-d); display:flex; align-items:center; justify-content:center; border:none; cursor:pointer; flex:0 0 auto;}
+  .mic svg{ width:24px; height:24px;}
+  .call{ background:var(--green); color:#fff; border:none; border-radius:26px; padding:14px 18px; font-size:16px; font-weight:700; min-height:52px; display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer; width:100%;}
+  .call svg{ width:22px; height:22px;}
+  /* toast */
+  .toast{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,.84); color:#fff; padding:14px 20px; border-radius:14px; font-size:14.5px; z-index:90; display:none; max-width:82%; text-align:center; line-height:1.5;}
+  /* disclaimer launch overlay */
+  .disc-overlay{ position:absolute; inset:0; background:#fff; z-index:100; display:flex; flex-direction:column; padding:34px 26px; overflow-y:auto;}
+  .disc-overlay h2{ font-size:22px; color:var(--ink); font-weight:700; text-align:center;}
+  .disc-overlay .sub{ text-align:center; color:var(--sub); font-size:14px; margin-top:8px;}
+  .disc-box{ background:var(--bg); border-radius:16px; padding:18px; margin-top:20px; font-size:15px; color:var(--ink); line-height:1.7;}
+  .disc-box b{ color:var(--green-d);}
+  .disc-check{ display:flex; align-items:flex-start; gap:10px; margin-top:20px; font-size:14.5px; color:var(--ink); cursor:pointer;}
+  .disc-check .box{ width:24px; height:24px; border:2px solid var(--green); border-radius:6px; flex:0 0 auto; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700;}
+  .disc-check.on .box{ background:var(--green); }
+  .disc-enter{ margin-top:18px; background:var(--disabled); color:#fff; border:none; border-radius:26px; padding:16px; font-size:18px; font-weight:700; min-height:56px; width:100%;}
+  .disc-enter.on{ background:var(--green); }
+  /* list */
+  .list-item{ display:flex; justify-content:space-between; align-items:center; padding:16px; background:#fff; border-bottom:1px solid var(--line); font-size:16px; color:var(--ink);}
+  .list-item:active{ background:#f7f9f7; }
+  .arrow{ color:#c2ccc4; font-size:18px;}
+  .switch{ width:52px; height:30px; border-radius:16px; background:var(--disabled); position:relative; transition:.2s;}
+  .switch.on{ background:var(--green); }
+  .switch i{ position:absolute; top:3px; left:3px; width:24px; height:24px; border-radius:50%; background:#fff; transition:.2s;}
+  .switch.on i{ left:25px; }
+  .section-title{ font-size:16px; font-weight:700; color:var(--ink); margin:18px 14px 2px; }
+  .hidden{ display:none !important; }
+  .loading{ display:inline-block; width:18px; height:18px; border:2px solid #fff; border-top-color:transparent; border-radius:50%; animation:spin .7s linear infinite; vertical-align:-3px; margin-right:7px;}
+  @keyframes spin{ to{ transform:rotate(360deg);} }
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="screen">
+    <div class="statusbar">
+      <span>9:41</span>
+      <span class="dots"><i></i><i></i><i></i> 5G ▮▮▮ 100%</span>
+    </div>
+
+    <!-- ============ HOME ============ -->
+    <div class="view" id="view-home">
+      <div class="topbar"><h1>我的麦冬地</h1><span class="badge-geo">📍 三台·涪城</span></div>
+
+      <div class="disc-bar">⚠️ 本平台方案与 AI 识别结果<b style="color:#8a6d2f">仅供参考</b>，不构成种植/用药最终依据，请结合实地并咨询农技人员。</div>
+
+      <div class="hero" style="background:linear-gradient(135deg,#1a9d4e,#0f7a3a);color:#fff;margin:12px 14px;border-radius:20px;padding:18px">
+        <h2 style="font-size:18px;font-weight:700">川麦冬全生命周期管家</h2>
+        <p style="font-size:14px;opacity:.93;margin-top:7px;line-height:1.55">按时推送农事与用肥用药方案，AI 识别 + 专家诊断双重把关，帮您顺利用过新药典。</p>
+        <div class="stat" style="display:flex;gap:9px;margin-top:13px">
+          <div class="s" style="flex:1;background:rgba(255,255,255,.16);border-radius:12px;padding:9px"><div class="n" style="font-size:17px;font-weight:700">2</div><div class="l" style="font-size:11px;opacity:.9">地块</div></div>
+          <div class="s" style="flex:1;background:rgba(255,255,255,.16);border-radius:12px;padding:9px"><div class="n" style="font-size:17px;font-weight:700">20.5</div><div class="l" style="font-size:11px;opacity:.9">亩</div></div>
+          <div class="s" style="flex:1;background:rgba(255,255,255,.16);border-radius:12px;padding:9px"><div class="n" style="font-size:17px;font-weight:700">3</div><div class="l" style="font-size:11px;opacity:.9">待办农事</div></div>
+        </div>
+      </div>
+
+      <!-- 政策机会：顶部轮播 banner（与地块卡片拉开层级） -->
+      <div class="banner" id="banner">
+        <div class="banner-track" id="bannerTrack">
+          <div class="slide a" onclick="openOpp('kongwang')">
+            <span class="tag-hot">政策红利</span>
+            <h3>🌿 不用多效唑，也能控旺</h3>
+            <p>2025 药典首设多效唑残留红线（≤0.1mg/kg）。生态控旺替代方案，过检更安心、收购价更高。</p>
+            <span class="go">查看生态控旺方案 ›</span>
+          </div>
+          <div class="slide b" onclick="openOpp('chongcha')">
+            <span class="tag-hot">主产区痛点</span>
+            <h3>🪴 重茬地不过检？土壤修复</h3>
+            <p>连作致土传病害高发、残留超标。轮作 + 生物菌剂 + 土壤改良，从根上解决问题。</p>
+            <span class="go">查看重茬治理方案 ›</span>
+          </div>
+        </div>
+        <div class="banner-dots" id="bannerDots"><i class="on" onclick="goBanner(0,event)"></i><i onclick="goBanner(1,event)"></i></div>
+      </div>
+
+      <div class="land" onclick="openLand('l1')">
+        <span class="stage">当前：提苗生根期</span>
+        <h3>涪城村 2 号地</h3>
+        <div class="meta">8.5 亩 · 川麦1号 · 2026-04-28 栽种</div>
+        <div class="next">⏰ 6 月中旬追肥：25-6-9 提苗肥 30–40kg/亩</div>
+        <div class="progress row between"><span class="xs">全周期进度 18%</span></div>
+        <div class="bar"><i style="width:18%"></i></div>
+      </div>
+
+      <div class="land" style="background:linear-gradient(135deg,#3a7d52,#225c3b)" onclick="openLand('l2')">
+        <span class="stage">当前：返青期</span>
+        <h3>永明镇 1 号地</h3>
+        <div class="meta">12 亩 · 涪麦1号 · 2026-05-10 栽种</div>
+        <div class="next">🔍 返青期查缺补苗，AI 评估出苗率</div>
+        <div class="progress row between"><span class="xs">全周期进度 8%</span></div>
+        <div class="bar"><i style="width:8%"></i></div>
+      </div>
+
+      <div class="card tight row between" onclick="switchTab('calendar')">
+        <div><div class="bold ink" style="font-size:16px">查看全生命周期日历</div><div class="muted sm mts">10 个阶段 · 当前处于第 5 阶段</div></div>
+        <span class="green" style="font-size:20px">›</span>
+      </div>
+      <div style="height:8px"></div>
+    </div>
+
+    <!-- ============ CALENDAR ============ -->
+    <div class="view hidden" id="view-calendar">
+      <div class="topbar"><h1>生命周期</h1><span class="badge-geo">🌱 约 12 个月</span></div>
+      <div class="card tight" style="margin-top:12px">
+        <div class="row between"><span class="bold ink" style="font-size:16px">涪城村 2 号地</span><span class="pill amber">提苗生根期</span></div>
+        <div class="bar mtx"><i style="width:18%"></i></div>
+        <div class="muted xs mts">栽种 2026-04-28 · 预计采收 2027-04 上旬</div>
+      </div>
+      <div class="tl" id="timeline"></div>
+    </div>
+
+    <!-- ============ RECOGNIZE ============ -->
+    <div class="view hidden" id="view-recognize">
+      <div class="topbar"><h1>AI 识别</h1><span class="badge-geo">苗情·病虫害·缺素</span></div>
+      <div class="card">
+        <div class="cam" id="camBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8a2 2 0 0 1 2-2h2l1.5-2h7L19 6h0a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="12.5" r="3.5"/></svg>
+          <div class="bold">拍照 / 上传叶片照片</div>
+          <div class="sm" style="opacity:.85">支持苗情、病虫害、缺素识别</div>
+        </div>
+        <div class="diag" id="diagBox">
+          <div class="dcard">
+            <div class="row between">
+              <span class="bold ink" style="font-size:16.5px">叶斑病（高湿季节高发）</span>
+              <span class="pill amber">置信度 91%</span>
+            </div>
+            <div class="muted sm mts" style="line-height:1.55">叶片出现圆形黄斑、边缘紫红色，后期病斑穿孔。</div>
+            <div class="sol mtx">
+              <div class="h">💊 防治建议（合规）</div>
+              <div class="item"><div><div class="name">苯醚甲环唑 10%</div><div class="spec">预防期 1500 倍液</div></div><span class="buy" onclick="goMallFrom('叶斑病','苯醚甲环唑')">去购买</span></div>
+              <div class="item"><div><div class="name">井冈霉素 5%</div><div class="spec">治疗期 1000 倍液</div></div><span class="buy" onclick="goMallFrom('叶斑病','井冈霉素')">去购买</span></div>
+            </div>
+            <div class="risk">⚠️ AI 识别仅供参考，为第一道筛查而非最终诊断；复杂或毁灭性病害请转专家复核，用药前请核对标签与安全间隔期。</div>
+            <div class="row between mtx">
+              <span class="xs muted">不确定？让专家帮您看</span>
+              <span class="btn ghost sm" style="min-height:44px;font-size:15px" onclick="switchTab('expert')">转专家诊断</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section-title">识别记录</div>
+      <div class="card tight"><div class="muted sm">暂无更多记录</div></div>
+    </div>
+
+    <!-- ============ MALL ============ -->
+    <div class="view hidden" id="view-mall">
+      <div class="topbar"><h1>麦冬农资</h1><span class="badge-geo">🛡 合规优选</span></div>
+      <div class="shelf-tabs" id="shelfTabs"></div>
+      <div id="prodList"></div>
+      <div class="card tight" style="margin-top:6px">
+        <div class="row between"><span class="bold ink" style="font-size:15px">🛡 合规护栏</span></div>
+        <div class="muted xs mts" style="line-height:1.5">已屏蔽 47 种禁用农药 · 多效唑残留红线 ≤0.1mg/kg · 采收前 30 天自动停售化学药。平台仅提供商品信息，请遵标签与当地规定使用。</div>
+      </div>
+    </div>
+
+    <!-- ============ EXPERT ============ -->
+    <div class="view hidden" id="view-expert">
+      <div class="topbar"><h1>专家诊断</h1><span class="badge-geo">1分钟初诊·5分钟复核</span></div>
+      <div class="card">
+        <div class="bold ink" style="font-size:16px">一键问诊</div>
+        <div class="muted sm mts" style="line-height:1.5">AI 初诊 + 属地专家人工复核，输出带合规用法的电子处方。</div>
+        <div class="field mtx" style="height:46px;display:flex;align-items:center">地块：涪城村 2 号地（提苗生根期）</div>
+        <div class="row" style="gap:8px;margin-top:11px">
+          <textarea class="field" style="flex:1;margin-top:0" placeholder="请描述症状，例如：叶片发黄、根部褐色腐烂…（也可点右侧麦克风说话）">叶片发黄、植株萎蔫，湿度大时根部有白色菌丝</textarea>
+          <button class="mic" onclick="toast('正在聆听…（演示）请口述症状')" title="语音输入">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+          </button>
+        </div>
+        <div class="cam" style="height:120px; margin-top:11px; border-color:var(--green-d); font-size:14px" onclick="toast('已添加 3 张照片')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg>
+          <div class="sm">+ 添加照片（最多 6 张）</div>
+        </div>
+        <button class="btn block mtx" onclick="submitExpert(this)">提交问诊</button>
+        <button class="call mtx" onclick="toast('正在接通县麦冬办农技热线 0816-2822078')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h3l2 5-2 1a11 11 0 0 0 5 5l1-2 5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+          一键电话咨询农技员
+        </button>
+      </div>
+      <div class="card hidden" id="rxBox">
+        <div class="row between"><span class="bold ink" style="font-size:16.5px">📋 电子处方</span><span class="pill green">专家已复核</span></div>
+        <div class="muted xs mts">主治医师：县农科院 植保站 · 李工 ｜ 复核用时 4 分 12 秒</div>
+        <div class="sol mtx">
+          <div class="h">🔬 诊断：根腐病（初期）</div>
+          <div class="item"><div><div class="name">噁霉灵·吡唑醚菌酯</div><div class="spec">灌根，发病初期</div></div><span class="buy" onclick="goMallFrom('根腐病','噁霉灵')">去购买</span></div>
+          <div class="item"><div><div class="name">枯草芽孢杆菌</div><div class="spec">生物防控，沟施 5kg/亩</div></div><span class="buy" onclick="goMallFrom('根腐病','枯草芽孢杆菌')">去购买</span></div>
+        </div>
+        <div class="risk">⚠️ 处方仅供参考，用药前请核对标签剂量、安全间隔期与当地规定；加强水分管理避免积水，采收前 30 天停用化学农药。</div>
+      </div>
+    </div>
+
+    <!-- ============ MINE ============ -->
+    <div class="view hidden" id="view-mine">
+      <div class="topbar"><h1>我的</h1></div>
+      <div class="card row between" style="margin-top:12px">
+        <div class="row"><div style="width:50px;height:50px;border-radius:50%;background:var(--green-l);display:flex;align-items:center;justify-content:center;font-size:24px">🌿</div>
+        <div class="col mts"><div class="bold ink" style="font-size:16px">麦冬种植户</div><div class="muted xs">积分 320 · 会员 L1</div></div></div>
+        <span class="arrow">›</span>
+      </div>
+      <div class="section-title">设置</div>
+      <div class="list-item" onclick="toggleElder()">
+        <div>👴 长辈模式（放大字号）</div>
+        <div class="switch" id="elderSw"><i></i></div>
+      </div>
+      <div class="list-item" onclick="openDisc()">📜 免责声明与风险提示 <span class="arrow">›</span></div>
+      <div class="section-title">我的服务</div>
+      <div class="list-item" onclick="switchTab('home')">我的麦冬地 <span class="arrow">›</span></div>
+      <div class="list-item" onclick="switchTab('calendar')">农事日历 <span class="arrow">›</span></div>
+      <div class="list-item" onclick="switchTab('mall')">我的订单 <span class="arrow">›</span></div>
+      <div class="list-item" onclick="toast('即将上线：年度种植档案与溯源')">种植档案 / 溯源 <span class="arrow">›</span></div>
+      <div class="list-item" onclick="toast('即将上线：农技学堂（大字语音版）')">农技学堂 <span class="arrow">›</span></div>
+      <div class="list-item" onclick="toast('客服：县麦冬办农技热线 0816-2822078')">联系专家 / 客服 <span class="arrow">›</span></div>
+    </div>
+
+    <!-- bottom tabs -->
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab('home')" data-v="home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>麦冬地</div>
+      <div class="tab" onclick="switchTab('calendar')" data-v="calendar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>生命周期</div>
+      <div class="tab" onclick="switchTab('recognize')" data-v="recognize">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>AI识别</div>
+      <div class="tab" onclick="switchTab('mall')" data-v="mall">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 7h12l-1 13H7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>农资</div>
+      <div class="tab" onclick="switchTab('expert')" data-v="expert">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>专家</div>
+    </div>
+
+    <!-- stage sheet -->
+    <div class="mask" id="mask" onclick="closeSheet()"></div>
+    <div class="sheet" id="stageSheet">
+      <span class="closex" onclick="closeSheet()">×</span>
+      <div id="sheetContent"></div>
+    </div>
+
+    <!-- opportunity sheet -->
+    <div class="sheet" id="oppSheet">
+      <span class="closex" onclick="closeSheet()">×</span>
+      <div id="oppContent"></div>
+    </div>
+
+    <!-- disclaimer launch overlay -->
+    <div class="disc-overlay" id="discOverlay">
+      <h2>温馨提示 · 使用前请阅读</h2>
+      <div class="sub">川麦冬管家 · 免费功能说明与免责声明</div>
+      <div class="disc-box">
+        本平台的<b>生命周期方案建议、AI 病虫害识别</b>均为<b>免费参考工具</b>，请注意：<br><br>
+        1. 方案与识别结果<b>仅供参考</b>，不构成种植或用药的最终依据，请结合地块实地情况并咨询农技人员/专家后实施。<br>
+        2. AI 识别为<b>第一道筛查</b>，非最终诊断；复杂或毁灭性病害请以专家复核与病原检测为准。<br>
+        3. 所有用肥用药须严格遵循<b>农药标签、安全间隔期及当地法规</b>；因使用不当造成的作物损失，平台不承担责任。<br>
+        4. 2025 版《中国药典》对多效唑等设残留限量，禁用农药已扩至 47 种，请务必合规使用。
+      </div>
+      <div class="disc-check" id="discCheck" onclick="toggleDisc()">
+        <div class="box" id="discBox">✓</div>
+        <div>我已阅读并理解上述《免责声明与风险提示》</div>
+      </div>
+      <button class="disc-enter" id="discEnter" onclick="enterApp()">同意并进入</button>
+    </div>
+
+    <div class="toast" id="toast"></div>
+  </div>
+</div>
+
+<script>
+/* ---------- data: 10 lifecycle stages ---------- */
+const STAGES = [
+  {id:1, name:"选地整地", time:"栽前 7–10 天", status:"done",
+   farm:"深翻 20–30cm、清除杂草/香附子；选沙壤土 pH 7–8",
+   fert:[{n:"商品有机肥",s:"800–1500 kg/亩",buy:0},{n:"平衡复合肥 15-15-15",s:"30–40 kg/亩",buy:1}], med:[]},
+  {id:2, name:"种苗处理", time:"4 月（随采收选种）", status:"done",
+   farm:"选健壮单蘖苗（≥15 叶、株高≥10cm）",
+   fert:[], med:[{n:"多菌灵 / 甲基硫菌灵",s:"浸苗杀菌",buy:8}]},
+  {id:3, name:"栽种", time:"4 中下–5 中（阴天）", status:"done",
+   farm:"株行距 10×8cm、深 3–4cm、栽后灌水淹没 5cm", fert:[], med:[]},
+  {id:4, name:"返青期", time:"栽后 1 月内", status:"done",
+   farm:"查缺补苗、降雨后浅锄保墒；AI 评估出苗率", fert:[], med:[]},
+  {id:5, name:"提苗生根期", time:"6 月中旬", status:"cur",
+   farm:"中耕、水分保持 60–70%；提苗追肥",
+   fert:[{n:"高氮提苗肥 25-6-9",s:"30–40 kg/亩",buy:2}], med:[{n:"噁霉灵·吡唑醚菌酯",s:"预防根腐，灌根",buy:9}]},
+  {id:6, name:"分蘖期", time:"7 下–8 上", status:"todo",
+   farm:"排水防涝、间作玉米管理；平衡追肥",
+   fert:[{n:"平衡复合肥 15-15-15",s:"30–40 kg/亩",buy:1}], med:[{n:"苯醚甲环唑 10%",s:"叶斑病预防 1500 倍液",buy:10}]},
+  {id:7, name:"壮苗期", time:"9 月（玉米收后）", status:"todo",
+   farm:"植株调控、红蜘蛛/蚜虫监测",
+   fert:[{n:"平衡复合肥 15-15-15",s:"30–40 kg/亩",buy:1}], med:[{n:"阿维菌素 1.8%",s:"红蜘蛛 3000 倍液",buy:11}]},
+  {id:8, name:"果根生长期", time:"10 中下", status:"todo",
+   farm:"控水（湿度<30%、干湿交替）；叶面调控（生态控旺关键期）",
+   fert:[{n:"黄腐酸钾 + 磷酸二氢钾",s:"叶面 3–4 次/15天",buy:3},{n:"磷酸二氢钾",s:"500–1000 倍液",buy:4}], med:[]},
+  {id:9, name:"块根膨大期", time:"次年 2 中下", status:"todo",
+   farm:"保温防冻；叶面肥 2–3 次/10天",
+   fert:[{n:"黄腐酸钾 + 磷酸二氢钾",s:"同配方 2–3 次",buy:3}], med:[]},
+  {id:10, name:"采收", time:"次年 3 底–4 中（清明后）", status:"todo",
+   farm:"采挖、清洗、分级、烘干；产量录入", fert:[], med:[]}
+];
+
+/* ---------- mall products ---------- */
+const PRODUCTS = [
+  {id:0,name:"商品有机肥（川麦冬专用）",emoji:"🌱",spec:"40kg/袋",price:"85",tag:"配方肥",stage:1,use:"底肥/改土"},
+  {id:1,name:"平衡复合肥 15-15-15",emoji:"🟫",spec:"50kg/袋",price:"160",tag:"配方肥",stage:1,use:"底肥/分蘖/壮苗"},
+  {id:2,name:"高氮提苗肥 25-6-9",emoji:"🟢",spec:"50kg/袋",price:"175",tag:"配方肥",stage:5,use:"提苗生根（氮前移）"},
+  {id:3,name:"黄腐酸钾叶面肥",emoji:"🍃",spec:"1kg/袋",price:"48",tag:"功能肥",stage:8,use:"生态控旺/膨大"},
+  {id:4,name:"磷酸二氢钾",emoji:"💎",spec:"500g/袋",price:"22",tag:"功能肥",stage:8,use:"叶面喷施"},
+  {id:8,name:"多菌灵 50%",emoji:"🧪",spec:"100g/袋",price:"15",tag:"生物农药",stage:2,use:"种苗消毒"},
+  {id:9,name:"噁霉灵·吡唑醚菌酯",emoji:"🧴",spec:"200ml/瓶",price:"36",tag:"合规农药",stage:5,use:"根腐灌根"},
+  {id:10,name:"苯醚甲环唑 10%",emoji:"💊",spec:"100g/袋",price:"28",tag:"合规农药",stage:6,use:"叶斑病"},
+  {id:11,name:"阿维菌素 1.8%",emoji:"🕸",spec:"200ml/瓶",price:"19",tag:"合规农药",stage:7,use:"红蜘蛛"},
+  {id:12,name:"枯草芽孢杆菌",emoji:"🦠",spec:"1kg/袋",price:"55",tag:"生物农药",stage:5,use:"生物防控/重茬"},
+  {id:13,name:"淡紫拟青霉颗粒剂",emoji:"🌾",spec:"1kg/袋",price:"62",tag:"生物农药",stage:1,use:"防线结线虫/重茬"},
+  {id:14,name:"四聚乙醛颗粒剂",emoji:"🐌",spec:"500g/袋",price:"24",tag:"合规农药",stage:7,use:"蛞蝓蜗牛"}
+];
+const STAGE_NAMES = ["","底肥期","种苗期","栽种期","返青期","提苗期","分蘖期","壮苗期","果根期","膨大期","采收期"];
+
+/* ---------- policy opportunity content ---------- */
+const OPP = {
+  kongwang:{
+    title:"🌿 生态控旺方案（替代多效唑）",
+    intro:"2025 版《中国药典》首设麦冬<b>多效唑残留红线（≤0.1mg/kg）</b>，传统控旺方式受限。以下为合规替代路径，既能控旺长、促膨大，又能顺利过检、卖价更高（案例：不用多效唑的麦冬收购价高 40%，105 vs 75 元/kg）。",
+    items:[
+      ["施肥调控","氮肥前移、钾肥后移——川麦冬『123』方案：1 底（有机肥）+ 2 撒（高氮→平衡复合肥）+ 3 喷（高钾叶面肥）"],
+      ["叶面调控","块根期喷 磷酸二氢钾 + 黄腐酸钾/海藻酸，促膨大、控旺长（替代调节剂）"],
+      ["物理调控","适时中耕、断根；合理密植；与玉米间作遮阴，抑制过度营养生长"],
+      ["合规调节剂","如需使用植物生长调节剂，须严格按登记范围与剂量，严禁超量"]
+    ],
+    buy:[3,4,2,1],
+    risk:"控旺非一日之功，请结合地块长势与农技人员指导逐步调整，切勿盲目加大用药。"
+  },
+  chongcha:{
+    title:"🪴 重茬 / 连作障碍治理（解决残留超标不过检）",
+    intro:"主产区长期连作致<b>土壤板结酸化、土传病害（根腐病、根结线虫）高发、残留积累超标</b>。治理须提前一季规划，轮作是根本。",
+    items:[
+      ["轮作换茬","水旱轮作（与水稻）；轮作周期 ≥2 年，前茬选玉米 / 大豆 / 蔬菜"],
+      ["土壤改良","增施有机肥、深翻晒垡、测土配方，恢复地力"],
+      ["生物菌剂","淡紫拟青霉（防线结线虫）、枯草芽孢杆菌（抗病）、绿僵菌/白僵菌（地下害虫）沟施"],
+      ["种苗消毒","多菌灵 / 甲基硫菌灵浸苗；栽前剪净老根，清除香附子"]
+    ],
+    buy:[0,12,13,8],
+    risk:"重茬治理以预防为本，发病后再补救成本高；连作障碍地块建议先轮作一季再种麦冬。"
+  }
+};
+
+/* ---------- render timeline ---------- */
+function renderTimeline(){
+  const tl = document.getElementById('timeline');
+  tl.innerHTML = STAGES.map(s=>`
+    <div class="tl-item ${s.status}">
+      <div class="tl-dot"></div>
+      <div class="tl-card" onclick="openStage(${s.id})">
+        <div class="row between"><span class="t">${s.id}. ${s.name}</span><span class="go">详情 ›</span></div>
+        <div class="d">${s.time}</div>
+      </div>
+    </div>`).join('');
+}
+
+/* ---------- stage sheet ---------- */
+function openStage(id){
+  const s = STAGES.find(x=>x.id===id);
+  const fertHtml = s.fert.length? s.fert.map(f=>`
+    <div class="item"><div><div class="name">${f.n}</div><div class="spec">${f.s}</div></div>
+    <span class="buy" onclick="goMallFrom('${s.name}','${f.n}')">去购买</span></div>`).join('') : '<div class="muted sm" style="padding:9px 0">本阶段以农事操作为主</div>';
+  const medHtml = s.med.length? s.med.map(m=>`
+    <div class="item"><div><div class="name">${m.n}</div><div class="spec">${m.s}</div></div>
+    <span class="buy" onclick="goMallFrom('${s.name}','${m.n}')">去购买</span></div>`).join('') : '<div class="muted sm" style="padding:9px 0">本阶段无化学用药</div>';
+  document.getElementById('sheetContent').innerHTML = `
+    <span class="pill ${s.status==='cur'?'amber':'green'}">${s.status==='cur'?'当前阶段':s.status==='done'?'已完成':'待开始'}</span>
+    <h2 style="margin-top:9px">${s.id}. ${s.name}</h2>
+    <div class="muted sm mts">⏱ ${s.time}</div>
+    <div class="card tight" style="margin:13px 0 0;box-shadow:none;border:1px solid var(--line)"><div class="bold ink sm">🌾 农事操作</div><div class="muted sm mts" style="line-height:1.55">${s.farm}</div></div>
+    <div class="sol"><div class="h">🟢 用肥方案</div>${fertHtml}</div>
+    <div class="sol"><div class="h">💊 用药 / 植保方案</div>${medHtml}</div>
+    <div class="risk">🛡 所有药剂均经合规校验：屏蔽 47 种禁用农药、多效唑红线、采收前 30 天安全间隔。请严格按标签与安全间隔使用，本方案仅供参考。</div>
+    <button class="btn block mtx" onclick="toast('已生成「${s.name}」农事待办')">加入我的农事待办</button>`;
+  showSheet('stageSheet');
+}
+function closeSheet(){ document.getElementById('mask').style.display='none'; document.getElementById('stageSheet').classList.remove('show'); document.getElementById('oppSheet').classList.remove('show'); }
+function showSheet(id){ document.getElementById('mask').style.display='block'; document.getElementById(id).classList.add('show'); }
+
+/* ---------- opportunity sheet ---------- */
+function openOpp(key){
+  const o = OPP[key];
+  const items = o.items.map(it=>`<div class="card tight mtx" style="box-shadow:none;border:1px solid var(--line)"><div class="bold ink">${it[0]}</div><div class="muted sm mts" style="line-height:1.55">${it[1]}</div></div>`).join('');
+  const buys = o.buy.map(id=>{const p=PRODUCTS.find(x=>x.id===id);return `<span class="buy" onclick="goMallFrom('${o.title}','${p.name}')">${p.name} ›</span>`;}).join(' ');
+  document.getElementById('oppContent').innerHTML = `
+    <h2>${o.title}</h2>
+    <div class="muted sm mts" style="line-height:1.6">${o.intro}</div>
+    ${items}
+    <div class="risk">⚠️ ${o.risk}</div>
+    <div class="card tight mtx" style="box-shadow:none;border:1px solid var(--line)"><div class="bold ink sm">🛒 方案配套农资</div><div class="row" style="gap:8px;flex-wrap:wrap;margin-top:9px">${buys}</div></div>
+    <button class="btn block mtx" onclick="goMallFrom('${o.title}','配套农资')">去商城选购配套农资</button>`;
+  showSheet('oppSheet');
+}
+
+/* ---------- mall ---------- */
+function renderShelfTabs(){
+  const t = document.getElementById('shelfTabs');
+  t.innerHTML = STAGE_NAMES.map((n,i)=>`<div class="stab ${i===5?'active':''}" data-st="${i}" onclick="filterShelf(${i})">${i===0?'全部':n}</div>`).join('');
+}
+function renderProducts(stage=5){
+  const list = stage===0? PRODUCTS : PRODUCTS.filter(p=>p.stage===stage);
+  document.getElementById('prodList').innerHTML = list.map(p=>`
+    <div class="prod" onclick="openProduct(${p.id})">
+      <div class="thumb">${p.emoji}</div>
+      <div class="info">
+        <div class="pname">${p.name}</div>
+        <div class="row" style="gap:6px;margin-top:5px"><span class="pill ${p.tag==='生物农药'?'green':p.tag==='合规农药'?'amber':'gray'}">${p.tag}</span><span class="xs muted">${p.use}</span></div>
+        <div class="row between mts"><span class="price">¥${p.price}<small>/${p.spec}</small></span><span class="btn ghost sm" style="min-height:42px;font-size:14px">查看</span></div>
+      </div>
+    </div>`).join('') || '<div class="card tight muted sm">该阶段暂无推荐商品</div>';
+}
+function filterShelf(st){ document.querySelectorAll('.stab').forEach(e=>e.classList.toggle('active', +e.dataset.st===st)); renderProducts(st); }
+function openProduct(id){
+  const p = PRODUCTS.find(x=>x.id===id);
+  document.getElementById('sheetContent').innerHTML = `
+    <h2>${p.emoji} ${p.name}</h2>
+    <div class="row" style="gap:6px;margin-top:9px"><span class="pill ${p.tag==='生物农药'?'green':p.tag==='合规农药'?'amber':'gray'}">${p.tag}</span><span class="xs muted">适配阶段：${STAGE_NAMES[p.stage]}</span></div>
+    <div class="price mtx">¥${p.price} <small style="color:var(--sub);font-weight:400">/ ${p.spec}</small></div>
+    <div class="card tight mtx" style="box-shadow:none;border:1px solid var(--line)"><div class="bold ink sm">推荐用途</div><div class="muted sm mts" style="line-height:1.55">${p.use}。本商品已通过合规校验，可安全用于川麦冬种植周期。</div></div>
+    <div class="risk">请严格按农药标签与当地规定使用，注意安全间隔期；平台仅提供商品信息。</div>
+    <div class="row" style="gap:11px;margin-top:13px">
+      <button class="btn ghost block" onclick="toast('已加入购物车')">加入购物车</button>
+      <button class="btn block" onclick="toast('已下单，1 小时送达地头')">立即购买</button>
+    </div>`;
+  showSheet('stageSheet');
+}
+
+/* ---------- tab switch ---------- */
+function switchTab(v){
+  ['home','calendar','recognize','mall','expert','mine'].forEach(id=>{
+    document.getElementById('view-'+id).classList.toggle('hidden', id!==v);
+  });
+  if(['home','calendar','recognize','mall','expert'].includes(v)){
+    document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active', t.dataset.v===v));
+  }
+  if(v==='calendar') renderTimeline();
+  if(v==='mall'){ renderShelfTabs(); renderProducts(5); }
+}
+function openLand(id){ toast('已切换至该地块日历'); switchTab('calendar'); }
+
+/* ---------- recognize flow ---------- */
+document.getElementById('camBtn').addEventListener('click', ()=>{
+  const box = document.getElementById('diagBox');
+  document.getElementById('camBtn').innerHTML = '<div class="loading"></div><div class="sm">AI 识别中…</div>';
+  setTimeout(()=>{
+    box.style.display='block';
+    document.getElementById('camBtn').innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8a2 2 0 0 1 2-2h2l1.5-2h7L19 6h0a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="12.5" r="3.5"/></svg><div class="bold">拍照 / 上传叶片照片</div><div class="sm" style="opacity:.85">支持苗情、病虫害、缺素识别</div>`;
+    box.scrollIntoView({behavior:'smooth'});
+  }, 1400);
+});
+
+/* ---------- go mall from solution card ---------- */
+function goMallFrom(stageName, prodName){
+  closeSheet();
+  switchTab('mall');
+  setTimeout(()=>{ toast(`已为你定位商城：${prodName}`); }, 250);
+}
+
+/* ---------- expert submit ---------- */
+function submitExpert(btn){
+  btn.innerHTML = '<span class="loading"></span> 派单中…'; btn.disabled=true;
+  setTimeout(()=>{
+    document.getElementById('rxBox').classList.remove('hidden');
+    btn.innerHTML='已提交';
+    document.getElementById('rxBox').scrollIntoView({behavior:'smooth'});
+  }, 1600);
+}
+
+/* ---------- disclaimer ---------- */
+function toggleDisc(){ const c=document.getElementById('discCheck'); c.classList.toggle('on'); const e=document.getElementById('discEnter'); e.classList.toggle('on', c.classList.contains('on')); }
+function enterApp(){ if(!document.getElementById('discCheck').classList.contains('on')){ toast('请先勾选已阅读免责声明'); return;} document.getElementById('discOverlay').style.display='none'; try{localStorage.setItem('mcDisc','1');}catch(e){} }
+function openDisc(){ document.getElementById('sheetContent').innerHTML=`
+  <h2>📜 免责声明与风险提示</h2>
+  <div class="muted sm mts" style="line-height:1.7">本平台的<b>生命周期方案建议、AI 病虫害识别</b>均为<b>免费参考工具</b>：<br><br>
+  1. 方案与识别结果仅供参考，不构成种植或用药的最终依据，请结合实地并咨询农技人员/专家后实施。<br>
+  2. AI 识别为第一道筛查，非最终诊断；复杂或毁灭性病害请以专家复核与病原检测为准。<br>
+  3. 用肥用药须严格遵循农药标签、安全间隔期及当地法规；因使用不当造成的作物损失，平台不承担责任。<br>
+  4. 2025 版《中国药典》对多效唑等设残留限量，禁用农药已扩至 47 种，请务必合规使用。</div>
+  <button class="btn block mtx" onclick="closeSheet()">我已知晓</button>`;
+  showSheet('stageSheet');
+}
+
+/* ---------- elder mode ---------- */
+function toggleElder(){ const sw=document.getElementById('elderSw'); const on=sw.classList.toggle('on'); document.body.classList.toggle('elder',on); toast(on?'已开启长辈模式':'已关闭长辈模式'); }
+
+/* ---------- toast ---------- */
+let toastTimer;
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.style.display='block';
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.style.display='none', 1900);
+}
+
+/* ---------- policy banner carousel ---------- */
+let bannerIdx = 0, bannerTimer;
+function goBanner(i, ev){
+  if(ev) ev.stopPropagation();
+  bannerIdx = i;
+  document.getElementById('bannerTrack').style.transform = `translateX(-${i*50}%)`;
+  document.querySelectorAll('#bannerDots i').forEach((d,k)=>d.classList.toggle('on', k===i));
+  restartBanner();
+}
+function restartBanner(){ clearInterval(bannerTimer); bannerTimer = setInterval(()=>{ goBanner((bannerIdx+1)%2); }, 4500); }
+/* swipe support */
+let touchX = null;
+const bannerEl = document.getElementById('banner');
+bannerEl.addEventListener('touchstart', e=>{ touchX = e.touches[0].clientX; }, {passive:true});
+bannerEl.addEventListener('touchend', e=>{ if(touchX===null) return; const dx = e.changedTouches[0].clientX - touchX; if(Math.abs(dx)>30){ goBanner(dx<0 ? Math.min(bannerIdx+1,1) : Math.max(bannerIdx-1,0)); } touchX=null; });
+
+/* init */
+renderTimeline();
+restartBanner();
+try{ if(localStorage.getItem('mcDisc')==='1'){ document.getElementById('discOverlay').style.display='none'; } }catch(e){}
+</script>
+</body>
+</html>
