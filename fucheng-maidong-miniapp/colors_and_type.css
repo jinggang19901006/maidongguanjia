@@ -1,0 +1,107 @@
+:root {
+  color-scheme: light;
+  --maidong-background: #f6f3ea;
+  --maidong-foreground: #1d2a1f;
+  --maidong-card: #fffdf8;
+  --maidong-card-foreground: #1d2a1f;
+  --maidong-popover: #fffdf8;
+  --maidong-popover-foreground: #1d2a1f;
+  --maidong-primary: #567a38;
+  --maidong-primary-foreground: #f9fff2;
+  --maidong-muted: #ebe4d6;
+  --maidong-muted-foreground: #6c7567;
+  --maidong-border: #d9d2c1;
+  --maidong-input: #d9d2c1;
+  --maidong-ring: #7aa352;
+  --maidong-surface-2: #f1ecdf;
+  --maidong-surface-3: #e7e0d0;
+  --maidong-brand-soft: #e4efd8;
+  --maidong-brand-soft-2: #d4e4c0;
+  --maidong-warning: #b67c27;
+  --maidong-warning-foreground: #fff8ea;
+  --maidong-danger: #b24736;
+  --maidong-danger-foreground: #fff5f2;
+  --maidong-success: #4e7b49;
+  --maidong-success-foreground: #f5fff4;
+  --state-success: #4e7b49;
+  --state-warning: #b67c27;
+  --state-error: #b24736;
+  --state-info: #567a38;
+  --maidong-radius-small: 4px;
+  --maidong-radius-medium: 10px;
+  --maidong-radius-large: 16px;
+  --maidong-radius-full: 9999px;
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+  --shadow-1: 0 1px 2px rgba(30, 42, 28, 0.04), 0 6px 20px rgba(30, 42, 28, 0.03);
+  --shadow-2: 0 16px 40px rgba(30, 42, 28, 0.08);
+  --font-sans: Inter, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+.theme-light {
+  --background: var(--maidong-background);
+  --foreground: var(--maidong-foreground);
+  --card: var(--maidong-card);
+  --card-foreground: var(--maidong-card-foreground);
+  --popover: var(--maidong-popover);
+  --popover-foreground: var(--maidong-popover-foreground);
+  --primary: var(--maidong-primary);
+  --primary-foreground: var(--maidong-primary-foreground);
+  --muted: var(--maidong-muted);
+  --muted-foreground: var(--maidong-muted-foreground);
+  --border: var(--maidong-border);
+  --input: var(--maidong-input);
+  --ring: var(--maidong-ring);
+}
+
+html, body {
+  font-family: var(--font-sans);
+}
+
+body {
+  background: var(--maidong-background);
+  color: var(--maidong-foreground);
+}
+
+.type-display {
+  font-size: clamp(28px, 6vw, 34px);
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.type-h1 {
+  font-size: clamp(24px, 5vw, 28px);
+  line-height: 1.18;
+  font-weight: 700;
+}
+
+.type-h2 {
+  font-size: 20px;
+  line-height: 1.24;
+  font-weight: 700;
+}
+
+.type-h3 {
+  font-size: 17px;
+  line-height: 1.35;
+  font-weight: 600;
+}
+
+.type-body-lg {
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.type-body {
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.type-caption {
+  font-size: 12px;
+  line-height: 1.5;
+}

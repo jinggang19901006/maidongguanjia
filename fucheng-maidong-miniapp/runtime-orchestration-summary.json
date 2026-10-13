@@ -1,0 +1,2647 @@
+{
+  "schemaVersion": "1.0",
+  "skillProvenance": {
+    "name": "solo-design",
+    "version": "2026.08.06.19.15.08",
+    "release": "prompt-base-cloud-ssot-migration",
+    "version_source": "skill-release-manifest.json",
+    "read_status": "ok"
+  },
+  "project": {
+    "name": "川麦冬全周期管理小程序",
+    "operation": "create",
+    "deviceType": "mobile",
+    "surface": "project",
+    "resolvedLane": "existing_edit_add_comparison",
+    "intentProfile": {
+      "caseFamily": "existing_edit_add_comparison",
+      "sourceType": "existing-page-suite",
+      "complexity": "stateful-existing-edit",
+      "routingReason": "用户要求继续完成整套核心页的农户工具化风格，按现有项目新增整套对比页处理。"
+    },
+    "selectedIntentWorkflowRead": true,
+    "contextRequirementsLoaded": [
+      {
+        "path": "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "delivery-quality/page-rendering-quality-gate.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "delivery-quality/design-artifact-validation.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "delivery-quality/delivery-evidence-contract.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "visual-experience/visual-experience-guidelines.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      }
+    ],
+    "contextReadScope": {
+      "mainAgent": {
+        "forbiddenReads": [
+          "other intent-workflows/**",
+          "Sub-Agent implementation files before dispatch"
+        ]
+      },
+      "pageSubAgent": {
+        "allowedReads": [
+          "current lane page runtime guide",
+          "current lane dispatch contract excerpt",
+          "current Page Packet",
+          "supplementaryReads[] only"
+        ],
+        "forbiddenReads": [
+          "SKILL.md full re-read",
+          "other intent-workflows/**",
+          "full runtime-orchestration-summary.json unless explicitly sliced"
+        ]
+      },
+      "readScopeLedgerWriter": "shared-runtime/deterministic-tooling/build-page-dispatch-manifest.mjs"
+    },
+    "validationRunDiscipline": {
+      "maxFullValidationRuns": 2,
+      "softWarningsTriggerRepair": false,
+      "blockingRepairMode": "targeted-once",
+      "forbiddenRepairTriggers": [
+        "soft-warning-only",
+        "provenance-warning-only",
+        "style-warning-only"
+      ]
+    },
+    "lowValueCallWatchdog": {
+      "applies": true,
+      "noProgressSignals": [
+        "no_tool_call",
+        "no_artifact_diff",
+        "no_structured_decision"
+      ],
+      "noProgressNextAction": "enter_readiness_or_blocked_summary"
+    },
+    "cssPreflightEvidence": {
+      "applies": true,
+      "status": "passed",
+      "command": "node {SKILL_DIR}/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs <css-path> <preflight-html> --title=\"Preflight\" --lang=zh-CN --prefix=maidong",
+      "brandPrefix": "maidong",
+      "checks": {
+        "themeVars": "present",
+        "semanticTokenFallback": "present",
+        "themeInline": "present",
+        "tailwindCdn": "present",
+        "htmlClass": "present",
+        "semanticMappings": "resolved"
+      },
+      "retryCount": 0,
+      "blockingReason": null
+    },
+    "styleDefinitionBrief": "面向四川涪城麦冬种植户的农业管理工具型小程序，配色偏土地与作物绿，强调可信、专业、易读。",
+    "designRead": "农业生产工具 / 种植户与农技顾问 / 专业可信 / 信息明确 / 避免通用SaaS感",
+    "designDials": {
+      "layoutVariance": 2,
+      "motionIntensity": 2,
+      "visualDensity": 3
+    },
+    "styleContinuityAnchors": [
+      "暖米色背景 + 草本绿主色",
+      "圆角控制在 16px 内",
+      "顶部小程序导航 + 底部五栏导航",
+      "卡片式农事信息模块",
+      "关键行动按钮统一使用深绿实底"
+    ],
+    "pageCompletenessGate": {
+      "expectedPages": [
+        "home",
+        "fields",
+        "ai-diagnosis",
+        "plan",
+        "expert",
+        "mine",
+        "home-conversion",
+        "home-farmer-tool",
+        "fields-farmer-tool",
+        "ai-diagnosis-farmer-tool",
+        "plan-farmer-tool",
+        "expert-farmer-tool",
+        "mine-farmer-tool"
+      ],
+      "requiredStates": [],
+      "requiredInteractions": [
+        "bottom-nav",
+        "open-ai-diagnosis",
+        "open-plan-detail",
+        "open-expert-diagnosis",
+        "back-or-close"
+      ],
+      "requiredNavigation": [
+        "bottom-nav",
+        "back-or-close"
+      ],
+      "missingAllowed": []
+    },
+    "defaultDeliverableVisibility": {
+      "applies": true,
+      "requiredVisibleRegions": [
+        {
+          "htmlSrc": "pages/home.html",
+          "selector": "#region-field-overview",
+          "label": "地块概览",
+          "source": "user requirement"
+        },
+        {
+          "htmlSrc": "pages/ai-diagnosis.html",
+          "selector": "#region-diagnosis-result",
+          "label": "AI识别结果",
+          "source": "user requirement"
+        },
+        {
+          "htmlSrc": "pages/plan.html",
+          "selector": "#region-lifecycle-plan",
+          "label": "生命周期方案建议",
+          "source": "user requirement"
+        },
+        {
+          "htmlSrc": "pages/expert.html",
+          "selector": "#region-expert-service",
+          "label": "在线专家诊断入口",
+          "source": "user requirement"
+        }
+      ],
+      "hiddenAllowed": []
+    },
+    "sharedProjectShellContract": {
+      "radiusScale": "4 / 10 / 16",
+      "surfaceDepthModel": "浅层卡片 + 轻边框，静态面板不使用重阴影",
+      "mobileNavigation": {
+        "applies": true,
+        "type": "bottom-tab",
+        "items": [
+          {
+            "key": "home",
+            "label": "首页",
+            "icon": "house"
+          },
+          {
+            "key": "fields",
+            "label": "地块",
+            "icon": "map"
+          },
+          {
+            "key": "ai",
+            "label": "识别",
+            "icon": "scan-line"
+          },
+          {
+            "key": "plan",
+            "label": "方案",
+            "icon": "clipboard-list"
+          },
+          {
+            "key": "mine",
+            "label": "我的",
+            "icon": "user-round"
+          }
+        ],
+        "heightPx": 64,
+        "position": "flow-bottom",
+        "activeState": "only color/font-weight/data-active may change; no class changes that affect layout",
+        "structure": {
+          "navTag": "nav",
+          "navClass": "mt-6 border border-border/80 bg-card rounded-[16px] shadow-[var(--shadow-1)] h-[64px]",
+          "innerClass": "w-full grid grid-cols-5 h-full",
+          "itemTag": "a",
+          "itemClass": "min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-[11px]",
+          "iconClass": "w-5 h-5 shrink-0",
+          "labelClass": "text-[11px] leading-none whitespace-nowrap max-w-full truncate",
+          "activeRule": "only color/font-weight/data-active may change; no class changes that affect layout",
+          "markerAttr": "data-mobile-nav=\"global\"",
+          "canonicalHtmlByKey": {
+            "home": "<nav data-mobile-nav=\"global\" class=\"mt-6 border border-border/80 bg-card rounded-[16px] shadow-[var(--shadow-1)] h-[64px]\"><div class=\"w-full grid grid-cols-5 h-full\"><a href=\"#\" data-nav-key=\"home\" data-active=\"true\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-primary font-semibold\"><i data-lucide=\"house\" class=\"w-5 h-5 shrink-0\"></i><span class=\"text-[11px] leading-none whitespace-nowrap\">首页</span></a><a href=\"#\" data-nav-key=\"fields\" data-dom-id=\"nav-fields\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground\"><i data-lucide=\"map\" class=\"w-5 h-5 shrink-0\"></i><span class=\"text-[11px] leading-none whitespace-nowrap\">地块</span></a><a href=\"#\" data-nav-key=\"ai\" data-dom-id=\"nav-ai-diagnosis\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground\"><i data-lucide=\"scan-line\" class=\"w-5 h-5 shrink-0\"></i><span class=\"text-[11px] leading-none whitespace-nowrap\">识别</span></a><a href=\"#\" data-nav-key=\"plan\" data-dom-id=\"nav-plan\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground\"><i data-lucide=\"clipboard-list\" class=\"w-5 h-5 shrink-0\"></i><span class=\"text-[11px] leading-none whitespace-nowrap\">方案</span></a><a href=\"#\" data-nav-key=\"mine\" data-dom-id=\"nav-mine\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground\"><i data-lucide=\"user-round\" class=\"w-5 h-5 shrink-0\"></i><span class=\"text-[11px] leading-none whitespace-nowrap\">我的</span></a></div></nav>",
+            "fields": "<nav data-mobile-nav=\"global\" class=\"mt-6 border border-border/80 bg-card rounded-[16px] shadow-[var(--shadow-1)] h-[64px]\"><div class=\"w-full grid grid-cols-5 h-full\"><a href=\"#\" data-nav-key=\"home\" data-dom-id=\"nav-home\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground\"><i data-lucide=\"house\" class=\"w-5 h-5 shrink-0\"></i><span class=\"text-[11px] leading-none whitespace-nowrap\">首页</span></a><a href=\"#\" data-nav-key=\"fields\" data-active=\"true\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-primary font-semibold\"><i data-lucide=\"map\" class=\"w-5 h-5 shrink-0\"></i><span class=\"text-[11px] leading-none whitespace-nowrap\">地块</span></a><a href=\"#\" data-nav-key=\"ai\" data-dom-id=\"nav-ai-diagnosis\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground\"><i data-lucide=\"scan-line\" class=\"w-5 h-5 shrink-0\"></i><span class=\"text-[11px] leading-none whitespace-nowrap\">识别</span></a><a href=\"#\" data-nav-key=\"plan\" data-dom-id=\"nav-plan\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground\"><i data-lucide=\"clipboard-list\" class=\"w-5 h-5 shrink-0\"></i><span class=\"text-[11px] leading-none whitespace-nowrap\">方案</span></a><a href=\"#\" data-nav-key=\"mine\" data-dom-id=\"nav-mine\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground\"><i data-lucide=\"user-round\" class=\"w-5 h-5 shrink-0\"></i><span class=\"text-[11px] leading-none whitespace-nowrap\">我的</span></a></div></nav>",
+            "ai": "<nav data-mobile-nav=\"global\" class=\"mt-6 border border-border/80 bg-card rounded-[16px] shadow-[var(--shadow-1)] h-[64px]\"><div class=\"w-full grid grid-cols-5 h-full\"><a href=\"#\" data-nav-key=\"home\" data-dom-id=\"nav-home\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground\"><i data-lucide=\"house\" class=\"w-5 h-5 shrink-0\"></i><span class=\"text-[11px] leading-none whitespace-nowrap\">首页</span></a><a href=\"#\" data-nav-key=\"fields\" data-dom-id=\"nav-fields\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground\"><i data-lucide=\"map\" class=\"w-5 h-5 shrink-0\"></i><span class=\"text-[11px] leading-none whitespace-nowrap\">地块</span></a><a href=\"#\" data-nav-key=\"ai\" data-active=\"true\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-primary font-semibold\"><i data-lucide=\"scan-line\" class=\"w-5 h-5 shrink-0\"></i><span class=\"text-[11px] leading-none whitespace-nowrap\">识别</span></a><a href=\"#\" data-nav-key=\"plan\" data-dom-id=\"nav-plan\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground\"><i data-lucide=\"clipboard-list\" class=\"w-5 h-5 shrink-0\"></i><span class=\"text-[11px] leading-none whitespace-nowrap\">方案</span></a><a href=\"#\" data-nav-key=\"mine\" data-dom-id=\"nav-mine\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground\"><i data-lucide=\"user-round\" class=\"w-5 h-5 shrink-0\"></i><span class=\"text-[11px] leading-none whitespace-nowrap\">我的</span></a></div></nav>",
+            "plan": "<nav data-mobile-nav=\"global\" class=\"mt-6 border border-border/80 bg-card rounded-[16px] shadow-[var(--shadow-1)] h-[64px]\"><div class=\"w-full grid grid-cols-5 h-full\"><a href=\"#\" data-nav-key=\"home\" data-dom-id=\"nav-home\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground\"><i data-lucide=\"house\" class=\"w-5 h-5 shrink-0\"></i><span class=\"text-[11px] leading-none whitespace-nowrap\">首页</span></a><a href=\"#\" data-nav-key=\"fields\" data-dom-id=\"nav-fields\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground\"><i data-lucide=\"map\" class=\"w-5 h-5 shrink-0\"></i><span class=\"text-[11px] leading-none whitespace-nowrap\">地块</span></a><a href=\"#\" data-nav-key=\"ai\" data-dom-id=\"nav-ai-diagnosis\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground\"><i data-lucide=\"scan-line\" class=\"w-5 h-5 shrink-0\"></i><span class=\"text-[11px] leading-none whitespace-nowrap\">识别</span></a><a href=\"#\" data-nav-key=\"plan\" data-active=\"true\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-primary font-semibold\"><i data-lucide=\"clipboard-list\" class=\"w-5 h-5 shrink-0\"></i><span class=\"text-[11px] leading-none whitespace-nowrap\">方案</span></a><a href=\"#\" data-nav-key=\"mine\" data-dom-id=\"nav-mine\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground\"><i data-lucide=\"user-round\" class=\"w-5 h-5 shrink-0\"></i><span class=\"text-[11px] leading-none whitespace-nowrap\">我的</span></a></div></nav>",
+            "mine": "<nav data-mobile-nav=\"global\" class=\"mt-6 border border-border/80 bg-card rounded-[16px] shadow-[var(--shadow-1)] h-[64px]\"><div class=\"w-full grid grid-cols-5 h-full\"><a href=\"#\" data-nav-key=\"home\" data-dom-id=\"nav-home\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground\"><i data-lucide=\"house\" class=\"w-5 h-5 shrink-0\"></i><span class=\"text-[11px] leading-none whitespace-nowrap\">首页</span></a><a href=\"#\" data-nav-key=\"fields\" data-dom-id=\"nav-fields\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground\"><i data-lucide=\"map\" class=\"w-5 h-5 shrink-0\"></i><span class=\"text-[11px] leading-none whitespace-nowrap\">地块</span></a><a href=\"#\" data-nav-key=\"ai\" data-dom-id=\"nav-ai-diagnosis\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground\"><i data-lucide=\"scan-line\" class=\"w-5 h-5 shrink-0\"></i><span class=\"text-[11px] leading-none whitespace-nowrap\">识别</span></a><a href=\"#\" data-nav-key=\"plan\" data-dom-id=\"nav-plan\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground\"><i data-lucide=\"clipboard-list\" class=\"w-5 h-5 shrink-0\"></i><span class=\"text-[11px] leading-none whitespace-nowrap\">方案</span></a><a href=\"#\" data-nav-key=\"mine\" data-active=\"true\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-primary font-semibold\"><i data-lucide=\"user-round\" class=\"w-5 h-5 shrink-0\"></i><span class=\"text-[11px] leading-none whitespace-nowrap\">我的</span></a></div></nav>"
+          }
+        }
+      }
+    },
+    "dispatchPreflightManifest": [
+      {
+        "recorded_at": "2026-10-12T06:52:26.620Z",
+        "generatedBy": "build-page-dispatch-manifest.mjs",
+        "packetType": "ExistingEditPagePacket",
+        "laneContract": {
+          "resolvedLane": "existing_edit_add_comparison",
+          "packetType": "ExistingEditPagePacket",
+          "pageRuntimeGuide": "intent-workflows/intent-project-mutation/existing-edit-page-runtime.md",
+          "dispatchContract": "intent-workflows/intent-project-mutation/existing-edit-dispatch-contract.md"
+        },
+        "taskLinePresent": true,
+        "outputPathPresent": true,
+        "sharedTemplate": "intent-workflows/intent-project-mutation/existing-edit-page-runtime.md",
+        "nodeId": "page-home",
+        "htmlSrc": "pages/home.html",
+        "supplementaryReads": [],
+        "allowedWritePaths": [
+          "pages/home.html",
+          "assets/"
+        ],
+        "forbiddenWriteRoots": [
+          "*.design",
+          "runtime-orchestration-summary.json",
+          "validation-report.json",
+          "finish-readiness-report.json",
+          "restore-contract-report.json",
+          "page-generation-summary.json"
+        ],
+        "toolPolicy": {
+          "todoWriteAllowed": false,
+          "validationScriptsAllowed": false,
+          "previewAllowed": false,
+          "helperScriptsAllowed": false,
+          "designFileWriteAllowed": false,
+          "allowedWritePaths": [
+            "pages/home.html",
+            "assets/"
+          ]
+        },
+        "skillRuntime": {
+          "skillDir": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design",
+          "deterministicToolDir": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling",
+          "toolPaths": {
+            "applyHtmlHeadContract": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs",
+            "recordDispatchCompletion": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs",
+            "buildPageDispatchManifest": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/build-page-dispatch-manifest.mjs",
+            "validateDesignWorkspace": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-design-workspace.mjs",
+            "validateFinishReadiness": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-finish-readiness.mjs",
+            "validateRestoreContract": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-restore-contract.mjs"
+          },
+          "requiredForPageSubAgent": [
+            "applyHtmlHeadContract",
+            "recordDispatchCompletion"
+          ],
+          "pathInjection": "absolute",
+          "pathContract": "Do not use {SKILL_DIR} placeholders inside Page Sub-Agent packets; use toolPaths.* absolute paths.",
+          "commandTemplates": {
+            "recordDispatchCompletion": "node '/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp' --node-id='page-home' --html-src='pages/home.html' --status=completed --changed-files=<comma-separated-project-relative-files> --trace-digest=<main-agent-runtime-trace-digest> --tool-ledger-json=<tool-ledger-json-or-file>"
+          }
+        },
+        "cssFilePath": "/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/colors_and_type.css",
+        "htmlFilePath": "/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/pages/home.html",
+        "brandPrefix": "maidong",
+        "aestheticsMode": "free-explore",
+        "toolDisciplineBlockPresent": true,
+        "fillHtmlHeadCommand": "node '/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/colors_and_type.css' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/pages/home.html' --title='首页' --lang='zh-CN' --prefix='maidong' --replace-head",
+        "headFillMode": "replace-head-after-body",
+        "viewportMode": "document-scroll",
+        "completionSchemaExpected": "full",
+        "restoreFields": null,
+        "restoreContractStatus": null,
+        "restoreCompactPacket": null,
+        "deterministicCommands": null,
+        "sourceAuthorityLock": null,
+        "preDispatchFileHashes": {
+          "fucheng-maidong-miniapp.design": "6ca2a05ab0127593ad5dd9df6c0b6991ab4e29ab31ced715253bf8a8c964d240"
+        },
+        "contextPreflight": {
+          "workflowPath": "intent-workflows/intent-project-mutation/INTENT_WORKFLOW.md",
+          "requiredContextFiles": [
+            "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+            "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+            "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+            "delivery-quality/page-rendering-quality-gate.md",
+            "delivery-quality/design-artifact-validation.md",
+            "delivery-quality/delivery-evidence-contract.md"
+          ],
+          "optionalContextFiles": [
+            "visual-experience/visual-experience-guidelines.md"
+          ],
+          "passed": true
+        },
+        "pageSliceOnly": true,
+        "requiredFieldsPresent": true,
+        "missingFields": [],
+        "fillHtmlHeadCommandValid": true,
+        "mobileNavigation": {
+          "required": true,
+          "appliesToThisPage": true,
+          "activeKey": "home",
+          "contractPresent": true,
+          "structurePresent": true,
+          "canonicalHtmlIncluded": true,
+          "canonicalHtmlSource": "sharedProjectShellContract.mobileNavigation.structure.canonicalHtmlByKey.home",
+          "structureHash": "13f47950c93b7cb91e35c6c827b8a6905f41053a8a0a84385b1ebe9c6c0348b2",
+          "missingFields": []
+        },
+        "persistedToSummary": true,
+        "taskQueryAudited": false,
+        "proofSource": "summary-only",
+        "largeWorkflowFilesInTaskQuery": null
+      },
+      {
+        "recorded_at": "2026-10-12T06:52:26.620Z",
+        "generatedBy": "build-page-dispatch-manifest.mjs",
+        "packetType": "ExistingEditPagePacket",
+        "laneContract": {
+          "resolvedLane": "existing_edit_add_comparison",
+          "packetType": "ExistingEditPagePacket",
+          "pageRuntimeGuide": "intent-workflows/intent-project-mutation/existing-edit-page-runtime.md",
+          "dispatchContract": "intent-workflows/intent-project-mutation/existing-edit-dispatch-contract.md"
+        },
+        "taskLinePresent": true,
+        "outputPathPresent": true,
+        "sharedTemplate": "intent-workflows/intent-project-mutation/existing-edit-page-runtime.md",
+        "nodeId": "page-fields",
+        "htmlSrc": "pages/fields.html",
+        "supplementaryReads": [],
+        "allowedWritePaths": [
+          "pages/fields.html",
+          "assets/"
+        ],
+        "forbiddenWriteRoots": [
+          "*.design",
+          "runtime-orchestration-summary.json",
+          "validation-report.json",
+          "finish-readiness-report.json",
+          "restore-contract-report.json",
+          "page-generation-summary.json"
+        ],
+        "toolPolicy": {
+          "todoWriteAllowed": false,
+          "validationScriptsAllowed": false,
+          "previewAllowed": false,
+          "helperScriptsAllowed": false,
+          "designFileWriteAllowed": false,
+          "allowedWritePaths": [
+            "pages/fields.html",
+            "assets/"
+          ]
+        },
+        "skillRuntime": {
+          "skillDir": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design",
+          "deterministicToolDir": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling",
+          "toolPaths": {
+            "applyHtmlHeadContract": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs",
+            "recordDispatchCompletion": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs",
+            "buildPageDispatchManifest": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/build-page-dispatch-manifest.mjs",
+            "validateDesignWorkspace": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-design-workspace.mjs",
+            "validateFinishReadiness": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-finish-readiness.mjs",
+            "validateRestoreContract": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-restore-contract.mjs"
+          },
+          "requiredForPageSubAgent": [
+            "applyHtmlHeadContract",
+            "recordDispatchCompletion"
+          ],
+          "pathInjection": "absolute",
+          "pathContract": "Do not use {SKILL_DIR} placeholders inside Page Sub-Agent packets; use toolPaths.* absolute paths.",
+          "commandTemplates": {
+            "recordDispatchCompletion": "node '/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp' --node-id='page-fields' --html-src='pages/fields.html' --status=completed --changed-files=<comma-separated-project-relative-files> --trace-digest=<main-agent-runtime-trace-digest> --tool-ledger-json=<tool-ledger-json-or-file>"
+          }
+        },
+        "cssFilePath": "/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/colors_and_type.css",
+        "htmlFilePath": "/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/pages/fields.html",
+        "brandPrefix": "maidong",
+        "aestheticsMode": "free-explore",
+        "toolDisciplineBlockPresent": true,
+        "fillHtmlHeadCommand": "node '/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/colors_and_type.css' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/pages/fields.html' --title='地块档案' --lang='zh-CN' --prefix='maidong' --replace-head",
+        "headFillMode": "replace-head-after-body",
+        "viewportMode": "document-scroll",
+        "completionSchemaExpected": "full",
+        "restoreFields": null,
+        "restoreContractStatus": null,
+        "restoreCompactPacket": null,
+        "deterministicCommands": null,
+        "sourceAuthorityLock": null,
+        "preDispatchFileHashes": {
+          "fucheng-maidong-miniapp.design": "6ca2a05ab0127593ad5dd9df6c0b6991ab4e29ab31ced715253bf8a8c964d240"
+        },
+        "contextPreflight": {
+          "workflowPath": "intent-workflows/intent-project-mutation/INTENT_WORKFLOW.md",
+          "requiredContextFiles": [
+            "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+            "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+            "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+            "delivery-quality/page-rendering-quality-gate.md",
+            "delivery-quality/design-artifact-validation.md",
+            "delivery-quality/delivery-evidence-contract.md"
+          ],
+          "optionalContextFiles": [
+            "visual-experience/visual-experience-guidelines.md"
+          ],
+          "passed": true
+        },
+        "pageSliceOnly": true,
+        "requiredFieldsPresent": true,
+        "missingFields": [],
+        "fillHtmlHeadCommandValid": true,
+        "mobileNavigation": {
+          "required": true,
+          "appliesToThisPage": true,
+          "activeKey": "fields",
+          "contractPresent": true,
+          "structurePresent": true,
+          "canonicalHtmlIncluded": true,
+          "canonicalHtmlSource": "sharedProjectShellContract.mobileNavigation.structure.canonicalHtmlByKey.fields",
+          "structureHash": "13f47950c93b7cb91e35c6c827b8a6905f41053a8a0a84385b1ebe9c6c0348b2",
+          "missingFields": []
+        },
+        "persistedToSummary": true,
+        "taskQueryAudited": false,
+        "proofSource": "summary-only",
+        "largeWorkflowFilesInTaskQuery": null
+      },
+      {
+        "recorded_at": "2026-10-12T06:52:26.620Z",
+        "generatedBy": "build-page-dispatch-manifest.mjs",
+        "packetType": "ExistingEditPagePacket",
+        "laneContract": {
+          "resolvedLane": "existing_edit_add_comparison",
+          "packetType": "ExistingEditPagePacket",
+          "pageRuntimeGuide": "intent-workflows/intent-project-mutation/existing-edit-page-runtime.md",
+          "dispatchContract": "intent-workflows/intent-project-mutation/existing-edit-dispatch-contract.md"
+        },
+        "taskLinePresent": true,
+        "outputPathPresent": true,
+        "sharedTemplate": "intent-workflows/intent-project-mutation/existing-edit-page-runtime.md",
+        "nodeId": "page-ai-diagnosis",
+        "htmlSrc": "pages/ai-diagnosis.html",
+        "supplementaryReads": [],
+        "allowedWritePaths": [
+          "pages/ai-diagnosis.html",
+          "assets/"
+        ],
+        "forbiddenWriteRoots": [
+          "*.design",
+          "runtime-orchestration-summary.json",
+          "validation-report.json",
+          "finish-readiness-report.json",
+          "restore-contract-report.json",
+          "page-generation-summary.json"
+        ],
+        "toolPolicy": {
+          "todoWriteAllowed": false,
+          "validationScriptsAllowed": false,
+          "previewAllowed": false,
+          "helperScriptsAllowed": false,
+          "designFileWriteAllowed": false,
+          "allowedWritePaths": [
+            "pages/ai-diagnosis.html",
+            "assets/"
+          ]
+        },
+        "skillRuntime": {
+          "skillDir": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design",
+          "deterministicToolDir": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling",
+          "toolPaths": {
+            "applyHtmlHeadContract": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs",
+            "recordDispatchCompletion": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs",
+            "buildPageDispatchManifest": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/build-page-dispatch-manifest.mjs",
+            "validateDesignWorkspace": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-design-workspace.mjs",
+            "validateFinishReadiness": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-finish-readiness.mjs",
+            "validateRestoreContract": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-restore-contract.mjs"
+          },
+          "requiredForPageSubAgent": [
+            "applyHtmlHeadContract",
+            "recordDispatchCompletion"
+          ],
+          "pathInjection": "absolute",
+          "pathContract": "Do not use {SKILL_DIR} placeholders inside Page Sub-Agent packets; use toolPaths.* absolute paths.",
+          "commandTemplates": {
+            "recordDispatchCompletion": "node '/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp' --node-id='page-ai-diagnosis' --html-src='pages/ai-diagnosis.html' --status=completed --changed-files=<comma-separated-project-relative-files> --trace-digest=<main-agent-runtime-trace-digest> --tool-ledger-json=<tool-ledger-json-or-file>"
+          }
+        },
+        "cssFilePath": "/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/colors_and_type.css",
+        "htmlFilePath": "/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/pages/ai-diagnosis.html",
+        "brandPrefix": "maidong",
+        "aestheticsMode": "free-explore",
+        "toolDisciplineBlockPresent": true,
+        "fillHtmlHeadCommand": "node '/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/colors_and_type.css' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/pages/ai-diagnosis.html' --title='AI识别' --lang='zh-CN' --prefix='maidong' --replace-head",
+        "headFillMode": "replace-head-after-body",
+        "viewportMode": "document-scroll",
+        "completionSchemaExpected": "full",
+        "restoreFields": null,
+        "restoreContractStatus": null,
+        "restoreCompactPacket": null,
+        "deterministicCommands": null,
+        "sourceAuthorityLock": null,
+        "preDispatchFileHashes": {
+          "fucheng-maidong-miniapp.design": "6ca2a05ab0127593ad5dd9df6c0b6991ab4e29ab31ced715253bf8a8c964d240"
+        },
+        "contextPreflight": {
+          "workflowPath": "intent-workflows/intent-project-mutation/INTENT_WORKFLOW.md",
+          "requiredContextFiles": [
+            "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+            "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+            "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+            "delivery-quality/page-rendering-quality-gate.md",
+            "delivery-quality/design-artifact-validation.md",
+            "delivery-quality/delivery-evidence-contract.md"
+          ],
+          "optionalContextFiles": [
+            "visual-experience/visual-experience-guidelines.md"
+          ],
+          "passed": true
+        },
+        "pageSliceOnly": true,
+        "requiredFieldsPresent": true,
+        "missingFields": [],
+        "fillHtmlHeadCommandValid": true,
+        "mobileNavigation": {
+          "required": true,
+          "appliesToThisPage": true,
+          "activeKey": "ai",
+          "contractPresent": true,
+          "structurePresent": true,
+          "canonicalHtmlIncluded": true,
+          "canonicalHtmlSource": "sharedProjectShellContract.mobileNavigation.structure.canonicalHtmlByKey.ai",
+          "structureHash": "13f47950c93b7cb91e35c6c827b8a6905f41053a8a0a84385b1ebe9c6c0348b2",
+          "missingFields": []
+        },
+        "persistedToSummary": true,
+        "taskQueryAudited": false,
+        "proofSource": "summary-only",
+        "largeWorkflowFilesInTaskQuery": null
+      },
+      {
+        "recorded_at": "2026-10-12T06:52:26.620Z",
+        "generatedBy": "build-page-dispatch-manifest.mjs",
+        "packetType": "ExistingEditPagePacket",
+        "laneContract": {
+          "resolvedLane": "existing_edit_add_comparison",
+          "packetType": "ExistingEditPagePacket",
+          "pageRuntimeGuide": "intent-workflows/intent-project-mutation/existing-edit-page-runtime.md",
+          "dispatchContract": "intent-workflows/intent-project-mutation/existing-edit-dispatch-contract.md"
+        },
+        "taskLinePresent": true,
+        "outputPathPresent": true,
+        "sharedTemplate": "intent-workflows/intent-project-mutation/existing-edit-page-runtime.md",
+        "nodeId": "page-plan",
+        "htmlSrc": "pages/plan.html",
+        "supplementaryReads": [],
+        "allowedWritePaths": [
+          "pages/plan.html",
+          "assets/"
+        ],
+        "forbiddenWriteRoots": [
+          "*.design",
+          "runtime-orchestration-summary.json",
+          "validation-report.json",
+          "finish-readiness-report.json",
+          "restore-contract-report.json",
+          "page-generation-summary.json"
+        ],
+        "toolPolicy": {
+          "todoWriteAllowed": false,
+          "validationScriptsAllowed": false,
+          "previewAllowed": false,
+          "helperScriptsAllowed": false,
+          "designFileWriteAllowed": false,
+          "allowedWritePaths": [
+            "pages/plan.html",
+            "assets/"
+          ]
+        },
+        "skillRuntime": {
+          "skillDir": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design",
+          "deterministicToolDir": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling",
+          "toolPaths": {
+            "applyHtmlHeadContract": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs",
+            "recordDispatchCompletion": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs",
+            "buildPageDispatchManifest": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/build-page-dispatch-manifest.mjs",
+            "validateDesignWorkspace": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-design-workspace.mjs",
+            "validateFinishReadiness": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-finish-readiness.mjs",
+            "validateRestoreContract": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-restore-contract.mjs"
+          },
+          "requiredForPageSubAgent": [
+            "applyHtmlHeadContract",
+            "recordDispatchCompletion"
+          ],
+          "pathInjection": "absolute",
+          "pathContract": "Do not use {SKILL_DIR} placeholders inside Page Sub-Agent packets; use toolPaths.* absolute paths.",
+          "commandTemplates": {
+            "recordDispatchCompletion": "node '/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp' --node-id='page-plan' --html-src='pages/plan.html' --status=completed --changed-files=<comma-separated-project-relative-files> --trace-digest=<main-agent-runtime-trace-digest> --tool-ledger-json=<tool-ledger-json-or-file>"
+          }
+        },
+        "cssFilePath": "/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/colors_and_type.css",
+        "htmlFilePath": "/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/pages/plan.html",
+        "brandPrefix": "maidong",
+        "aestheticsMode": "free-explore",
+        "toolDisciplineBlockPresent": true,
+        "fillHtmlHeadCommand": "node '/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/colors_and_type.css' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/pages/plan.html' --title='管理方案' --lang='zh-CN' --prefix='maidong' --replace-head",
+        "headFillMode": "replace-head-after-body",
+        "viewportMode": "document-scroll",
+        "completionSchemaExpected": "full",
+        "restoreFields": null,
+        "restoreContractStatus": null,
+        "restoreCompactPacket": null,
+        "deterministicCommands": null,
+        "sourceAuthorityLock": null,
+        "preDispatchFileHashes": {
+          "fucheng-maidong-miniapp.design": "6ca2a05ab0127593ad5dd9df6c0b6991ab4e29ab31ced715253bf8a8c964d240"
+        },
+        "contextPreflight": {
+          "workflowPath": "intent-workflows/intent-project-mutation/INTENT_WORKFLOW.md",
+          "requiredContextFiles": [
+            "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+            "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+            "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+            "delivery-quality/page-rendering-quality-gate.md",
+            "delivery-quality/design-artifact-validation.md",
+            "delivery-quality/delivery-evidence-contract.md"
+          ],
+          "optionalContextFiles": [
+            "visual-experience/visual-experience-guidelines.md"
+          ],
+          "passed": true
+        },
+        "pageSliceOnly": true,
+        "requiredFieldsPresent": true,
+        "missingFields": [],
+        "fillHtmlHeadCommandValid": true,
+        "mobileNavigation": {
+          "required": true,
+          "appliesToThisPage": true,
+          "activeKey": "plan",
+          "contractPresent": true,
+          "structurePresent": true,
+          "canonicalHtmlIncluded": true,
+          "canonicalHtmlSource": "sharedProjectShellContract.mobileNavigation.structure.canonicalHtmlByKey.plan",
+          "structureHash": "13f47950c93b7cb91e35c6c827b8a6905f41053a8a0a84385b1ebe9c6c0348b2",
+          "missingFields": []
+        },
+        "persistedToSummary": true,
+        "taskQueryAudited": false,
+        "proofSource": "summary-only",
+        "largeWorkflowFilesInTaskQuery": null
+      },
+      {
+        "recorded_at": "2026-10-12T06:52:26.620Z",
+        "generatedBy": "build-page-dispatch-manifest.mjs",
+        "packetType": "ExistingEditPagePacket",
+        "laneContract": {
+          "resolvedLane": "existing_edit_add_comparison",
+          "packetType": "ExistingEditPagePacket",
+          "pageRuntimeGuide": "intent-workflows/intent-project-mutation/existing-edit-page-runtime.md",
+          "dispatchContract": "intent-workflows/intent-project-mutation/existing-edit-dispatch-contract.md"
+        },
+        "taskLinePresent": true,
+        "outputPathPresent": true,
+        "sharedTemplate": "intent-workflows/intent-project-mutation/existing-edit-page-runtime.md",
+        "nodeId": "page-expert",
+        "htmlSrc": "pages/expert.html",
+        "supplementaryReads": [],
+        "allowedWritePaths": [
+          "pages/expert.html",
+          "assets/"
+        ],
+        "forbiddenWriteRoots": [
+          "*.design",
+          "runtime-orchestration-summary.json",
+          "validation-report.json",
+          "finish-readiness-report.json",
+          "restore-contract-report.json",
+          "page-generation-summary.json"
+        ],
+        "toolPolicy": {
+          "todoWriteAllowed": false,
+          "validationScriptsAllowed": false,
+          "previewAllowed": false,
+          "helperScriptsAllowed": false,
+          "designFileWriteAllowed": false,
+          "allowedWritePaths": [
+            "pages/expert.html",
+            "assets/"
+          ]
+        },
+        "skillRuntime": {
+          "skillDir": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design",
+          "deterministicToolDir": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling",
+          "toolPaths": {
+            "applyHtmlHeadContract": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs",
+            "recordDispatchCompletion": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs",
+            "buildPageDispatchManifest": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/build-page-dispatch-manifest.mjs",
+            "validateDesignWorkspace": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-design-workspace.mjs",
+            "validateFinishReadiness": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-finish-readiness.mjs",
+            "validateRestoreContract": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-restore-contract.mjs"
+          },
+          "requiredForPageSubAgent": [
+            "applyHtmlHeadContract",
+            "recordDispatchCompletion"
+          ],
+          "pathInjection": "absolute",
+          "pathContract": "Do not use {SKILL_DIR} placeholders inside Page Sub-Agent packets; use toolPaths.* absolute paths.",
+          "commandTemplates": {
+            "recordDispatchCompletion": "node '/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp' --node-id='page-expert' --html-src='pages/expert.html' --status=completed --changed-files=<comma-separated-project-relative-files> --trace-digest=<main-agent-runtime-trace-digest> --tool-ledger-json=<tool-ledger-json-or-file>"
+          }
+        },
+        "cssFilePath": "/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/colors_and_type.css",
+        "htmlFilePath": "/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/pages/expert.html",
+        "brandPrefix": "maidong",
+        "aestheticsMode": "free-explore",
+        "toolDisciplineBlockPresent": true,
+        "fillHtmlHeadCommand": "node '/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/colors_and_type.css' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/pages/expert.html' --title='专家诊断' --lang='zh-CN' --prefix='maidong' --replace-head",
+        "headFillMode": "replace-head-after-body",
+        "viewportMode": "document-scroll",
+        "completionSchemaExpected": "full",
+        "restoreFields": null,
+        "restoreContractStatus": null,
+        "restoreCompactPacket": null,
+        "deterministicCommands": null,
+        "sourceAuthorityLock": null,
+        "preDispatchFileHashes": {
+          "fucheng-maidong-miniapp.design": "6ca2a05ab0127593ad5dd9df6c0b6991ab4e29ab31ced715253bf8a8c964d240"
+        },
+        "contextPreflight": {
+          "workflowPath": "intent-workflows/intent-project-mutation/INTENT_WORKFLOW.md",
+          "requiredContextFiles": [
+            "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+            "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+            "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+            "delivery-quality/page-rendering-quality-gate.md",
+            "delivery-quality/design-artifact-validation.md",
+            "delivery-quality/delivery-evidence-contract.md"
+          ],
+          "optionalContextFiles": [
+            "visual-experience/visual-experience-guidelines.md"
+          ],
+          "passed": true
+        },
+        "pageSliceOnly": true,
+        "requiredFieldsPresent": true,
+        "missingFields": [],
+        "fillHtmlHeadCommandValid": true,
+        "mobileNavigation": {
+          "required": true,
+          "appliesToThisPage": true,
+          "activeKey": "mine",
+          "contractPresent": true,
+          "structurePresent": true,
+          "canonicalHtmlIncluded": true,
+          "canonicalHtmlSource": "sharedProjectShellContract.mobileNavigation.structure.canonicalHtmlByKey.mine",
+          "structureHash": "13f47950c93b7cb91e35c6c827b8a6905f41053a8a0a84385b1ebe9c6c0348b2",
+          "missingFields": []
+        },
+        "persistedToSummary": true,
+        "taskQueryAudited": false,
+        "proofSource": "summary-only",
+        "largeWorkflowFilesInTaskQuery": null
+      },
+      {
+        "recorded_at": "2026-10-12T06:52:26.620Z",
+        "generatedBy": "build-page-dispatch-manifest.mjs",
+        "packetType": "ExistingEditPagePacket",
+        "laneContract": {
+          "resolvedLane": "existing_edit_add_comparison",
+          "packetType": "ExistingEditPagePacket",
+          "pageRuntimeGuide": "intent-workflows/intent-project-mutation/existing-edit-page-runtime.md",
+          "dispatchContract": "intent-workflows/intent-project-mutation/existing-edit-dispatch-contract.md"
+        },
+        "taskLinePresent": true,
+        "outputPathPresent": true,
+        "sharedTemplate": "intent-workflows/intent-project-mutation/existing-edit-page-runtime.md",
+        "nodeId": "page-mine",
+        "htmlSrc": "pages/mine.html",
+        "supplementaryReads": [],
+        "allowedWritePaths": [
+          "pages/mine.html",
+          "assets/"
+        ],
+        "forbiddenWriteRoots": [
+          "*.design",
+          "runtime-orchestration-summary.json",
+          "validation-report.json",
+          "finish-readiness-report.json",
+          "restore-contract-report.json",
+          "page-generation-summary.json"
+        ],
+        "toolPolicy": {
+          "todoWriteAllowed": false,
+          "validationScriptsAllowed": false,
+          "previewAllowed": false,
+          "helperScriptsAllowed": false,
+          "designFileWriteAllowed": false,
+          "allowedWritePaths": [
+            "pages/mine.html",
+            "assets/"
+          ]
+        },
+        "skillRuntime": {
+          "skillDir": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design",
+          "deterministicToolDir": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling",
+          "toolPaths": {
+            "applyHtmlHeadContract": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs",
+            "recordDispatchCompletion": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs",
+            "buildPageDispatchManifest": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/build-page-dispatch-manifest.mjs",
+            "validateDesignWorkspace": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-design-workspace.mjs",
+            "validateFinishReadiness": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-finish-readiness.mjs",
+            "validateRestoreContract": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-restore-contract.mjs"
+          },
+          "requiredForPageSubAgent": [
+            "applyHtmlHeadContract",
+            "recordDispatchCompletion"
+          ],
+          "pathInjection": "absolute",
+          "pathContract": "Do not use {SKILL_DIR} placeholders inside Page Sub-Agent packets; use toolPaths.* absolute paths.",
+          "commandTemplates": {
+            "recordDispatchCompletion": "node '/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp' --node-id='page-mine' --html-src='pages/mine.html' --status=completed --changed-files=<comma-separated-project-relative-files> --trace-digest=<main-agent-runtime-trace-digest> --tool-ledger-json=<tool-ledger-json-or-file>"
+          }
+        },
+        "cssFilePath": "/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/colors_and_type.css",
+        "htmlFilePath": "/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/pages/mine.html",
+        "brandPrefix": "maidong",
+        "aestheticsMode": "free-explore",
+        "toolDisciplineBlockPresent": true,
+        "fillHtmlHeadCommand": "node '/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/colors_and_type.css' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/pages/mine.html' --title='我的' --lang='zh-CN' --prefix='maidong' --replace-head",
+        "headFillMode": "replace-head-after-body",
+        "viewportMode": "document-scroll",
+        "completionSchemaExpected": "full",
+        "restoreFields": null,
+        "restoreContractStatus": null,
+        "restoreCompactPacket": null,
+        "deterministicCommands": null,
+        "sourceAuthorityLock": null,
+        "preDispatchFileHashes": {
+          "fucheng-maidong-miniapp.design": "6ca2a05ab0127593ad5dd9df6c0b6991ab4e29ab31ced715253bf8a8c964d240"
+        },
+        "contextPreflight": {
+          "workflowPath": "intent-workflows/intent-project-mutation/INTENT_WORKFLOW.md",
+          "requiredContextFiles": [
+            "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+            "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+            "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+            "delivery-quality/page-rendering-quality-gate.md",
+            "delivery-quality/design-artifact-validation.md",
+            "delivery-quality/delivery-evidence-contract.md"
+          ],
+          "optionalContextFiles": [
+            "visual-experience/visual-experience-guidelines.md"
+          ],
+          "passed": true
+        },
+        "pageSliceOnly": true,
+        "requiredFieldsPresent": true,
+        "missingFields": [],
+        "fillHtmlHeadCommandValid": true,
+        "mobileNavigation": {
+          "required": true,
+          "appliesToThisPage": true,
+          "activeKey": "mine",
+          "contractPresent": true,
+          "structurePresent": true,
+          "canonicalHtmlIncluded": true,
+          "canonicalHtmlSource": "sharedProjectShellContract.mobileNavigation.structure.canonicalHtmlByKey.mine",
+          "structureHash": "13f47950c93b7cb91e35c6c827b8a6905f41053a8a0a84385b1ebe9c6c0348b2",
+          "missingFields": []
+        },
+        "persistedToSummary": true,
+        "taskQueryAudited": false,
+        "proofSource": "summary-only",
+        "largeWorkflowFilesInTaskQuery": null
+      },
+      {
+        "recorded_at": "2026-10-12T06:52:26.620Z",
+        "generatedBy": "build-page-dispatch-manifest.mjs",
+        "packetType": "ExistingEditPagePacket",
+        "laneContract": {
+          "resolvedLane": "existing_edit_add_comparison",
+          "packetType": "ExistingEditPagePacket",
+          "pageRuntimeGuide": "intent-workflows/intent-project-mutation/existing-edit-page-runtime.md",
+          "dispatchContract": "intent-workflows/intent-project-mutation/existing-edit-dispatch-contract.md"
+        },
+        "taskLinePresent": true,
+        "outputPathPresent": true,
+        "sharedTemplate": "intent-workflows/intent-project-mutation/existing-edit-page-runtime.md",
+        "nodeId": "page-home-conversion",
+        "htmlSrc": "pages/home-conversion.html",
+        "supplementaryReads": [],
+        "allowedWritePaths": [
+          "pages/home-conversion.html",
+          "assets/"
+        ],
+        "forbiddenWriteRoots": [
+          "*.design",
+          "runtime-orchestration-summary.json",
+          "validation-report.json",
+          "finish-readiness-report.json",
+          "restore-contract-report.json",
+          "page-generation-summary.json"
+        ],
+        "toolPolicy": {
+          "todoWriteAllowed": false,
+          "validationScriptsAllowed": false,
+          "previewAllowed": false,
+          "helperScriptsAllowed": false,
+          "designFileWriteAllowed": false,
+          "allowedWritePaths": [
+            "pages/home-conversion.html",
+            "assets/"
+          ]
+        },
+        "skillRuntime": {
+          "skillDir": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design",
+          "deterministicToolDir": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling",
+          "toolPaths": {
+            "applyHtmlHeadContract": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs",
+            "recordDispatchCompletion": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs",
+            "buildPageDispatchManifest": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/build-page-dispatch-manifest.mjs",
+            "validateDesignWorkspace": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-design-workspace.mjs",
+            "validateFinishReadiness": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-finish-readiness.mjs",
+            "validateRestoreContract": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-restore-contract.mjs"
+          },
+          "requiredForPageSubAgent": [
+            "applyHtmlHeadContract",
+            "recordDispatchCompletion"
+          ],
+          "pathInjection": "absolute",
+          "pathContract": "Do not use {SKILL_DIR} placeholders inside Page Sub-Agent packets; use toolPaths.* absolute paths.",
+          "commandTemplates": {
+            "recordDispatchCompletion": "node '/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp' --node-id='page-home-conversion' --html-src='pages/home-conversion.html' --status=completed --changed-files=<comma-separated-project-relative-files> --trace-digest=<main-agent-runtime-trace-digest> --tool-ledger-json=<tool-ledger-json-or-file>"
+          }
+        },
+        "cssFilePath": "/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/colors_and_type.css",
+        "htmlFilePath": "/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/pages/home-conversion.html",
+        "brandPrefix": "maidong",
+        "aestheticsMode": "free-explore",
+        "toolDisciplineBlockPresent": true,
+        "fillHtmlHeadCommand": "node '/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/colors_and_type.css' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/pages/home-conversion.html' --title='首页·农资转化版' --lang='zh-CN' --prefix='maidong' --replace-head",
+        "headFillMode": "replace-head-after-body",
+        "viewportMode": "document-scroll",
+        "completionSchemaExpected": "full",
+        "restoreFields": null,
+        "restoreContractStatus": null,
+        "restoreCompactPacket": null,
+        "deterministicCommands": null,
+        "sourceAuthorityLock": null,
+        "preDispatchFileHashes": {
+          "fucheng-maidong-miniapp.design": "6ca2a05ab0127593ad5dd9df6c0b6991ab4e29ab31ced715253bf8a8c964d240"
+        },
+        "contextPreflight": {
+          "workflowPath": "intent-workflows/intent-project-mutation/INTENT_WORKFLOW.md",
+          "requiredContextFiles": [
+            "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+            "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+            "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+            "delivery-quality/page-rendering-quality-gate.md",
+            "delivery-quality/design-artifact-validation.md",
+            "delivery-quality/delivery-evidence-contract.md"
+          ],
+          "optionalContextFiles": [
+            "visual-experience/visual-experience-guidelines.md"
+          ],
+          "passed": true
+        },
+        "pageSliceOnly": true,
+        "requiredFieldsPresent": true,
+        "missingFields": [],
+        "fillHtmlHeadCommandValid": true,
+        "mobileNavigation": {
+          "required": true,
+          "appliesToThisPage": true,
+          "activeKey": "home",
+          "contractPresent": true,
+          "structurePresent": true,
+          "canonicalHtmlIncluded": true,
+          "canonicalHtmlSource": "sharedProjectShellContract.mobileNavigation.structure.canonicalHtmlByKey.home",
+          "structureHash": "13f47950c93b7cb91e35c6c827b8a6905f41053a8a0a84385b1ebe9c6c0348b2",
+          "missingFields": []
+        },
+        "persistedToSummary": true,
+        "taskQueryAudited": false,
+        "proofSource": "summary-only",
+        "largeWorkflowFilesInTaskQuery": null
+      },
+      {
+        "recorded_at": "2026-10-12T06:52:26.620Z",
+        "generatedBy": "build-page-dispatch-manifest.mjs",
+        "packetType": "ExistingEditPagePacket",
+        "laneContract": {
+          "resolvedLane": "existing_edit_add_comparison",
+          "packetType": "ExistingEditPagePacket",
+          "pageRuntimeGuide": "intent-workflows/intent-project-mutation/existing-edit-page-runtime.md",
+          "dispatchContract": "intent-workflows/intent-project-mutation/existing-edit-dispatch-contract.md"
+        },
+        "taskLinePresent": true,
+        "outputPathPresent": true,
+        "sharedTemplate": "intent-workflows/intent-project-mutation/existing-edit-page-runtime.md",
+        "nodeId": "page-home-farmer-tool",
+        "htmlSrc": "pages/home-farmer-tool.html",
+        "supplementaryReads": [],
+        "allowedWritePaths": [
+          "pages/home-farmer-tool.html",
+          "assets/"
+        ],
+        "forbiddenWriteRoots": [
+          "*.design",
+          "runtime-orchestration-summary.json",
+          "validation-report.json",
+          "finish-readiness-report.json",
+          "restore-contract-report.json",
+          "page-generation-summary.json"
+        ],
+        "toolPolicy": {
+          "todoWriteAllowed": false,
+          "validationScriptsAllowed": false,
+          "previewAllowed": false,
+          "helperScriptsAllowed": false,
+          "designFileWriteAllowed": false,
+          "allowedWritePaths": [
+            "pages/home-farmer-tool.html",
+            "assets/"
+          ]
+        },
+        "skillRuntime": {
+          "skillDir": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design",
+          "deterministicToolDir": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling",
+          "toolPaths": {
+            "applyHtmlHeadContract": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs",
+            "recordDispatchCompletion": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs",
+            "buildPageDispatchManifest": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/build-page-dispatch-manifest.mjs",
+            "validateDesignWorkspace": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-design-workspace.mjs",
+            "validateFinishReadiness": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-finish-readiness.mjs",
+            "validateRestoreContract": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-restore-contract.mjs"
+          },
+          "requiredForPageSubAgent": [
+            "applyHtmlHeadContract",
+            "recordDispatchCompletion"
+          ],
+          "pathInjection": "absolute",
+          "pathContract": "Do not use {SKILL_DIR} placeholders inside Page Sub-Agent packets; use toolPaths.* absolute paths.",
+          "commandTemplates": {
+            "recordDispatchCompletion": "node '/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp' --node-id='page-home-farmer-tool' --html-src='pages/home-farmer-tool.html' --status=completed --changed-files=<comma-separated-project-relative-files> --trace-digest=<main-agent-runtime-trace-digest> --tool-ledger-json=<tool-ledger-json-or-file>"
+          }
+        },
+        "cssFilePath": "/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/colors_and_type.css",
+        "htmlFilePath": "/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/pages/home-farmer-tool.html",
+        "brandPrefix": "maidong",
+        "aestheticsMode": "free-explore",
+        "toolDisciplineBlockPresent": true,
+        "fillHtmlHeadCommand": "node '/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/colors_and_type.css' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/pages/home-farmer-tool.html' --title='首页·农户工具版' --lang='zh-CN' --prefix='maidong' --replace-head",
+        "headFillMode": "replace-head-after-body",
+        "viewportMode": "document-scroll",
+        "completionSchemaExpected": "full",
+        "restoreFields": null,
+        "restoreContractStatus": null,
+        "restoreCompactPacket": null,
+        "deterministicCommands": null,
+        "sourceAuthorityLock": null,
+        "preDispatchFileHashes": {
+          "fucheng-maidong-miniapp.design": "6ca2a05ab0127593ad5dd9df6c0b6991ab4e29ab31ced715253bf8a8c964d240"
+        },
+        "contextPreflight": {
+          "workflowPath": "intent-workflows/intent-project-mutation/INTENT_WORKFLOW.md",
+          "requiredContextFiles": [
+            "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+            "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+            "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+            "delivery-quality/page-rendering-quality-gate.md",
+            "delivery-quality/design-artifact-validation.md",
+            "delivery-quality/delivery-evidence-contract.md"
+          ],
+          "optionalContextFiles": [
+            "visual-experience/visual-experience-guidelines.md"
+          ],
+          "passed": true
+        },
+        "pageSliceOnly": true,
+        "requiredFieldsPresent": true,
+        "missingFields": [],
+        "fillHtmlHeadCommandValid": true,
+        "mobileNavigation": {
+          "required": true,
+          "appliesToThisPage": true,
+          "activeKey": "home",
+          "contractPresent": true,
+          "structurePresent": true,
+          "canonicalHtmlIncluded": true,
+          "canonicalHtmlSource": "sharedProjectShellContract.mobileNavigation.structure.canonicalHtmlByKey.home",
+          "structureHash": "13f47950c93b7cb91e35c6c827b8a6905f41053a8a0a84385b1ebe9c6c0348b2",
+          "missingFields": []
+        },
+        "persistedToSummary": true,
+        "taskQueryAudited": false,
+        "proofSource": "summary-only",
+        "largeWorkflowFilesInTaskQuery": null
+      },
+      {
+        "recorded_at": "2026-10-12T06:52:26.620Z",
+        "generatedBy": "build-page-dispatch-manifest.mjs",
+        "packetType": "ExistingEditPagePacket",
+        "laneContract": {
+          "resolvedLane": "existing_edit_add_comparison",
+          "packetType": "ExistingEditPagePacket",
+          "pageRuntimeGuide": "intent-workflows/intent-project-mutation/existing-edit-page-runtime.md",
+          "dispatchContract": "intent-workflows/intent-project-mutation/existing-edit-dispatch-contract.md"
+        },
+        "taskLinePresent": true,
+        "outputPathPresent": true,
+        "sharedTemplate": "intent-workflows/intent-project-mutation/existing-edit-page-runtime.md",
+        "nodeId": "page-fields-farmer-tool",
+        "htmlSrc": "pages/fields-farmer-tool.html",
+        "supplementaryReads": [],
+        "allowedWritePaths": [
+          "pages/fields-farmer-tool.html",
+          "assets/"
+        ],
+        "forbiddenWriteRoots": [
+          "*.design",
+          "runtime-orchestration-summary.json",
+          "validation-report.json",
+          "finish-readiness-report.json",
+          "restore-contract-report.json",
+          "page-generation-summary.json"
+        ],
+        "toolPolicy": {
+          "todoWriteAllowed": false,
+          "validationScriptsAllowed": false,
+          "previewAllowed": false,
+          "helperScriptsAllowed": false,
+          "designFileWriteAllowed": false,
+          "allowedWritePaths": [
+            "pages/fields-farmer-tool.html",
+            "assets/"
+          ]
+        },
+        "skillRuntime": {
+          "skillDir": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design",
+          "deterministicToolDir": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling",
+          "toolPaths": {
+            "applyHtmlHeadContract": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs",
+            "recordDispatchCompletion": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs",
+            "buildPageDispatchManifest": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/build-page-dispatch-manifest.mjs",
+            "validateDesignWorkspace": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-design-workspace.mjs",
+            "validateFinishReadiness": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-finish-readiness.mjs",
+            "validateRestoreContract": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-restore-contract.mjs"
+          },
+          "requiredForPageSubAgent": [
+            "applyHtmlHeadContract",
+            "recordDispatchCompletion"
+          ],
+          "pathInjection": "absolute",
+          "pathContract": "Do not use {SKILL_DIR} placeholders inside Page Sub-Agent packets; use toolPaths.* absolute paths.",
+          "commandTemplates": {
+            "recordDispatchCompletion": "node '/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp' --node-id='page-fields-farmer-tool' --html-src='pages/fields-farmer-tool.html' --status=completed --changed-files=<comma-separated-project-relative-files> --trace-digest=<main-agent-runtime-trace-digest> --tool-ledger-json=<tool-ledger-json-or-file>"
+          }
+        },
+        "cssFilePath": "/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/colors_and_type.css",
+        "htmlFilePath": "/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/pages/fields-farmer-tool.html",
+        "brandPrefix": "maidong",
+        "aestheticsMode": "free-explore",
+        "toolDisciplineBlockPresent": true,
+        "fillHtmlHeadCommand": "node '/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/colors_and_type.css' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/pages/fields-farmer-tool.html' --title='地块·农户工具版' --lang='zh-CN' --prefix='maidong' --replace-head",
+        "headFillMode": "replace-head-after-body",
+        "viewportMode": "document-scroll",
+        "completionSchemaExpected": "full",
+        "restoreFields": null,
+        "restoreContractStatus": null,
+        "restoreCompactPacket": null,
+        "deterministicCommands": null,
+        "sourceAuthorityLock": null,
+        "preDispatchFileHashes": {
+          "fucheng-maidong-miniapp.design": "6ca2a05ab0127593ad5dd9df6c0b6991ab4e29ab31ced715253bf8a8c964d240"
+        },
+        "contextPreflight": {
+          "workflowPath": "intent-workflows/intent-project-mutation/INTENT_WORKFLOW.md",
+          "requiredContextFiles": [
+            "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+            "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+            "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+            "delivery-quality/page-rendering-quality-gate.md",
+            "delivery-quality/design-artifact-validation.md",
+            "delivery-quality/delivery-evidence-contract.md"
+          ],
+          "optionalContextFiles": [
+            "visual-experience/visual-experience-guidelines.md"
+          ],
+          "passed": true
+        },
+        "pageSliceOnly": true,
+        "requiredFieldsPresent": true,
+        "missingFields": [],
+        "fillHtmlHeadCommandValid": true,
+        "mobileNavigation": {
+          "required": true,
+          "appliesToThisPage": true,
+          "activeKey": "fields",
+          "contractPresent": true,
+          "structurePresent": true,
+          "canonicalHtmlIncluded": true,
+          "canonicalHtmlSource": "sharedProjectShellContract.mobileNavigation.structure.canonicalHtmlByKey.fields",
+          "structureHash": "13f47950c93b7cb91e35c6c827b8a6905f41053a8a0a84385b1ebe9c6c0348b2",
+          "missingFields": []
+        },
+        "persistedToSummary": true,
+        "taskQueryAudited": false,
+        "proofSource": "summary-only",
+        "largeWorkflowFilesInTaskQuery": null
+      },
+      {
+        "recorded_at": "2026-10-12T06:52:26.620Z",
+        "generatedBy": "build-page-dispatch-manifest.mjs",
+        "packetType": "ExistingEditPagePacket",
+        "laneContract": {
+          "resolvedLane": "existing_edit_add_comparison",
+          "packetType": "ExistingEditPagePacket",
+          "pageRuntimeGuide": "intent-workflows/intent-project-mutation/existing-edit-page-runtime.md",
+          "dispatchContract": "intent-workflows/intent-project-mutation/existing-edit-dispatch-contract.md"
+        },
+        "taskLinePresent": true,
+        "outputPathPresent": true,
+        "sharedTemplate": "intent-workflows/intent-project-mutation/existing-edit-page-runtime.md",
+        "nodeId": "page-ai-diagnosis-farmer-tool",
+        "htmlSrc": "pages/ai-diagnosis-farmer-tool.html",
+        "supplementaryReads": [],
+        "allowedWritePaths": [
+          "pages/ai-diagnosis-farmer-tool.html",
+          "assets/"
+        ],
+        "forbiddenWriteRoots": [
+          "*.design",
+          "runtime-orchestration-summary.json",
+          "validation-report.json",
+          "finish-readiness-report.json",
+          "restore-contract-report.json",
+          "page-generation-summary.json"
+        ],
+        "toolPolicy": {
+          "todoWriteAllowed": false,
+          "validationScriptsAllowed": false,
+          "previewAllowed": false,
+          "helperScriptsAllowed": false,
+          "designFileWriteAllowed": false,
+          "allowedWritePaths": [
+            "pages/ai-diagnosis-farmer-tool.html",
+            "assets/"
+          ]
+        },
+        "skillRuntime": {
+          "skillDir": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design",
+          "deterministicToolDir": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling",
+          "toolPaths": {
+            "applyHtmlHeadContract": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs",
+            "recordDispatchCompletion": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs",
+            "buildPageDispatchManifest": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/build-page-dispatch-manifest.mjs",
+            "validateDesignWorkspace": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-design-workspace.mjs",
+            "validateFinishReadiness": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-finish-readiness.mjs",
+            "validateRestoreContract": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-restore-contract.mjs"
+          },
+          "requiredForPageSubAgent": [
+            "applyHtmlHeadContract",
+            "recordDispatchCompletion"
+          ],
+          "pathInjection": "absolute",
+          "pathContract": "Do not use {SKILL_DIR} placeholders inside Page Sub-Agent packets; use toolPaths.* absolute paths.",
+          "commandTemplates": {
+            "recordDispatchCompletion": "node '/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp' --node-id='page-ai-diagnosis-farmer-tool' --html-src='pages/ai-diagnosis-farmer-tool.html' --status=completed --changed-files=<comma-separated-project-relative-files> --trace-digest=<main-agent-runtime-trace-digest> --tool-ledger-json=<tool-ledger-json-or-file>"
+          }
+        },
+        "cssFilePath": "/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/colors_and_type.css",
+        "htmlFilePath": "/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/pages/ai-diagnosis-farmer-tool.html",
+        "brandPrefix": "maidong",
+        "aestheticsMode": "free-explore",
+        "toolDisciplineBlockPresent": true,
+        "fillHtmlHeadCommand": "node '/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/colors_and_type.css' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/pages/ai-diagnosis-farmer-tool.html' --title='识别·农户工具版' --lang='zh-CN' --prefix='maidong' --replace-head",
+        "headFillMode": "replace-head-after-body",
+        "viewportMode": "document-scroll",
+        "completionSchemaExpected": "full",
+        "restoreFields": null,
+        "restoreContractStatus": null,
+        "restoreCompactPacket": null,
+        "deterministicCommands": null,
+        "sourceAuthorityLock": null,
+        "preDispatchFileHashes": {
+          "fucheng-maidong-miniapp.design": "6ca2a05ab0127593ad5dd9df6c0b6991ab4e29ab31ced715253bf8a8c964d240"
+        },
+        "contextPreflight": {
+          "workflowPath": "intent-workflows/intent-project-mutation/INTENT_WORKFLOW.md",
+          "requiredContextFiles": [
+            "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+            "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+            "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+            "delivery-quality/page-rendering-quality-gate.md",
+            "delivery-quality/design-artifact-validation.md",
+            "delivery-quality/delivery-evidence-contract.md"
+          ],
+          "optionalContextFiles": [
+            "visual-experience/visual-experience-guidelines.md"
+          ],
+          "passed": true
+        },
+        "pageSliceOnly": true,
+        "requiredFieldsPresent": true,
+        "missingFields": [],
+        "fillHtmlHeadCommandValid": true,
+        "mobileNavigation": {
+          "required": true,
+          "appliesToThisPage": true,
+          "activeKey": "ai",
+          "contractPresent": true,
+          "structurePresent": true,
+          "canonicalHtmlIncluded": true,
+          "canonicalHtmlSource": "sharedProjectShellContract.mobileNavigation.structure.canonicalHtmlByKey.ai",
+          "structureHash": "13f47950c93b7cb91e35c6c827b8a6905f41053a8a0a84385b1ebe9c6c0348b2",
+          "missingFields": []
+        },
+        "persistedToSummary": true,
+        "taskQueryAudited": false,
+        "proofSource": "summary-only",
+        "largeWorkflowFilesInTaskQuery": null
+      },
+      {
+        "recorded_at": "2026-10-12T06:52:26.620Z",
+        "generatedBy": "build-page-dispatch-manifest.mjs",
+        "packetType": "ExistingEditPagePacket",
+        "laneContract": {
+          "resolvedLane": "existing_edit_add_comparison",
+          "packetType": "ExistingEditPagePacket",
+          "pageRuntimeGuide": "intent-workflows/intent-project-mutation/existing-edit-page-runtime.md",
+          "dispatchContract": "intent-workflows/intent-project-mutation/existing-edit-dispatch-contract.md"
+        },
+        "taskLinePresent": true,
+        "outputPathPresent": true,
+        "sharedTemplate": "intent-workflows/intent-project-mutation/existing-edit-page-runtime.md",
+        "nodeId": "page-plan-farmer-tool",
+        "htmlSrc": "pages/plan-farmer-tool.html",
+        "supplementaryReads": [],
+        "allowedWritePaths": [
+          "pages/plan-farmer-tool.html",
+          "assets/"
+        ],
+        "forbiddenWriteRoots": [
+          "*.design",
+          "runtime-orchestration-summary.json",
+          "validation-report.json",
+          "finish-readiness-report.json",
+          "restore-contract-report.json",
+          "page-generation-summary.json"
+        ],
+        "toolPolicy": {
+          "todoWriteAllowed": false,
+          "validationScriptsAllowed": false,
+          "previewAllowed": false,
+          "helperScriptsAllowed": false,
+          "designFileWriteAllowed": false,
+          "allowedWritePaths": [
+            "pages/plan-farmer-tool.html",
+            "assets/"
+          ]
+        },
+        "skillRuntime": {
+          "skillDir": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design",
+          "deterministicToolDir": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling",
+          "toolPaths": {
+            "applyHtmlHeadContract": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs",
+            "recordDispatchCompletion": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs",
+            "buildPageDispatchManifest": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/build-page-dispatch-manifest.mjs",
+            "validateDesignWorkspace": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-design-workspace.mjs",
+            "validateFinishReadiness": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-finish-readiness.mjs",
+            "validateRestoreContract": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-restore-contract.mjs"
+          },
+          "requiredForPageSubAgent": [
+            "applyHtmlHeadContract",
+            "recordDispatchCompletion"
+          ],
+          "pathInjection": "absolute",
+          "pathContract": "Do not use {SKILL_DIR} placeholders inside Page Sub-Agent packets; use toolPaths.* absolute paths.",
+          "commandTemplates": {
+            "recordDispatchCompletion": "node '/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp' --node-id='page-plan-farmer-tool' --html-src='pages/plan-farmer-tool.html' --status=completed --changed-files=<comma-separated-project-relative-files> --trace-digest=<main-agent-runtime-trace-digest> --tool-ledger-json=<tool-ledger-json-or-file>"
+          }
+        },
+        "cssFilePath": "/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/colors_and_type.css",
+        "htmlFilePath": "/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/pages/plan-farmer-tool.html",
+        "brandPrefix": "maidong",
+        "aestheticsMode": "free-explore",
+        "toolDisciplineBlockPresent": true,
+        "fillHtmlHeadCommand": "node '/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/colors_and_type.css' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/pages/plan-farmer-tool.html' --title='方案·农户工具版' --lang='zh-CN' --prefix='maidong' --replace-head",
+        "headFillMode": "replace-head-after-body",
+        "viewportMode": "document-scroll",
+        "completionSchemaExpected": "full",
+        "restoreFields": null,
+        "restoreContractStatus": null,
+        "restoreCompactPacket": null,
+        "deterministicCommands": null,
+        "sourceAuthorityLock": null,
+        "preDispatchFileHashes": {
+          "fucheng-maidong-miniapp.design": "6ca2a05ab0127593ad5dd9df6c0b6991ab4e29ab31ced715253bf8a8c964d240"
+        },
+        "contextPreflight": {
+          "workflowPath": "intent-workflows/intent-project-mutation/INTENT_WORKFLOW.md",
+          "requiredContextFiles": [
+            "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+            "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+            "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+            "delivery-quality/page-rendering-quality-gate.md",
+            "delivery-quality/design-artifact-validation.md",
+            "delivery-quality/delivery-evidence-contract.md"
+          ],
+          "optionalContextFiles": [
+            "visual-experience/visual-experience-guidelines.md"
+          ],
+          "passed": true
+        },
+        "pageSliceOnly": true,
+        "requiredFieldsPresent": true,
+        "missingFields": [],
+        "fillHtmlHeadCommandValid": true,
+        "mobileNavigation": {
+          "required": true,
+          "appliesToThisPage": true,
+          "activeKey": "plan",
+          "contractPresent": true,
+          "structurePresent": true,
+          "canonicalHtmlIncluded": true,
+          "canonicalHtmlSource": "sharedProjectShellContract.mobileNavigation.structure.canonicalHtmlByKey.plan",
+          "structureHash": "13f47950c93b7cb91e35c6c827b8a6905f41053a8a0a84385b1ebe9c6c0348b2",
+          "missingFields": []
+        },
+        "persistedToSummary": true,
+        "taskQueryAudited": false,
+        "proofSource": "summary-only",
+        "largeWorkflowFilesInTaskQuery": null
+      },
+      {
+        "recorded_at": "2026-10-12T06:52:26.620Z",
+        "generatedBy": "build-page-dispatch-manifest.mjs",
+        "packetType": "ExistingEditPagePacket",
+        "laneContract": {
+          "resolvedLane": "existing_edit_add_comparison",
+          "packetType": "ExistingEditPagePacket",
+          "pageRuntimeGuide": "intent-workflows/intent-project-mutation/existing-edit-page-runtime.md",
+          "dispatchContract": "intent-workflows/intent-project-mutation/existing-edit-dispatch-contract.md"
+        },
+        "taskLinePresent": true,
+        "outputPathPresent": true,
+        "sharedTemplate": "intent-workflows/intent-project-mutation/existing-edit-page-runtime.md",
+        "nodeId": "page-expert-farmer-tool",
+        "htmlSrc": "pages/expert-farmer-tool.html",
+        "supplementaryReads": [],
+        "allowedWritePaths": [
+          "pages/expert-farmer-tool.html",
+          "assets/"
+        ],
+        "forbiddenWriteRoots": [
+          "*.design",
+          "runtime-orchestration-summary.json",
+          "validation-report.json",
+          "finish-readiness-report.json",
+          "restore-contract-report.json",
+          "page-generation-summary.json"
+        ],
+        "toolPolicy": {
+          "todoWriteAllowed": false,
+          "validationScriptsAllowed": false,
+          "previewAllowed": false,
+          "helperScriptsAllowed": false,
+          "designFileWriteAllowed": false,
+          "allowedWritePaths": [
+            "pages/expert-farmer-tool.html",
+            "assets/"
+          ]
+        },
+        "skillRuntime": {
+          "skillDir": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design",
+          "deterministicToolDir": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling",
+          "toolPaths": {
+            "applyHtmlHeadContract": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs",
+            "recordDispatchCompletion": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs",
+            "buildPageDispatchManifest": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/build-page-dispatch-manifest.mjs",
+            "validateDesignWorkspace": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-design-workspace.mjs",
+            "validateFinishReadiness": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-finish-readiness.mjs",
+            "validateRestoreContract": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-restore-contract.mjs"
+          },
+          "requiredForPageSubAgent": [
+            "applyHtmlHeadContract",
+            "recordDispatchCompletion"
+          ],
+          "pathInjection": "absolute",
+          "pathContract": "Do not use {SKILL_DIR} placeholders inside Page Sub-Agent packets; use toolPaths.* absolute paths.",
+          "commandTemplates": {
+            "recordDispatchCompletion": "node '/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp' --node-id='page-expert-farmer-tool' --html-src='pages/expert-farmer-tool.html' --status=completed --changed-files=<comma-separated-project-relative-files> --trace-digest=<main-agent-runtime-trace-digest> --tool-ledger-json=<tool-ledger-json-or-file>"
+          }
+        },
+        "cssFilePath": "/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/colors_and_type.css",
+        "htmlFilePath": "/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/pages/expert-farmer-tool.html",
+        "brandPrefix": "maidong",
+        "aestheticsMode": "free-explore",
+        "toolDisciplineBlockPresent": true,
+        "fillHtmlHeadCommand": "node '/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/colors_and_type.css' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/pages/expert-farmer-tool.html' --title='专家·农户工具版' --lang='zh-CN' --prefix='maidong' --replace-head",
+        "headFillMode": "replace-head-after-body",
+        "viewportMode": "document-scroll",
+        "completionSchemaExpected": "full",
+        "restoreFields": null,
+        "restoreContractStatus": null,
+        "restoreCompactPacket": null,
+        "deterministicCommands": null,
+        "sourceAuthorityLock": null,
+        "preDispatchFileHashes": {
+          "fucheng-maidong-miniapp.design": "6ca2a05ab0127593ad5dd9df6c0b6991ab4e29ab31ced715253bf8a8c964d240"
+        },
+        "contextPreflight": {
+          "workflowPath": "intent-workflows/intent-project-mutation/INTENT_WORKFLOW.md",
+          "requiredContextFiles": [
+            "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+            "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+            "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+            "delivery-quality/page-rendering-quality-gate.md",
+            "delivery-quality/design-artifact-validation.md",
+            "delivery-quality/delivery-evidence-contract.md"
+          ],
+          "optionalContextFiles": [
+            "visual-experience/visual-experience-guidelines.md"
+          ],
+          "passed": true
+        },
+        "pageSliceOnly": true,
+        "requiredFieldsPresent": true,
+        "missingFields": [],
+        "fillHtmlHeadCommandValid": true,
+        "mobileNavigation": {
+          "required": true,
+          "appliesToThisPage": true,
+          "activeKey": "mine",
+          "contractPresent": true,
+          "structurePresent": true,
+          "canonicalHtmlIncluded": true,
+          "canonicalHtmlSource": "sharedProjectShellContract.mobileNavigation.structure.canonicalHtmlByKey.mine",
+          "structureHash": "13f47950c93b7cb91e35c6c827b8a6905f41053a8a0a84385b1ebe9c6c0348b2",
+          "missingFields": []
+        },
+        "persistedToSummary": true,
+        "taskQueryAudited": false,
+        "proofSource": "summary-only",
+        "largeWorkflowFilesInTaskQuery": null
+      },
+      {
+        "recorded_at": "2026-10-12T06:52:26.620Z",
+        "generatedBy": "build-page-dispatch-manifest.mjs",
+        "packetType": "ExistingEditPagePacket",
+        "laneContract": {
+          "resolvedLane": "existing_edit_add_comparison",
+          "packetType": "ExistingEditPagePacket",
+          "pageRuntimeGuide": "intent-workflows/intent-project-mutation/existing-edit-page-runtime.md",
+          "dispatchContract": "intent-workflows/intent-project-mutation/existing-edit-dispatch-contract.md"
+        },
+        "taskLinePresent": true,
+        "outputPathPresent": true,
+        "sharedTemplate": "intent-workflows/intent-project-mutation/existing-edit-page-runtime.md",
+        "nodeId": "page-mine-farmer-tool",
+        "htmlSrc": "pages/mine-farmer-tool.html",
+        "supplementaryReads": [],
+        "allowedWritePaths": [
+          "pages/mine-farmer-tool.html",
+          "assets/"
+        ],
+        "forbiddenWriteRoots": [
+          "*.design",
+          "runtime-orchestration-summary.json",
+          "validation-report.json",
+          "finish-readiness-report.json",
+          "restore-contract-report.json",
+          "page-generation-summary.json"
+        ],
+        "toolPolicy": {
+          "todoWriteAllowed": false,
+          "validationScriptsAllowed": false,
+          "previewAllowed": false,
+          "helperScriptsAllowed": false,
+          "designFileWriteAllowed": false,
+          "allowedWritePaths": [
+            "pages/mine-farmer-tool.html",
+            "assets/"
+          ]
+        },
+        "skillRuntime": {
+          "skillDir": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design",
+          "deterministicToolDir": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling",
+          "toolPaths": {
+            "applyHtmlHeadContract": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs",
+            "recordDispatchCompletion": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs",
+            "buildPageDispatchManifest": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/build-page-dispatch-manifest.mjs",
+            "validateDesignWorkspace": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-design-workspace.mjs",
+            "validateFinishReadiness": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-finish-readiness.mjs",
+            "validateRestoreContract": "/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-restore-contract.mjs"
+          },
+          "requiredForPageSubAgent": [
+            "applyHtmlHeadContract",
+            "recordDispatchCompletion"
+          ],
+          "pathInjection": "absolute",
+          "pathContract": "Do not use {SKILL_DIR} placeholders inside Page Sub-Agent packets; use toolPaths.* absolute paths.",
+          "commandTemplates": {
+            "recordDispatchCompletion": "node '/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp' --node-id='page-mine-farmer-tool' --html-src='pages/mine-farmer-tool.html' --status=completed --changed-files=<comma-separated-project-relative-files> --trace-digest=<main-agent-runtime-trace-digest> --tool-ledger-json=<tool-ledger-json-or-file>"
+          }
+        },
+        "cssFilePath": "/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/colors_and_type.css",
+        "htmlFilePath": "/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/pages/mine-farmer-tool.html",
+        "brandPrefix": "maidong",
+        "aestheticsMode": "free-explore",
+        "toolDisciplineBlockPresent": true,
+        "fillHtmlHeadCommand": "node '/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/colors_and_type.css' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp/pages/mine-farmer-tool.html' --title='我的·农户工具版' --lang='zh-CN' --prefix='maidong' --replace-head",
+        "headFillMode": "replace-head-after-body",
+        "viewportMode": "document-scroll",
+        "completionSchemaExpected": "full",
+        "restoreFields": null,
+        "restoreContractStatus": null,
+        "restoreCompactPacket": null,
+        "deterministicCommands": null,
+        "sourceAuthorityLock": null,
+        "preDispatchFileHashes": {
+          "fucheng-maidong-miniapp.design": "6ca2a05ab0127593ad5dd9df6c0b6991ab4e29ab31ced715253bf8a8c964d240"
+        },
+        "contextPreflight": {
+          "workflowPath": "intent-workflows/intent-project-mutation/INTENT_WORKFLOW.md",
+          "requiredContextFiles": [
+            "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+            "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+            "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+            "delivery-quality/page-rendering-quality-gate.md",
+            "delivery-quality/design-artifact-validation.md",
+            "delivery-quality/delivery-evidence-contract.md"
+          ],
+          "optionalContextFiles": [
+            "visual-experience/visual-experience-guidelines.md"
+          ],
+          "passed": true
+        },
+        "pageSliceOnly": true,
+        "requiredFieldsPresent": true,
+        "missingFields": [],
+        "fillHtmlHeadCommandValid": true,
+        "mobileNavigation": {
+          "required": true,
+          "appliesToThisPage": true,
+          "activeKey": "mine",
+          "contractPresent": true,
+          "structurePresent": true,
+          "canonicalHtmlIncluded": true,
+          "canonicalHtmlSource": "sharedProjectShellContract.mobileNavigation.structure.canonicalHtmlByKey.mine",
+          "structureHash": "13f47950c93b7cb91e35c6c827b8a6905f41053a8a0a84385b1ebe9c6c0348b2",
+          "missingFields": []
+        },
+        "persistedToSummary": true,
+        "taskQueryAudited": false,
+        "proofSource": "summary-only",
+        "largeWorkflowFilesInTaskQuery": null
+      }
+    ],
+    "validationHistory": [
+      {
+        "reportPath": "validation-report.json",
+        "reportHash": "3fca2f9370570bc0dec5d942499e04fa73c8eec11314bbcb428a8cbd20ccab8f",
+        "checkedAt": "2026-10-10T10:01:39.143Z",
+        "success": false,
+        "exitCode": 1,
+        "renderBlockingErrorCount": 24,
+        "repairPlanHints": [],
+        "errorSignatures": [
+          {
+            "errorClass": "dispatch-changed-files",
+            "normalized": "[dispatch-changed-files] pages/home.html: toolCallLedger.source must be main-agent-runtime-trace; found (missing)",
+            "signature": "eee920a392106c24ce3306337a0e3bb5cf97e6b2e87093577967250c185c5723"
+          },
+          {
+            "errorClass": "dispatch-changed-files",
+            "normalized": "[dispatch-changed-files] pages/home.html: toolCallLedger.traceDigest is required for trace-sourced discipline audit",
+            "signature": "dfaf803ec4da0946ddf9340a1738bf3e9eb74aa3b0f50e7a32e185964cb366f5"
+          },
+          {
+            "errorClass": "artifact-readiness",
+            "normalized": "[dispatch-changed-files] pages/home.html: controlled file changed after dispatch preflight without mainAgentPostDispatchMutations evidence: fucheng-maidong-miniapp.design",
+            "signature": "8399008170a9f04dc85918eb5b2ce709264b4bb781cd69ff947603fb86b79325"
+          },
+          {
+            "errorClass": "dispatch-changed-files",
+            "normalized": "[dispatch-changed-files] pages/fields.html: toolCallLedger.source must be main-agent-runtime-trace; found (missing)",
+            "signature": "c10824b1a071d60e1ef8b59ab16fecbd6155fb602042adb19be1d74f6bd6fa74"
+          },
+          {
+            "errorClass": "dispatch-changed-files",
+            "normalized": "[dispatch-changed-files] pages/fields.html: toolCallLedger.traceDigest is required for trace-sourced discipline audit",
+            "signature": "fe043e65988d049d741fe6cf8fd823fab3d69628ef00e007055125de2dcc1f9c"
+          },
+          {
+            "errorClass": "artifact-readiness",
+            "normalized": "[dispatch-changed-files] pages/fields.html: controlled file changed after dispatch preflight without mainAgentPostDispatchMutations evidence: fucheng-maidong-miniapp.design",
+            "signature": "4b9ab1b650d6029e21986c267dee253404925865248c9a3c74cb5001a472c200"
+          },
+          {
+            "errorClass": "dispatch-changed-files",
+            "normalized": "[dispatch-changed-files] pages/ai-diagnosis.html: toolCallLedger.source must be main-agent-runtime-trace; found (missing)",
+            "signature": "2a1366d9a9283a6b4bf662db2e6bd7179ef3cc365507a5010694a672ed8edd54"
+          },
+          {
+            "errorClass": "dispatch-changed-files",
+            "normalized": "[dispatch-changed-files] pages/ai-diagnosis.html: toolCallLedger.traceDigest is required for trace-sourced discipline audit",
+            "signature": "2c215dc6d20cc421c167b983bfb4fe83399973ea266df30b6930940395c4bbc8"
+          },
+          {
+            "errorClass": "artifact-readiness",
+            "normalized": "[dispatch-changed-files] pages/ai-diagnosis.html: controlled file changed after dispatch preflight without mainAgentPostDispatchMutations evidence: fucheng-maidong-miniapp.design",
+            "signature": "9f0d2771965a0756d25139296d012fbf263c0033c82fa715bf033d1a04f0a264"
+          },
+          {
+            "errorClass": "dispatch-changed-files",
+            "normalized": "[dispatch-changed-files] pages/plan.html: toolCallLedger.source must be main-agent-runtime-trace; found (missing)",
+            "signature": "f48f717e004519f1fa9f89c209d2c48fd1fd1cb92e8b60283f1a90ee933ab1a6"
+          },
+          {
+            "errorClass": "dispatch-changed-files",
+            "normalized": "[dispatch-changed-files] pages/plan.html: toolCallLedger.traceDigest is required for trace-sourced discipline audit",
+            "signature": "15954c7bbc3973e022ddc0292c772416c470457edab46e5e744a1fc9fef9f142"
+          },
+          {
+            "errorClass": "artifact-readiness",
+            "normalized": "[dispatch-changed-files] pages/plan.html: controlled file changed after dispatch preflight without mainAgentPostDispatchMutations evidence: fucheng-maidong-miniapp.design",
+            "signature": "44ed04d2cd74fba43954378acd74abaaeafb2ce66c585b523fbc621527c5a4a3"
+          },
+          {
+            "errorClass": "dispatch-changed-files",
+            "normalized": "[dispatch-changed-files] pages/expert.html: toolCallLedger.source must be main-agent-runtime-trace; found (missing)",
+            "signature": "123a628d8afbb6aa87b80118808751916c79043fb907232edb89d979df5b1954"
+          },
+          {
+            "errorClass": "dispatch-changed-files",
+            "normalized": "[dispatch-changed-files] pages/expert.html: toolCallLedger.traceDigest is required for trace-sourced discipline audit",
+            "signature": "798c61d6d3ca3a8c1e21c8a730432ef31bd456687a3fd45ddc57588d81940892"
+          },
+          {
+            "errorClass": "artifact-readiness",
+            "normalized": "[dispatch-changed-files] pages/expert.html: controlled file changed after dispatch preflight without mainAgentPostDispatchMutations evidence: fucheng-maidong-miniapp.design",
+            "signature": "dfa4c6393cd91f05ccdd0e899fa3a6b457ce5b752b549b146b4ffc595356f4e2"
+          },
+          {
+            "errorClass": "dispatch-changed-files",
+            "normalized": "[dispatch-changed-files] pages/mine.html: toolCallLedger.source must be main-agent-runtime-trace; found (missing)",
+            "signature": "bb3874a8e36c63c6d37910a74909f22eb4747198f0d8c7774611429c1972d761"
+          },
+          {
+            "errorClass": "dispatch-changed-files",
+            "normalized": "[dispatch-changed-files] pages/mine.html: toolCallLedger.traceDigest is required for trace-sourced discipline audit",
+            "signature": "957cd472300cfa344f5347026a52ebecc19be4ba86ec5144545bb82ac2430a62"
+          },
+          {
+            "errorClass": "artifact-readiness",
+            "normalized": "[dispatch-changed-files] pages/mine.html: controlled file changed after dispatch preflight without mainAgentPostDispatchMutations evidence: fucheng-maidong-miniapp.design",
+            "signature": "11cae954874cf08c9df26a0224da031788619aa44ea63004396574148aa41efe"
+          },
+          {
+            "errorClass": "mini-program-chrome",
+            "normalized": "[mini-program-chrome] home.html: miniProgramStyle page must include a visible right system capsule.",
+            "signature": "33a36c23f494baa79c0f8f7187bb3efac3e716650c3449e47d533e1596186860"
+          },
+          {
+            "errorClass": "mini-program-chrome",
+            "normalized": "[mini-program-chrome] fields.html: miniProgramStyle page must include a visible right system capsule.",
+            "signature": "33009559f10be6af12f71a42280d1f991fc68831c0c326e88a27ed56aab8aea6"
+          },
+          {
+            "errorClass": "mini-program-chrome",
+            "normalized": "[mini-program-chrome] ai-diagnosis.html: miniProgramStyle page must include a visible right system capsule.",
+            "signature": "b131ab139fcfe5782c914b85b0e46f866242f3510cce8a8184f0de3546f844cc"
+          },
+          {
+            "errorClass": "mini-program-chrome",
+            "normalized": "[mini-program-chrome] plan.html: miniProgramStyle page must include a visible right system capsule.",
+            "signature": "18627e2466f6b339a13d090ffff9fb20d69ef2fc80664ae510f44d6a2cb0762a"
+          },
+          {
+            "errorClass": "mini-program-chrome",
+            "normalized": "[mini-program-chrome] expert.html: miniProgramStyle page must include a visible right system capsule.",
+            "signature": "6f3646838d1678053e4a16d3337a116e8a54bd2db33a33970af2270d7bebb29f"
+          },
+          {
+            "errorClass": "mini-program-chrome",
+            "normalized": "[mini-program-chrome] mine.html: miniProgramStyle page must include a visible right system capsule.",
+            "signature": "603b00e5e2cfdc3fcb61a12f57ae403734ec2a2621bb78233aeab8baffdb1465"
+          }
+        ],
+        "terminalState": null
+      }
+    ],
+    "validationRepairLedger": [
+      {
+        "failedReportPath": "validation-report.json",
+        "failedReportHash": "3fca2f9370570bc0dec5d942499e04fa73c8eec11314bbcb428a8cbd20ccab8f",
+        "repairWorkflowReadPath": "intent-workflows/intent-project-mutation/main-agent-repair-workflow.md",
+        "repairStartedAt": "2026-10-10T10:01:46.462Z",
+        "repairEntryStatus": "started-awaiting-owner-batch-repair",
+        "ownerTriage": [
+          {
+            "owner": "main-agent",
+            "errorClass": "unknown-blocking",
+            "affectedFiles": [],
+            "repairScope": "read validation report, classify owner, then use the narrowest targeted repair",
+            "strategy": "no validator source read; targeted affected-file excerpt only"
+          },
+          {
+            "owner": "main-agent",
+            "errorClass": "unknown-blocking",
+            "affectedFiles": [],
+            "repairScope": "read validation report, classify owner, then use the narrowest targeted repair",
+            "strategy": "no validator source read; targeted affected-file excerpt only"
+          },
+          {
+            "owner": "main-agent",
+            "errorClass": "artifact-readiness",
+            "affectedFiles": [],
+            "repairScope": "repair_design_registration_or_file_reference_only",
+            "strategy": "read .design and affected file metadata only"
+          },
+          {
+            "owner": "main-agent",
+            "errorClass": "unknown-blocking",
+            "affectedFiles": [],
+            "repairScope": "read validation report, classify owner, then use the narrowest targeted repair",
+            "strategy": "no validator source read; targeted affected-file excerpt only"
+          },
+          {
+            "owner": "main-agent",
+            "errorClass": "unknown-blocking",
+            "affectedFiles": [],
+            "repairScope": "read validation report, classify owner, then use the narrowest targeted repair",
+            "strategy": "no validator source read; targeted affected-file excerpt only"
+          },
+          {
+            "owner": "main-agent",
+            "errorClass": "artifact-readiness",
+            "affectedFiles": [],
+            "repairScope": "repair_design_registration_or_file_reference_only",
+            "strategy": "read .design and affected file metadata only"
+          },
+          {
+            "owner": "main-agent",
+            "errorClass": "unknown-blocking",
+            "affectedFiles": [],
+            "repairScope": "read validation report, classify owner, then use the narrowest targeted repair",
+            "strategy": "no validator source read; targeted affected-file excerpt only"
+          },
+          {
+            "owner": "main-agent",
+            "errorClass": "unknown-blocking",
+            "affectedFiles": [],
+            "repairScope": "read validation report, classify owner, then use the narrowest targeted repair",
+            "strategy": "no validator source read; targeted affected-file excerpt only"
+          }
+        ],
+        "repairPlanHints": [],
+        "repairActions": [],
+        "revalidationReportPath": null,
+        "revalidationReportHash": null,
+        "revalidationSuccess": null,
+        "blockedReason": null
+      }
+    ],
+    "validationSnapshot": {},
+    "artifactReadinessEvidence": {},
+    "wiringRegistrationEvidence": {
+      "expectedDomIds": [
+        "cta-ai-diagnosis:home.html",
+        "cta-plan:home.html",
+        "cta-expert:home.html",
+        "link-home:fields.html",
+        "link-ai-diagnosis:fields.html",
+        "link-plan:fields.html",
+        "link-mine:fields.html",
+        "back-home:ai-diagnosis.html",
+        "cta-expert:ai-diagnosis.html",
+        "cta-plan:ai-diagnosis.html",
+        "back-home:plan.html",
+        "cta-expert:plan.html",
+        "cta-ai-diagnosis:plan.html",
+        "back-home:expert.html",
+        "cta-submit-consult:expert.html",
+        "shortcut-ai-diagnosis:expert.html",
+        "shortcut-plan:expert.html",
+        "cta-expert:mine.html",
+        "shortcut-fields:mine.html",
+        "shortcut-ai-diagnosis:mine.html",
+        "shortcut-plan:mine.html"
+      ],
+      "allExpectedDomIdsRegistered": true,
+      "missingDomIds": []
+    },
+    "readScopeLedger": [
+      {
+        "actor": "page-sub-agent",
+        "lane": "free_exploration",
+        "path": "intent-workflows/intent-page-free-exploration/free-exploration-page-runtime.md",
+        "reason": "page runtime guide",
+        "scopeClass": "page-runtime",
+        "declaredBeforeRead": true,
+        "recordedAt": "2026-10-10T09:52:53.256Z",
+        "nodeId": "page-home",
+        "htmlSrc": "pages/home.html"
+      },
+      {
+        "actor": "page-sub-agent",
+        "lane": "free_exploration",
+        "path": "intent-workflows/intent-page-free-exploration/dispatch-contract.md",
+        "reason": "dispatch contract",
+        "scopeClass": "dispatch-contract",
+        "declaredBeforeRead": true,
+        "recordedAt": "2026-10-10T09:52:53.256Z",
+        "nodeId": "page-home",
+        "htmlSrc": "pages/home.html"
+      },
+      {
+        "actor": "page-sub-agent",
+        "lane": "existing_edit_add_comparison",
+        "path": "intent-workflows/intent-project-mutation/existing-edit-page-runtime.md",
+        "reason": "page runtime guide",
+        "scopeClass": "page-runtime",
+        "declaredBeforeRead": true,
+        "recordedAt": "2026-10-12T06:29:08.434Z",
+        "nodeId": "page-home",
+        "htmlSrc": "pages/home.html"
+      },
+      {
+        "actor": "page-sub-agent",
+        "lane": "existing_edit_add_comparison",
+        "path": "intent-workflows/intent-project-mutation/existing-edit-dispatch-contract.md",
+        "reason": "dispatch contract",
+        "scopeClass": "dispatch-contract",
+        "declaredBeforeRead": true,
+        "recordedAt": "2026-10-12T06:29:08.434Z",
+        "nodeId": "page-home",
+        "htmlSrc": "pages/home.html"
+      }
+    ],
+    "repairEntryEvidence": [
+      {
+        "failedReportPath": "validation-report.json",
+        "failedReportHash": "3fca2f9370570bc0dec5d942499e04fa73c8eec11314bbcb428a8cbd20ccab8f",
+        "repairWorkflowReadPath": "intent-workflows/intent-project-mutation/main-agent-repair-workflow.md",
+        "repairStartedAt": "2026-10-10T10:01:46.462Z",
+        "ledgerIndex": 0,
+        "ownerTriageCount": 8,
+        "repairActionCount": 0,
+        "revalidationReportPath": null,
+        "revalidationReportHash": null,
+        "revalidationSuccess": null
+      }
+    ],
+    "mainAgentPostDispatchMutations": [
+      {
+        "path": "fucheng-maidong-miniapp.design",
+        "reason": "main agent updated canvas registration and interaction graph after page dispatch assembly",
+        "owner": "main-agent",
+        "recordedAt": "2026-10-10T10:04:54.936Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "path": "fucheng-maidong-miniapp.design",
+        "reason": "main agent registered comparison page and refreshed canvas interaction graph after mutation assembly",
+        "owner": "main-agent",
+        "recordedAt": "2026-10-12T06:29:35.502Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "path": "fucheng-maidong-miniapp.design",
+        "reason": "main agent registered comparison page and refreshed canvas interaction graph after farmer-tool variant assembly",
+        "owner": "main-agent",
+        "recordedAt": "2026-10-12T06:39:18.635Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "path": "fucheng-maidong-miniapp.design",
+        "reason": "main agent registered farmer-tool page suite and refreshed canvas interaction graph after suite assembly",
+        "owner": "main-agent",
+        "recordedAt": "2026-10-12T06:52:44.731Z",
+        "source": "record-dispatch-completion.mjs"
+      }
+    ],
+    "sourcePageId": "page-home-farmer-tool",
+    "sourceHtmlSrc": "pages/home-farmer-tool.html",
+    "derivationType": "comparison-page-suite",
+    "inPlaceEditAllowed": false,
+    "affectedPageIds": [
+      "page-fields-farmer-tool",
+      "page-ai-diagnosis-farmer-tool",
+      "page-plan-farmer-tool",
+      "page-expert-farmer-tool",
+      "page-mine-farmer-tool"
+    ],
+    "affectedHtmlFiles": [
+      "pages/fields-farmer-tool.html",
+      "pages/ai-diagnosis-farmer-tool.html",
+      "pages/plan-farmer-tool.html",
+      "pages/expert-farmer-tool.html",
+      "pages/mine-farmer-tool.html"
+    ],
+    "comparisonTargetPageId": "page-home-farmer-tool",
+    "comparisonTargetHtmlSrc": "pages/home-farmer-tool.html",
+    "mutationMode": "existing-edit",
+    "sourceProjectLaneHeritage": {
+      "resolvedLane": "existing_edit_add_comparison",
+      "constraints": []
+    },
+    "expectedDispatches": [
+      {
+        "nodeId": "page-home",
+        "pageId": "page-home",
+        "targetPageId": "page-home",
+        "htmlSrc": "pages/home.html",
+        "packetType": "ExistingEditPagePacket",
+        "status": "completed",
+        "changedFiles": [
+          "pages/home.html"
+        ],
+        "toolCallLedger": {
+          "source": "main-agent-runtime-trace",
+          "traceDigest": "89a17b4df96b91f5a6fb29dcf3a4b9c535ed3c6110ab5bf588e9818810859467",
+          "todoWriteCalls": 0,
+          "previewCalls": 0,
+          "validationScriptCalls": 0,
+          "helperScriptWrites": 0
+        },
+        "recordedAt": "2026-10-12T06:52:44.731Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "nodeId": "page-fields",
+        "pageId": "page-fields",
+        "targetPageId": "page-fields",
+        "htmlSrc": "pages/fields.html",
+        "packetType": "ExistingEditPagePacket",
+        "status": "completed",
+        "changedFiles": [
+          "pages/fields.html"
+        ],
+        "toolCallLedger": {
+          "source": "main-agent-runtime-trace",
+          "traceDigest": "89a17b4df96b91f5a6fb29dcf3a4b9c535ed3c6110ab5bf588e9818810859467",
+          "todoWriteCalls": 0,
+          "previewCalls": 0,
+          "validationScriptCalls": 0,
+          "helperScriptWrites": 0
+        },
+        "recordedAt": "2026-10-12T06:52:44.947Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "nodeId": "page-ai-diagnosis",
+        "pageId": "page-ai-diagnosis",
+        "targetPageId": "page-ai-diagnosis",
+        "htmlSrc": "pages/ai-diagnosis.html",
+        "packetType": "ExistingEditPagePacket",
+        "status": "completed",
+        "changedFiles": [
+          "pages/ai-diagnosis.html"
+        ],
+        "toolCallLedger": {
+          "source": "main-agent-runtime-trace",
+          "traceDigest": "89a17b4df96b91f5a6fb29dcf3a4b9c535ed3c6110ab5bf588e9818810859467",
+          "todoWriteCalls": 0,
+          "previewCalls": 0,
+          "validationScriptCalls": 0,
+          "helperScriptWrites": 0
+        },
+        "recordedAt": "2026-10-12T06:52:45.060Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "nodeId": "page-plan",
+        "pageId": "page-plan",
+        "targetPageId": "page-plan",
+        "htmlSrc": "pages/plan.html",
+        "packetType": "ExistingEditPagePacket",
+        "status": "completed",
+        "changedFiles": [
+          "pages/plan.html"
+        ],
+        "toolCallLedger": {
+          "source": "main-agent-runtime-trace",
+          "traceDigest": "89a17b4df96b91f5a6fb29dcf3a4b9c535ed3c6110ab5bf588e9818810859467",
+          "todoWriteCalls": 0,
+          "previewCalls": 0,
+          "validationScriptCalls": 0,
+          "helperScriptWrites": 0
+        },
+        "recordedAt": "2026-10-12T06:52:45.175Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "nodeId": "page-expert",
+        "pageId": "page-expert",
+        "targetPageId": "page-expert",
+        "htmlSrc": "pages/expert.html",
+        "packetType": "ExistingEditPagePacket",
+        "status": "completed",
+        "changedFiles": [
+          "pages/expert.html"
+        ],
+        "toolCallLedger": {
+          "source": "main-agent-runtime-trace",
+          "traceDigest": "89a17b4df96b91f5a6fb29dcf3a4b9c535ed3c6110ab5bf588e9818810859467",
+          "todoWriteCalls": 0,
+          "previewCalls": 0,
+          "validationScriptCalls": 0,
+          "helperScriptWrites": 0
+        },
+        "recordedAt": "2026-10-12T06:52:45.287Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "nodeId": "page-mine",
+        "pageId": "page-mine",
+        "targetPageId": "page-mine",
+        "htmlSrc": "pages/mine.html",
+        "packetType": "ExistingEditPagePacket",
+        "status": "completed",
+        "changedFiles": [
+          "pages/mine.html"
+        ],
+        "toolCallLedger": {
+          "source": "main-agent-runtime-trace",
+          "traceDigest": "89a17b4df96b91f5a6fb29dcf3a4b9c535ed3c6110ab5bf588e9818810859467",
+          "todoWriteCalls": 0,
+          "previewCalls": 0,
+          "validationScriptCalls": 0,
+          "helperScriptWrites": 0
+        },
+        "recordedAt": "2026-10-12T06:52:45.387Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "nodeId": "page-home-conversion",
+        "pageId": "page-home-conversion",
+        "targetPageId": "page-home-conversion",
+        "htmlSrc": "pages/home-conversion.html",
+        "packetType": "ExistingEditPagePacket",
+        "status": "completed",
+        "changedFiles": [
+          "pages/home-conversion.html"
+        ],
+        "toolCallLedger": {
+          "source": "main-agent-runtime-trace",
+          "traceDigest": "89a17b4df96b91f5a6fb29dcf3a4b9c535ed3c6110ab5bf588e9818810859467",
+          "todoWriteCalls": 0,
+          "previewCalls": 0,
+          "validationScriptCalls": 0,
+          "helperScriptWrites": 0
+        },
+        "recordedAt": "2026-10-12T06:52:45.511Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "nodeId": "page-home-farmer-tool",
+        "pageId": "page-home-farmer-tool",
+        "targetPageId": "page-home-farmer-tool",
+        "htmlSrc": "pages/home-farmer-tool.html",
+        "packetType": "ExistingEditPagePacket",
+        "status": "completed",
+        "changedFiles": [
+          "pages/home-farmer-tool.html"
+        ],
+        "toolCallLedger": {
+          "source": "main-agent-runtime-trace",
+          "traceDigest": "89a17b4df96b91f5a6fb29dcf3a4b9c535ed3c6110ab5bf588e9818810859467",
+          "todoWriteCalls": 0,
+          "previewCalls": 0,
+          "validationScriptCalls": 0,
+          "helperScriptWrites": 0
+        },
+        "recordedAt": "2026-10-12T06:52:45.632Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "nodeId": "page-fields-farmer-tool",
+        "pageId": "page-fields-farmer-tool",
+        "targetPageId": "page-fields-farmer-tool",
+        "htmlSrc": "pages/fields-farmer-tool.html",
+        "packetType": "ExistingEditPagePacket",
+        "status": "completed",
+        "changedFiles": [
+          "pages/fields-farmer-tool.html"
+        ],
+        "toolCallLedger": {
+          "source": "main-agent-runtime-trace",
+          "traceDigest": "89a17b4df96b91f5a6fb29dcf3a4b9c535ed3c6110ab5bf588e9818810859467",
+          "todoWriteCalls": 0,
+          "previewCalls": 0,
+          "validationScriptCalls": 0,
+          "helperScriptWrites": 0
+        },
+        "recordedAt": "2026-10-12T06:52:45.747Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "nodeId": "page-ai-diagnosis-farmer-tool",
+        "pageId": "page-ai-diagnosis-farmer-tool",
+        "targetPageId": "page-ai-diagnosis-farmer-tool",
+        "htmlSrc": "pages/ai-diagnosis-farmer-tool.html",
+        "packetType": "ExistingEditPagePacket",
+        "status": "completed",
+        "changedFiles": [
+          "pages/ai-diagnosis-farmer-tool.html"
+        ],
+        "toolCallLedger": {
+          "source": "main-agent-runtime-trace",
+          "traceDigest": "89a17b4df96b91f5a6fb29dcf3a4b9c535ed3c6110ab5bf588e9818810859467",
+          "todoWriteCalls": 0,
+          "previewCalls": 0,
+          "validationScriptCalls": 0,
+          "helperScriptWrites": 0
+        },
+        "recordedAt": "2026-10-12T06:52:45.863Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "nodeId": "page-plan-farmer-tool",
+        "pageId": "page-plan-farmer-tool",
+        "targetPageId": "page-plan-farmer-tool",
+        "htmlSrc": "pages/plan-farmer-tool.html",
+        "packetType": "ExistingEditPagePacket",
+        "status": "completed",
+        "changedFiles": [
+          "pages/plan-farmer-tool.html"
+        ],
+        "toolCallLedger": {
+          "source": "main-agent-runtime-trace",
+          "traceDigest": "89a17b4df96b91f5a6fb29dcf3a4b9c535ed3c6110ab5bf588e9818810859467",
+          "todoWriteCalls": 0,
+          "previewCalls": 0,
+          "validationScriptCalls": 0,
+          "helperScriptWrites": 0
+        },
+        "recordedAt": "2026-10-12T06:52:45.990Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "nodeId": "page-expert-farmer-tool",
+        "pageId": "page-expert-farmer-tool",
+        "targetPageId": "page-expert-farmer-tool",
+        "htmlSrc": "pages/expert-farmer-tool.html",
+        "packetType": "ExistingEditPagePacket",
+        "status": "completed",
+        "changedFiles": [
+          "pages/expert-farmer-tool.html"
+        ],
+        "toolCallLedger": {
+          "source": "main-agent-runtime-trace",
+          "traceDigest": "89a17b4df96b91f5a6fb29dcf3a4b9c535ed3c6110ab5bf588e9818810859467",
+          "todoWriteCalls": 0,
+          "previewCalls": 0,
+          "validationScriptCalls": 0,
+          "helperScriptWrites": 0
+        },
+        "recordedAt": "2026-10-12T06:52:46.101Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "nodeId": "page-mine-farmer-tool",
+        "pageId": "page-mine-farmer-tool",
+        "targetPageId": "page-mine-farmer-tool",
+        "htmlSrc": "pages/mine-farmer-tool.html",
+        "packetType": "ExistingEditPagePacket",
+        "status": "completed",
+        "changedFiles": [
+          "pages/mine-farmer-tool.html"
+        ],
+        "toolCallLedger": {
+          "source": "main-agent-runtime-trace",
+          "traceDigest": "89a17b4df96b91f5a6fb29dcf3a4b9c535ed3c6110ab5bf588e9818810859467",
+          "todoWriteCalls": 0,
+          "previewCalls": 0,
+          "validationScriptCalls": 0,
+          "helperScriptWrites": 0
+        },
+        "recordedAt": "2026-10-12T06:52:46.221Z",
+        "source": "record-dispatch-completion.mjs"
+      }
+    ]
+  },
+  "designSource": {
+    "operatingMode": "free-explore",
+    "cssFilePath": "colors_and_type.css",
+    "brandPrefix": "maidong",
+    "libraryIdentity": null,
+    "styleConstraints": {
+      "radiusMax": 16,
+      "staticShadowAlphaMax": 0.05
+    }
+  },
+  "pages": [
+    {
+      "nodeId": "page-home",
+      "title": "首页",
+      "htmlSrc": "pages/home.html",
+      "pageIndex": 1,
+      "deviceType": "mobile",
+      "viewportMode": "document-scroll",
+      "pageType": "task-driven",
+      "qualityRisks": [
+        "信息密度偏高",
+        "需要在首屏体现地块、预警、AI入口"
+      ],
+      "miniProgramStyle": true,
+      "mobileNavigationActiveKey": "home",
+      "visualNorthStar": "像一个每天都会打开的农业工作台，首屏直接看到地块状态、今日建议和快速识别入口。",
+      "compositionPattern": "task-dashboard",
+      "continuityAnchors": [
+        "统一土壤米色底",
+        "绿色情况标签",
+        "上白下卡片结构"
+      ],
+      "chartsRequired": false
+    },
+    {
+      "nodeId": "page-fields",
+      "title": "地块档案",
+      "htmlSrc": "pages/fields.html",
+      "pageIndex": 2,
+      "deviceType": "mobile",
+      "viewportMode": "document-scroll",
+      "pageType": "information-dense",
+      "qualityRisks": [
+        "多卡片列表",
+        "需要保持信息清晰分层"
+      ],
+      "miniProgramStyle": true,
+      "mobileNavigationActiveKey": "fields",
+      "visualNorthStar": "像一张可操作的种植档案册，让种植户快速看懂每块田的阶段、苗情、风险和记录。",
+      "compositionPattern": "list-panel",
+      "continuityAnchors": [
+        "相同顶部导航",
+        "相同底部五栏导航",
+        "卡片边框节制"
+      ],
+      "chartsRequired": false
+    },
+    {
+      "nodeId": "page-ai-diagnosis",
+      "title": "AI识别",
+      "htmlSrc": "pages/ai-diagnosis.html",
+      "pageIndex": 3,
+      "deviceType": "mobile",
+      "viewportMode": "document-scroll",
+      "pageType": "task-driven",
+      "qualityRisks": [
+        "结果区域较复杂",
+        "需要清晰区分识别结论和建议动作"
+      ],
+      "miniProgramStyle": true,
+      "mobileNavigationActiveKey": "ai",
+      "visualNorthStar": "像随身农技助手，一次上传图片就能给出苗情、病害风险和下一步建议。",
+      "compositionPattern": "hero-result",
+      "continuityAnchors": [
+        "统一状态标签",
+        "绿色主按钮",
+        "说明文字左对齐"
+      ],
+      "chartsRequired": false
+    },
+    {
+      "nodeId": "page-plan",
+      "title": "管理方案",
+      "htmlSrc": "pages/plan.html",
+      "pageIndex": 4,
+      "deviceType": "mobile",
+      "viewportMode": "document-scroll",
+      "pageType": "information-dense",
+      "qualityRisks": [
+        "生命周期节点较多",
+        "容易变成纯列表"
+      ],
+      "miniProgramStyle": true,
+      "mobileNavigationActiveKey": "plan",
+      "visualNorthStar": "像一份能直接照着干的川麦冬全年管理路线图，把阶段、肥药建议和风险提醒统一起来。",
+      "compositionPattern": "timeline-board",
+      "continuityAnchors": [
+        "一致的分组标题",
+        "节点卡片样式一致",
+        "农业数据标签一致"
+      ],
+      "chartsRequired": false
+    },
+    {
+      "nodeId": "page-expert",
+      "title": "专家诊断",
+      "htmlSrc": "pages/expert.html",
+      "pageIndex": 5,
+      "deviceType": "mobile",
+      "viewportMode": "document-scroll",
+      "pageType": "task-driven",
+      "qualityRisks": [
+        "服务流程需要非常明确"
+      ],
+      "miniProgramStyle": true,
+      "mobileNavigationActiveKey": "mine",
+      "visualNorthStar": "像一个可信的远程问诊台，清楚说明提交资料、等待专家、查看回复的完整闭环。",
+      "compositionPattern": "step-card",
+      "continuityAnchors": [
+        "同一视觉系统",
+        "强调提交动作",
+        "保留返回结构"
+      ],
+      "chartsRequired": false
+    },
+    {
+      "nodeId": "page-mine",
+      "title": "我的",
+      "htmlSrc": "pages/mine.html",
+      "pageIndex": 6,
+      "deviceType": "mobile",
+      "viewportMode": "document-scroll",
+      "pageType": "task-driven",
+      "qualityRisks": [
+        "模块较多但要克制装饰"
+      ],
+      "miniProgramStyle": true,
+      "mobileNavigationActiveKey": "mine",
+      "visualNorthStar": "像个人种植控制台，集中展示我的地块、识别记录、专家订单和订阅服务。",
+      "compositionPattern": "profile-dashboard",
+      "continuityAnchors": [
+        "一致底色",
+        "相同底部五栏导航",
+        "重要信息使用强调数字"
+      ],
+      "chartsRequired": false
+    },
+    {
+      "nodeId": "page-home-conversion",
+      "title": "首页·农资转化版",
+      "htmlSrc": "pages/home-conversion.html",
+      "pageIndex": 7,
+      "deviceType": "mobile",
+      "viewportMode": "document-scroll",
+      "pageType": "conversion-home",
+      "qualityRisks": [
+        "首屏信息过载",
+        "套餐卡与成交动作需保持可读性"
+      ],
+      "miniProgramStyle": true,
+      "mobileNavigationActiveKey": "home",
+      "visualNorthStar": "像一个能带动咨询与下单的农业服务首页，首屏同时传达专业诊断能力与套餐成交入口。",
+      "compositionPattern": "conversion-dashboard",
+      "continuityAnchors": [
+        "统一土壤米色底",
+        "草本绿主色",
+        "顶部小程序壳层与底部五栏导航"
+      ],
+      "chartsRequired": false
+    },
+    {
+      "nodeId": "page-home-farmer-tool",
+      "title": "首页·农户工具版",
+      "htmlSrc": "pages/home-farmer-tool.html",
+      "pageIndex": 8,
+      "deviceType": "mobile",
+      "viewportMode": "document-scroll",
+      "pageType": "tool-home",
+      "qualityRisks": [
+        "首屏按钮需要足够大",
+        "信息必须压缩到一眼可懂"
+      ],
+      "miniProgramStyle": true,
+      "mobileNavigationActiveKey": "home",
+      "visualNorthStar": "像一把给农户在地里直接用的工具，先看今天情况，再做下一步，不需要读太多字。",
+      "compositionPattern": "field-tool-dashboard",
+      "continuityAnchors": [
+        "暖米色背景",
+        "草本绿主色",
+        "顶部小程序壳层",
+        "底部五栏导航"
+      ],
+      "chartsRequired": false
+    },
+    {
+      "nodeId": "page-fields-farmer-tool",
+      "title": "地块·农户工具版",
+      "htmlSrc": "pages/fields-farmer-tool.html",
+      "pageIndex": 9,
+      "deviceType": "mobile",
+      "viewportMode": "document-scroll",
+      "pageType": "tool-fields",
+      "qualityRisks": [
+        "地块状态必须一眼可懂",
+        "操作入口不能过多"
+      ],
+      "miniProgramStyle": true,
+      "mobileNavigationActiveKey": "fields",
+      "visualNorthStar": "让农户一眼看懂哪块地今天先看、到地里先看什么。",
+      "compositionPattern": "field-tool-dashboard",
+      "continuityAnchors": [
+        "暖米色背景",
+        "草本绿主色",
+        "顶部小程序壳层",
+        "底部五栏导航"
+      ],
+      "chartsRequired": false
+    },
+    {
+      "nodeId": "page-ai-diagnosis-farmer-tool",
+      "title": "识别·农户工具版",
+      "htmlSrc": "pages/ai-diagnosis-farmer-tool.html",
+      "pageIndex": 10,
+      "deviceType": "mobile",
+      "viewportMode": "document-scroll",
+      "pageType": "tool-ai",
+      "qualityRisks": [
+        "结果卡必须比说明更突出",
+        "按钮要足够大"
+      ],
+      "miniProgramStyle": true,
+      "mobileNavigationActiveKey": "ai",
+      "visualNorthStar": "拍照、看结果、下一步，三段式非常直白。",
+      "compositionPattern": "field-tool-dashboard",
+      "continuityAnchors": [
+        "暖米色背景",
+        "草本绿主色",
+        "顶部小程序壳层",
+        "底部五栏导航"
+      ],
+      "chartsRequired": false
+    },
+    {
+      "nodeId": "page-plan-farmer-tool",
+      "title": "方案·农户工具版",
+      "htmlSrc": "pages/plan-farmer-tool.html",
+      "pageIndex": 11,
+      "deviceType": "mobile",
+      "viewportMode": "document-scroll",
+      "pageType": "tool-plan",
+      "qualityRisks": [
+        "步骤顺序要强",
+        "警示信息不能过轻"
+      ],
+      "miniProgramStyle": true,
+      "mobileNavigationActiveKey": "plan",
+      "visualNorthStar": "像一张今天干活顺序卡，先做什么、别做什么很清楚。",
+      "compositionPattern": "field-tool-dashboard",
+      "continuityAnchors": [
+        "暖米色背景",
+        "草本绿主色",
+        "顶部小程序壳层",
+        "底部五栏导航"
+      ],
+      "chartsRequired": false
+    },
+    {
+      "nodeId": "page-expert-farmer-tool",
+      "title": "专家·农户工具版",
+      "htmlSrc": "pages/expert-farmer-tool.html",
+      "pageIndex": 12,
+      "deviceType": "mobile",
+      "viewportMode": "document-scroll",
+      "pageType": "tool-expert",
+      "qualityRisks": [
+        "人工求助入口必须明显",
+        "专家信息不能太密"
+      ],
+      "miniProgramStyle": true,
+      "mobileNavigationActiveKey": "mine",
+      "visualNorthStar": "让用户知道什么时候该找人、找人时怎么说，降低求助门槛。",
+      "compositionPattern": "field-tool-dashboard",
+      "continuityAnchors": [
+        "暖米色背景",
+        "草本绿主色",
+        "顶部小程序壳层",
+        "底部五栏导航"
+      ],
+      "chartsRequired": false
+    },
+    {
+      "nodeId": "page-mine-farmer-tool",
+      "title": "我的·农户工具版",
+      "htmlSrc": "pages/mine-farmer-tool.html",
+      "pageIndex": 13,
+      "deviceType": "mobile",
+      "viewportMode": "document-scroll",
+      "pageType": "tool-mine",
+      "qualityRisks": [
+        "个人页不能像后台",
+        "常用入口文案要口语化"
+      ],
+      "miniProgramStyle": true,
+      "mobileNavigationActiveKey": "mine",
+      "visualNorthStar": "以我的地块和最近记录为核心，常用入口少而清晰。",
+      "compositionPattern": "field-tool-dashboard",
+      "continuityAnchors": [
+        "暖米色背景",
+        "草本绿主色",
+        "顶部小程序壳层",
+        "底部五栏导航"
+      ],
+      "chartsRequired": false
+    }
+  ]
+}

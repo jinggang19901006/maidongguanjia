@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地块档案</title>
+    <style id="theme-vars">
+:root {
+  color-scheme: light;
+  --maidong-background: #f6f3ea;
+  --maidong-foreground: #1d2a1f;
+  --maidong-card: #fffdf8;
+  --maidong-card-foreground: #1d2a1f;
+  --maidong-popover: #fffdf8;
+  --maidong-popover-foreground: #1d2a1f;
+  --maidong-primary: #567a38;
+  --maidong-primary-foreground: #f9fff2;
+  --maidong-muted: #ebe4d6;
+  --maidong-muted-foreground: #6c7567;
+  --maidong-border: #d9d2c1;
+  --maidong-input: #d9d2c1;
+  --maidong-ring: #7aa352;
+  --maidong-surface-2: #f1ecdf;
+  --maidong-surface-3: #e7e0d0;
+  --maidong-brand-soft: #e4efd8;
+  --maidong-brand-soft-2: #d4e4c0;
+  --maidong-warning: #b67c27;
+  --maidong-warning-foreground: #fff8ea;
+  --maidong-danger: #b24736;
+  --maidong-danger-foreground: #fff5f2;
+  --maidong-success: #4e7b49;
+  --maidong-success-foreground: #f5fff4;
+  --state-success: #4e7b49;
+  --state-warning: #b67c27;
+  --state-error: #b24736;
+  --state-info: #567a38;
+  --maidong-radius-small: 4px;
+  --maidong-radius-medium: 10px;
+  --maidong-radius-large: 16px;
+  --maidong-radius-full: 9999px;
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+  --shadow-1: 0 1px 2px rgba(30, 42, 28, 0.04), 0 6px 20px rgba(30, 42, 28, 0.03);
+  --shadow-2: 0 16px 40px rgba(30, 42, 28, 0.08);
+  --font-sans: Inter, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+.theme-light {
+  --background: var(--maidong-background);
+  --foreground: var(--maidong-foreground);
+  --card: var(--maidong-card);
+  --card-foreground: var(--maidong-card-foreground);
+  --popover: var(--maidong-popover);
+  --popover-foreground: var(--maidong-popover-foreground);
+  --primary: var(--maidong-primary);
+  --primary-foreground: var(--maidong-primary-foreground);
+  --muted: var(--maidong-muted);
+  --muted-foreground: var(--maidong-muted-foreground);
+  --border: var(--maidong-border);
+  --input: var(--maidong-input);
+  --ring: var(--maidong-ring);
+}
+
+html, body {
+  font-family: var(--font-sans);
+}
+
+body {
+  background: var(--maidong-background);
+  color: var(--maidong-foreground);
+}
+
+.type-display {
+  font-size: clamp(28px, 6vw, 34px);
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.type-h1 {
+  font-size: clamp(24px, 5vw, 28px);
+  line-height: 1.18;
+  font-weight: 700;
+}
+
+.type-h2 {
+  font-size: 20px;
+  line-height: 1.24;
+  font-weight: 700;
+}
+
+.type-h3 {
+  font-size: 17px;
+  line-height: 1.35;
+  font-weight: 600;
+}
+
+.type-body-lg {
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.type-body {
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.type-caption {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--maidong-background);
+    --color-foreground: var(--maidong-foreground);
+    --color-card: var(--maidong-card);
+    --color-card-foreground: var(--maidong-card-foreground);
+    --color-popover: var(--maidong-popover);
+    --color-popover-foreground: var(--maidong-popover-foreground);
+    --color-primary: var(--maidong-primary);
+    --color-primary-foreground: var(--maidong-primary-foreground);
+    --color-muted: var(--maidong-muted);
+    --color-muted-foreground: var(--maidong-muted-foreground);
+    --color-border: var(--maidong-border);
+    --color-input: var(--maidong-input);
+    --color-ring: var(--maidong-ring);
+    --radius-sm: var(--maidong-radius-small);
+    --radius-md: var(--maidong-radius-medium);
+    --radius-lg: var(--maidong-radius-large);
+  }
+  @layer base {
+    body { background: var(--maidong-background); color: var(--maidong-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--maidong-background); }
+      .text-background { color: var(--maidong-background); }
+      .border-background { border-color: var(--maidong-background); }
+      .ring-background { --tw-ring-color: var(--maidong-background); }
+      .bg-foreground { background-color: var(--maidong-foreground); }
+      .text-foreground { color: var(--maidong-foreground); }
+      .border-foreground { border-color: var(--maidong-foreground); }
+      .ring-foreground { --tw-ring-color: var(--maidong-foreground); }
+      .bg-card { background-color: var(--maidong-card); }
+      .text-card { color: var(--maidong-card); }
+      .border-card { border-color: var(--maidong-card); }
+      .ring-card { --tw-ring-color: var(--maidong-card); }
+      .bg-card-foreground { background-color: var(--maidong-card-foreground); }
+      .text-card-foreground { color: var(--maidong-card-foreground); }
+      .border-card-foreground { border-color: var(--maidong-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--maidong-card-foreground); }
+      .bg-popover { background-color: var(--maidong-popover); }
+      .text-popover { color: var(--maidong-popover); }
+      .border-popover { border-color: var(--maidong-popover); }
+      .ring-popover { --tw-ring-color: var(--maidong-popover); }
+      .bg-popover-foreground { background-color: var(--maidong-popover-foreground); }
+      .text-popover-foreground { color: var(--maidong-popover-foreground); }
+      .border-popover-foreground { border-color: var(--maidong-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--maidong-popover-foreground); }
+      .bg-primary { background-color: var(--maidong-primary); }
+      .text-primary { color: var(--maidong-primary); }
+      .border-primary { border-color: var(--maidong-primary); }
+      .ring-primary { --tw-ring-color: var(--maidong-primary); }
+      .bg-primary-foreground { background-color: var(--maidong-primary-foreground); }
+      .text-primary-foreground { color: var(--maidong-primary-foreground); }
+      .border-primary-foreground { border-color: var(--maidong-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--maidong-primary-foreground); }
+      .bg-muted { background-color: var(--maidong-muted); }
+      .text-muted { color: var(--maidong-muted); }
+      .border-muted { border-color: var(--maidong-muted); }
+      .ring-muted { --tw-ring-color: var(--maidong-muted); }
+      .bg-muted-foreground { background-color: var(--maidong-muted-foreground); }
+      .text-muted-foreground { color: var(--maidong-muted-foreground); }
+      .border-muted-foreground { border-color: var(--maidong-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--maidong-muted-foreground); }
+      .bg-border { background-color: var(--maidong-border); }
+      .text-border { color: var(--maidong-border); }
+      .border-border { border-color: var(--maidong-border); }
+      .ring-border { --tw-ring-color: var(--maidong-border); }
+      .bg-input { background-color: var(--maidong-input); }
+      .text-input { color: var(--maidong-input); }
+      .border-input { border-color: var(--maidong-input); }
+      .ring-input { --tw-ring-color: var(--maidong-input); }
+      .bg-ring { background-color: var(--maidong-ring); }
+      .text-ring { color: var(--maidong-ring); }
+      .border-ring { border-color: var(--maidong-ring); }
+      .ring-ring { --tw-ring-color: var(--maidong-ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <main>
+        <div class="px-4 pt-4 pb-6 space-y-4">
+            <header class="flex items-start justify-between gap-3">
+                <div class="flex items-start gap-2">
+                    <a href="#" data-dom-id="link-home" class="mt-0.5 h-9 w-9 rounded-full border border-border bg-card text-muted-foreground shadow-[var(--shadow-1)] active:bg-muted/70 flex items-center justify-center">
+                        <i data-lucide="house" class="w-4 h-4"></i>
+                    </a>
+                    <div>
+                        <p class="type-caption text-muted-foreground">地块档案与田间状态</p>
+                        <h1 class="type-h2 mt-1">地块档案</h1>
+                    </div>
+                </div>
+                <div class="w-[88px] h-8 rounded-full border border-black/10 bg-white/90 text-black/75 flex items-center justify-between px-2">
+                    <button type="button" aria-label="更多" class="h-7 w-7 rounded-full flex items-center justify-center active:bg-black/5">
+                        <i data-lucide="ellipsis" class="w-4 h-4"></i>
+                    </button>
+                    <span class="w-px h-4 bg-black/10"></span>
+                    <button type="button" aria-label="关闭" class="h-7 w-7 rounded-full flex items-center justify-center active:bg-black/5">
+                        <i data-lucide="x" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </header>
+
+            <section class="grid grid-cols-3 gap-2">
+                <div class="rounded-[14px] border border-border/80 bg-card px-3 py-3 shadow-[var(--shadow-1)]">
+                    <p class="type-caption text-muted-foreground">总面积</p>
+                    <p class="type-body-lg font-semibold mt-1">42.3 亩</p>
+                </div>
+                <div class="rounded-[14px] border border-border/80 bg-card px-3 py-3 shadow-[var(--shadow-1)]">
+                    <p class="type-caption text-muted-foreground">预警地块</p>
+                    <p class="type-body-lg font-semibold mt-1 text-warning">2 块</p>
+                </div>
+                <div class="rounded-[14px] border border-border/80 bg-card px-3 py-3 shadow-[var(--shadow-1)]">
+                    <p class="type-caption text-muted-foreground">待执行作业</p>
+                    <p class="type-body-lg font-semibold mt-1">4 项</p>
+                </div>
+            </section>
+
+            <section class="grid grid-cols-3 gap-3">
+                <a href="#" data-dom-id="link-ai-diagnosis" class="rounded-[14px] border border-border/80 bg-card p-3 shadow-[var(--shadow-1)] active:bg-muted/60">
+                    <div class="h-9 w-9 rounded-full bg-[var(--maidong-brand-soft)] text-primary flex items-center justify-center">
+                        <i data-lucide="scan-line" class="w-4 h-4"></i>
+                    </div>
+                    <p class="type-body font-semibold mt-2">拍照识别</p>
+                </a>
+                <a href="#" data-dom-id="link-plan" class="rounded-[14px] border border-border/80 bg-card p-3 shadow-[var(--shadow-1)] active:bg-muted/60">
+                    <div class="h-9 w-9 rounded-full bg-[var(--maidong-brand-soft)] text-primary flex items-center justify-center">
+                        <i data-lucide="clipboard-list" class="w-4 h-4"></i>
+                    </div>
+                    <p class="type-body font-semibold mt-2">查看方案</p>
+                </a>
+                <a href="#" data-dom-id="link-mine" class="rounded-[14px] border border-border/80 bg-card p-3 shadow-[var(--shadow-1)] active:bg-muted/60">
+                    <div class="h-9 w-9 rounded-full bg-[var(--maidong-brand-soft)] text-primary flex items-center justify-center">
+                        <i data-lucide="user-round" class="w-4 h-4"></i>
+                    </div>
+                    <p class="type-body font-semibold mt-2">我的档案</p>
+                </a>
+            </section>
+
+            <section class="space-y-3">
+                <article class="rounded-[16px] border border-border/80 bg-card shadow-[var(--shadow-1)] p-4 space-y-3">
+                    <div class="flex items-start justify-between gap-3">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h2 class="type-h3">杨家桥 2 号田</h2>
+                                <span class="inline-flex items-center rounded-full bg-[var(--maidong-brand-soft)] px-2.5 py-1 text-[11px] font-medium text-primary">块根膨大期</span>
+                            </div>
+                            <p class="type-caption text-muted-foreground mt-1">18.6 亩 · 朝南缓坡地</p>
+                        </div>
+                        <span class="inline-flex items-center rounded-full bg-background px-2.5 py-1 text-[11px] font-medium text-foreground">苗情评分 86</span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2">
+                        <div class="rounded-[10px] bg-background px-3 py-2">
+                            <p class="type-caption text-muted-foreground">土壤湿度</p>
+                            <p class="type-body font-semibold mt-1">68%</p>
+                        </div>
+                        <div class="rounded-[10px] bg-background px-3 py-2">
+                            <p class="type-caption text-muted-foreground">杂草</p>
+                            <p class="type-body font-semibold mt-1">低</p>
+                        </div>
+                        <div class="rounded-[10px] bg-background px-3 py-2">
+                            <p class="type-caption text-muted-foreground">病害</p>
+                            <p class="type-body font-semibold mt-1">轻风险</p>
+                        </div>
+                    </div>
+                    <div class="rounded-[12px] border border-border/70 bg-background px-3 py-3 space-y-1">
+                        <p class="type-body font-semibold">备注</p>
+                        <p class="type-caption text-muted-foreground">墒情整体稳定，西南角见零星阔叶杂草；叶尖轻微黄化，建议持续观察。</p>
+                        <p class="type-caption text-muted-foreground">最新作业：10 月 9 日完成沟边清理与巡田记录。</p>
+                    </div>
+                </article>
+
+                <article class="rounded-[16px] border border-border/80 bg-card shadow-[var(--shadow-1)] p-4 space-y-3">
+                    <div class="flex items-start justify-between gap-3">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h2 class="type-h3">石塘村示范田</h2>
+                                <span class="inline-flex items-center rounded-full bg-background px-2.5 py-1 text-[11px] font-medium text-foreground">旺长期</span>
+                            </div>
+                            <p class="type-caption text-muted-foreground mt-1">12.4 亩 · 平坝水田改种</p>
+                        </div>
+                        <span class="inline-flex items-center rounded-full bg-[var(--maidong-warning-foreground)] px-2.5 py-1 text-[11px] font-medium text-warning">苗情评分 79</span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2">
+                        <div class="rounded-[10px] bg-background px-3 py-2">
+                            <p class="type-caption text-muted-foreground">土壤湿度</p>
+                            <p class="type-body font-semibold mt-1">74%</p>
+                        </div>
+                        <div class="rounded-[10px] bg-background px-3 py-2">
+                            <p class="type-caption text-muted-foreground">杂草</p>
+                            <p class="type-body font-semibold mt-1">中</p>
+                        </div>
+                        <div class="rounded-[10px] bg-background px-3 py-2">
+                            <p class="type-caption text-muted-foreground">病害</p>
+                            <p class="type-body font-semibold mt-1">待排查</p>
+                        </div>
+                    </div>
+                    <div class="rounded-[12px] border border-border/70 bg-background px-3 py-3 space-y-1">
+                        <p class="type-body font-semibold">备注</p>
+                        <p class="type-caption text-muted-foreground">沟边湿度偏高，禾本科杂草压苗明显，叶背见少量灰斑样点位。</p>
+                        <p class="type-caption text-muted-foreground">最新作业：10 月 8 日完成中耕除草，待补充病斑样本拍摄。</p>
+                    </div>
+                </article>
+
+                <article class="rounded-[16px] border border-border/80 bg-card shadow-[var(--shadow-1)] p-4 space-y-3">
+                    <div class="flex items-start justify-between gap-3">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h2 class="type-h3">龙门山脚育苗区</h2>
+                                <span class="inline-flex items-center rounded-full bg-[var(--maidong-brand-soft)] px-2.5 py-1 text-[11px] font-medium text-primary">建苗期</span>
+                            </div>
+                            <p class="type-caption text-muted-foreground mt-1">11.3 亩 · 新扩种区</p>
+                        </div>
+                        <span class="inline-flex items-center rounded-full bg-[var(--maidong-brand-soft)] px-2.5 py-1 text-[11px] font-medium text-primary">苗情评分 91</span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2">
+                        <div class="rounded-[10px] bg-background px-3 py-2">
+                            <p class="type-caption text-muted-foreground">土壤湿度</p>
+                            <p class="type-body font-semibold mt-1">61%</p>
+                        </div>
+                        <div class="rounded-[10px] bg-background px-3 py-2">
+                            <p class="type-caption text-muted-foreground">杂草</p>
+                            <p class="type-body font-semibold mt-1">低</p>
+                        </div>
+                        <div class="rounded-[10px] bg-background px-3 py-2">
+                            <p class="type-caption text-muted-foreground">病害</p>
+                            <p class="type-body font-semibold mt-1">未见异常</p>
+                        </div>
+                    </div>
+                    <div class="rounded-[12px] border border-border/70 bg-background px-3 py-3 space-y-1">
+                        <p class="type-body font-semibold">备注</p>
+                        <p class="type-caption text-muted-foreground">出苗整齐，株距较均匀，局部需要继续保持浅沟排水和薄覆盖。</p>
+                        <p class="type-caption text-muted-foreground">最新作业：10 月 10 日完成补苗核对与滴灌检修。</p>
+                    </div>
+                </article>
+            </section>
+
+            <nav data-mobile-nav="global" class="mt-6 border border-border/80 bg-card rounded-[16px] shadow-[var(--shadow-1)] h-[64px]">
+                <div class="w-full grid grid-cols-5 h-full">
+                    <a href="#" data-nav-key="home" data-dom-id="nav-home" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground">
+                        <i data-lucide="house" class="w-5 h-5 shrink-0"></i>
+                        <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">首页</span>
+                    </a>
+                    <a href="#" data-nav-key="fields" data-active="true" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-primary font-semibold">
+                        <i data-lucide="map" class="w-5 h-5 shrink-0"></i>
+                        <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">地块</span>
+                    </a>
+                    <a href="#" data-nav-key="ai" data-dom-id="nav-ai-diagnosis" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground">
+                        <i data-lucide="scan-line" class="w-5 h-5 shrink-0"></i>
+                        <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">识别</span>
+                    </a>
+                    <a href="#" data-nav-key="plan" data-dom-id="nav-plan" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground">
+                        <i data-lucide="clipboard-list" class="w-5 h-5 shrink-0"></i>
+                        <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">方案</span>
+                    </a>
+                    <a href="#" data-nav-key="mine" data-dom-id="nav-mine" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground">
+                        <i data-lucide="user-round" class="w-5 h-5 shrink-0"></i>
+                        <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">我的</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </main>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

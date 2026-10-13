@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页·农资转化版</title>
+    <style id="theme-vars">
+:root {
+  color-scheme: light;
+  --maidong-background: #f6f3ea;
+  --maidong-foreground: #1d2a1f;
+  --maidong-card: #fffdf8;
+  --maidong-card-foreground: #1d2a1f;
+  --maidong-popover: #fffdf8;
+  --maidong-popover-foreground: #1d2a1f;
+  --maidong-primary: #567a38;
+  --maidong-primary-foreground: #f9fff2;
+  --maidong-muted: #ebe4d6;
+  --maidong-muted-foreground: #6c7567;
+  --maidong-border: #d9d2c1;
+  --maidong-input: #d9d2c1;
+  --maidong-ring: #7aa352;
+  --maidong-surface-2: #f1ecdf;
+  --maidong-surface-3: #e7e0d0;
+  --maidong-brand-soft: #e4efd8;
+  --maidong-brand-soft-2: #d4e4c0;
+  --maidong-warning: #b67c27;
+  --maidong-warning-foreground: #fff8ea;
+  --maidong-danger: #b24736;
+  --maidong-danger-foreground: #fff5f2;
+  --maidong-success: #4e7b49;
+  --maidong-success-foreground: #f5fff4;
+  --state-success: #4e7b49;
+  --state-warning: #b67c27;
+  --state-error: #b24736;
+  --state-info: #567a38;
+  --maidong-radius-small: 4px;
+  --maidong-radius-medium: 10px;
+  --maidong-radius-large: 16px;
+  --maidong-radius-full: 9999px;
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+  --shadow-1: 0 1px 2px rgba(30, 42, 28, 0.04), 0 6px 20px rgba(30, 42, 28, 0.03);
+  --shadow-2: 0 16px 40px rgba(30, 42, 28, 0.08);
+  --font-sans: Inter, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+.theme-light {
+  --background: var(--maidong-background);
+  --foreground: var(--maidong-foreground);
+  --card: var(--maidong-card);
+  --card-foreground: var(--maidong-card-foreground);
+  --popover: var(--maidong-popover);
+  --popover-foreground: var(--maidong-popover-foreground);
+  --primary: var(--maidong-primary);
+  --primary-foreground: var(--maidong-primary-foreground);
+  --muted: var(--maidong-muted);
+  --muted-foreground: var(--maidong-muted-foreground);
+  --border: var(--maidong-border);
+  --input: var(--maidong-input);
+  --ring: var(--maidong-ring);
+}
+
+html, body {
+  font-family: var(--font-sans);
+}
+
+body {
+  background: var(--maidong-background);
+  color: var(--maidong-foreground);
+}
+
+.type-display {
+  font-size: clamp(28px, 6vw, 34px);
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.type-h1 {
+  font-size: clamp(24px, 5vw, 28px);
+  line-height: 1.18;
+  font-weight: 700;
+}
+
+.type-h2 {
+  font-size: 20px;
+  line-height: 1.24;
+  font-weight: 700;
+}
+
+.type-h3 {
+  font-size: 17px;
+  line-height: 1.35;
+  font-weight: 600;
+}
+
+.type-body-lg {
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.type-body {
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.type-caption {
+  font-size: 12px;
+  line-height: 1.5;
+}
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--maidong-background);
+    --color-foreground: var(--maidong-foreground);
+    --color-card: var(--maidong-card);
+    --color-card-foreground: var(--maidong-card-foreground);
+    --color-popover: var(--maidong-popover);
+    --color-popover-foreground: var(--maidong-popover-foreground);
+    --color-primary: var(--maidong-primary);
+    --color-primary-foreground: var(--maidong-primary-foreground);
+    --color-muted: var(--maidong-muted);
+    --color-muted-foreground: var(--maidong-muted-foreground);
+    --color-border: var(--maidong-border);
+    --color-input: var(--maidong-input);
+    --color-ring: var(--maidong-ring);
+    --radius-sm: var(--maidong-radius-small);
+    --radius-md: var(--maidong-radius-medium);
+    --radius-lg: var(--maidong-radius-large);
+  }
+  @layer base {
+    body { background: var(--maidong-background); color: var(--maidong-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--maidong-background); }
+      .text-background { color: var(--maidong-background); }
+      .border-background { border-color: var(--maidong-background); }
+      .ring-background { --tw-ring-color: var(--maidong-background); }
+      .bg-foreground { background-color: var(--maidong-foreground); }
+      .text-foreground { color: var(--maidong-foreground); }
+      .border-foreground { border-color: var(--maidong-foreground); }
+      .ring-foreground { --tw-ring-color: var(--maidong-foreground); }
+      .bg-card { background-color: var(--maidong-card); }
+      .text-card { color: var(--maidong-card); }
+      .border-card { border-color: var(--maidong-card); }
+      .ring-card { --tw-ring-color: var(--maidong-card); }
+      .bg-card-foreground { background-color: var(--maidong-card-foreground); }
+      .text-card-foreground { color: var(--maidong-card-foreground); }
+      .border-card-foreground { border-color: var(--maidong-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--maidong-card-foreground); }
+      .bg-popover { background-color: var(--maidong-popover); }
+      .text-popover { color: var(--maidong-popover); }
+      .border-popover { border-color: var(--maidong-popover); }
+      .ring-popover { --tw-ring-color: var(--maidong-popover); }
+      .bg-popover-foreground { background-color: var(--maidong-popover-foreground); }
+      .text-popover-foreground { color: var(--maidong-popover-foreground); }
+      .border-popover-foreground { border-color: var(--maidong-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--maidong-popover-foreground); }
+      .bg-primary { background-color: var(--maidong-primary); }
+      .text-primary { color: var(--maidong-primary); }
+      .border-primary { border-color: var(--maidong-primary); }
+      .ring-primary { --tw-ring-color: var(--maidong-primary); }
+      .bg-primary-foreground { background-color: var(--maidong-primary-foreground); }
+      .text-primary-foreground { color: var(--maidong-primary-foreground); }
+      .border-primary-foreground { border-color: var(--maidong-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--maidong-primary-foreground); }
+      .bg-muted { background-color: var(--maidong-muted); }
+      .text-muted { color: var(--maidong-muted); }
+      .border-muted { border-color: var(--maidong-muted); }
+      .ring-muted { --tw-ring-color: var(--maidong-muted); }
+      .bg-muted-foreground { background-color: var(--maidong-muted-foreground); }
+      .text-muted-foreground { color: var(--maidong-muted-foreground); }
+      .border-muted-foreground { border-color: var(--maidong-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--maidong-muted-foreground); }
+      .bg-border { background-color: var(--maidong-border); }
+      .text-border { color: var(--maidong-border); }
+      .border-border { border-color: var(--maidong-border); }
+      .ring-border { --tw-ring-color: var(--maidong-border); }
+      .bg-input { background-color: var(--maidong-input); }
+      .text-input { color: var(--maidong-input); }
+      .border-input { border-color: var(--maidong-input); }
+      .ring-input { --tw-ring-color: var(--maidong-input); }
+      .bg-ring { background-color: var(--maidong-ring); }
+      .text-ring { color: var(--maidong-ring); }
+      .border-ring { border-color: var(--maidong-ring); }
+      .ring-ring { --tw-ring-color: var(--maidong-ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <main>
+        <div class="px-4 pt-4 pb-6 space-y-4">
+            <header class="flex items-start justify-between gap-3">
+                <div>
+                    <p class="type-caption text-muted-foreground">川麦冬农资服务转化</p>
+                    <h1 class="type-h2 mt-1">首页·农资转化版</h1>
+                </div>
+                <div class="w-[88px] h-8 rounded-full border border-black/10 bg-white/90 text-black/75 flex items-center justify-between px-2">
+                    <button type="button" aria-label="更多" class="h-7 w-7 rounded-full flex items-center justify-center active:bg-black/5">
+                        <i data-lucide="ellipsis" class="w-4 h-4"></i>
+                    </button>
+                    <span class="w-px h-4 bg-black/10"></span>
+                    <button type="button" aria-label="关闭" class="h-7 w-7 rounded-full flex items-center justify-center active:bg-black/5">
+                        <i data-lucide="x" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </header>
+
+            <section class="rounded-[16px] border border-border/80 bg-primary text-primary-foreground shadow-[var(--shadow-2)] p-4 space-y-4">
+                <div class="flex items-start justify-between gap-3">
+                    <div class="space-y-2">
+                        <span class="inline-flex items-center rounded-full bg-primary-foreground/15 px-2.5 py-1 text-[11px] font-medium">
+                            本周重点 · 诊断带动转化
+                        </span>
+                        <div>
+                            <h2 class="type-h2">先识别苗情，再推荐配肥配药与服务套餐</h2>
+                            <p class="type-body mt-2 text-primary-foreground/85">把 AI 识别、农技顾问和农资供应串成同一条成交链路，优先推动川麦冬种植户完成首次咨询、首单购买和阶段复购。</p>
+                        </div>
+                    </div>
+                    <div class="h-12 w-12 shrink-0 rounded-full bg-primary-foreground/12 flex items-center justify-center">
+                        <i data-lucide="sprout" class="w-6 h-6"></i>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <a href="#" data-dom-id="cta-ai-diagnosis" class="rounded-[12px] bg-primary-foreground text-primary px-3 py-3 active:opacity-90">
+                        <p class="type-body font-semibold">拍照识别拿建议</p>
+                        <p class="type-caption mt-1 text-primary/75">自动生成配货方向</p>
+                    </a>
+                    <a href="#" data-dom-id="cta-expert" class="rounded-[12px] border border-primary-foreground/20 bg-primary-foreground/10 px-3 py-3 active:bg-primary-foreground/15">
+                        <p class="type-body font-semibold">联系农技顾问</p>
+                        <p class="type-caption mt-1 text-primary-foreground/80">高意向农户快速转人工</p>
+                    </a>
+                </div>
+                <div class="grid grid-cols-3 gap-2">
+                    <div class="rounded-[12px] bg-primary-foreground/10 px-3 py-3">
+                        <p class="type-caption text-primary-foreground/70">服务农户</p>
+                        <p class="type-body-lg font-semibold mt-1">286 户</p>
+                    </div>
+                    <div class="rounded-[12px] bg-primary-foreground/10 px-3 py-3">
+                        <p class="type-caption text-primary-foreground/70">套餐复购</p>
+                        <p class="type-body-lg font-semibold mt-1">62%</p>
+                    </div>
+                    <div class="rounded-[12px] bg-primary-foreground/10 px-3 py-3">
+                        <p class="type-caption text-primary-foreground/70">待跟进</p>
+                        <p class="type-body-lg font-semibold mt-1">19 单</p>
+                    </div>
+                </div>
+            </section>
+
+            <a href="#" data-dom-id="switch-original-home" class="block rounded-[14px] border border-border/80 bg-card px-4 py-3 shadow-[var(--shadow-1)] active:bg-muted/60">
+                <div class="flex items-center justify-between gap-3">
+                    <div>
+                        <p class="type-body font-semibold">查看原管理型首页</p>
+                        <p class="type-caption text-muted-foreground mt-1">和当前转化版并排对比信息结构与转化动作</p>
+                    </div>
+                    <i data-lucide="arrow-right-left" class="w-5 h-5 text-primary shrink-0"></i>
+                </div>
+            </a>
+
+            <section id="region-field-overview" class="rounded-[16px] border border-border/80 bg-card shadow-[var(--shadow-1)] p-4 space-y-4">
+                <div class="flex items-start justify-between gap-3">
+                    <div>
+                        <p class="type-caption text-muted-foreground">签约地块概览</p>
+                        <h2 class="type-h3 mt-1">杨家桥 2 号田 · 高意向成交样板</h2>
+                    </div>
+                    <span class="inline-flex items-center rounded-full bg-[var(--maidong-brand-soft)] px-2.5 py-1 text-[11px] font-medium text-primary">
+                        成交意向 88
+                    </span>
+                </div>
+                <div class="grid grid-cols-3 gap-2">
+                    <div class="rounded-[10px] bg-background px-3 py-2">
+                        <p class="type-caption text-muted-foreground">当前阶段</p>
+                        <p class="type-body font-semibold mt-1">块根膨大期</p>
+                    </div>
+                    <div class="rounded-[10px] bg-background px-3 py-2">
+                        <p class="type-caption text-muted-foreground">推荐方向</p>
+                        <p class="type-body font-semibold mt-1">排水 + 营养补充</p>
+                    </div>
+                    <div class="rounded-[10px] bg-background px-3 py-2">
+                        <p class="type-caption text-muted-foreground">跟进状态</p>
+                        <p class="type-body font-semibold mt-1">待报价</p>
+                    </div>
+                </div>
+                <div class="rounded-[12px] border border-border/70 bg-background px-3 py-3 space-y-2">
+                    <div class="flex items-center justify-between gap-3">
+                        <p class="type-body font-semibold">识别结论已触发销售动作</p>
+                        <span class="text-[11px] font-medium text-success">可转化</span>
+                    </div>
+                    <p class="type-caption text-muted-foreground">叶尖黄化伴湿害风险，适合推送“诊断复核 + 阶段营养 + 病斑预防”组合服务，并由顾问跟进确认下单。</p>
+                </div>
+                <a href="#" data-dom-id="cta-fields" class="inline-flex items-center gap-2 rounded-full bg-[var(--maidong-brand-soft)] px-3 py-2 text-[12px] font-medium text-primary active:opacity-90">
+                    <i data-lucide="map" class="w-4 h-4"></i>
+                    查看全部地块商机
+                </a>
+            </section>
+
+            <section class="space-y-3">
+                <div class="flex items-center justify-between">
+                    <h2 class="type-h3">推荐服务套餐</h2>
+                    <span class="text-[11px] text-muted-foreground">优先推动首单</span>
+                </div>
+                <article class="rounded-[16px] border border-primary/20 bg-card p-4 shadow-[var(--shadow-1)] space-y-3">
+                    <div class="flex items-start justify-between gap-3">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h3 class="type-h3">膨大期稳产组合包</h3>
+                                <span class="inline-flex items-center rounded-full bg-[var(--maidong-brand-soft)] px-2.5 py-1 text-[11px] font-medium text-primary">主推</span>
+                            </div>
+                            <p class="type-caption text-muted-foreground mt-1">适合叶色波动、雨后高湿、块根膨大不稳的地块</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="type-caption text-muted-foreground">预计客单</p>
+                            <p class="type-body-lg font-semibold text-primary mt-1">¥398 起</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2">
+                        <div class="rounded-[12px] bg-background px-3 py-3">
+                            <p class="type-caption text-muted-foreground">包含</p>
+                            <p class="type-body font-semibold mt-1">营养 + 预防</p>
+                        </div>
+                        <div class="rounded-[12px] bg-background px-3 py-3">
+                            <p class="type-caption text-muted-foreground">转化点</p>
+                            <p class="type-body font-semibold mt-1">识别后即推</p>
+                        </div>
+                        <div class="rounded-[12px] bg-background px-3 py-3">
+                            <p class="type-caption text-muted-foreground">复购点</p>
+                            <p class="type-body font-semibold mt-1">7 日回访</p>
+                        </div>
+                    </div>
+                    <a href="#" data-dom-id="cta-plan" class="block rounded-[12px] bg-primary px-4 py-3 text-primary-foreground active:opacity-90">
+                        <div class="flex items-center justify-between gap-3">
+                            <div>
+                                <p class="type-body font-semibold">查看完整阶段方案并生成推荐话术</p>
+                                <p class="type-caption mt-1 text-primary-foreground/80">把农事建议转成套餐推荐依据</p>
+                            </div>
+                            <i data-lucide="chevron-right" class="w-5 h-5 shrink-0"></i>
+                        </div>
+                    </a>
+                </article>
+
+                <article class="rounded-[16px] border border-border/80 bg-card p-4 shadow-[var(--shadow-1)] space-y-3">
+                    <div class="flex items-start justify-between gap-3">
+                        <div>
+                            <h3 class="type-h3">顾问托管跟进包</h3>
+                            <p class="type-caption text-muted-foreground mt-1">面向持续阴雨、病斑不明、需要人工复核的高价值农户</p>
+                        </div>
+                        <span class="inline-flex items-center rounded-full bg-background px-2.5 py-1 text-[11px] font-medium text-muted-foreground border border-border">高意向</span>
+                    </div>
+                    <p class="type-caption text-muted-foreground">由在线专家接手诊断，补充施肥施药建议，并带动后续复购与服务订阅。</p>
+                </article>
+            </section>
+
+            <section class="rounded-[16px] border border-border/80 bg-card p-4 shadow-[var(--shadow-1)] space-y-3">
+                <div class="flex items-center justify-between">
+                    <h2 class="type-h3">成交推进动作</h2>
+                    <span class="text-[11px] text-muted-foreground">今日建议</span>
+                </div>
+                <div class="space-y-2">
+                    <div class="rounded-[12px] bg-background px-3 py-3 flex items-start gap-3">
+                        <span class="mt-0.5 h-8 w-8 shrink-0 rounded-full bg-[var(--maidong-brand-soft)] text-primary flex items-center justify-center">1</span>
+                        <div>
+                            <p class="type-body font-semibold">先用 AI 识别拿到明确问题标签</p>
+                            <p class="type-caption text-muted-foreground mt-1">让农户先看到客观结论，再顺势推荐配肥配药与顾问服务。</p>
+                        </div>
+                    </div>
+                    <div class="rounded-[12px] bg-background px-3 py-3 flex items-start gap-3">
+                        <span class="mt-0.5 h-8 w-8 shrink-0 rounded-full bg-[var(--maidong-brand-soft)] text-primary flex items-center justify-center">2</span>
+                        <div>
+                            <p class="type-body font-semibold">对高风险地块直接推套餐卡</p>
+                            <p class="type-caption text-muted-foreground mt-1">优先突出“稳产”“省心”“顾问复核”，而不是泛泛展示产品名称。</p>
+                        </div>
+                    </div>
+                    <div class="rounded-[12px] bg-background px-3 py-3 flex items-start gap-3">
+                        <span class="mt-0.5 h-8 w-8 shrink-0 rounded-full bg-[var(--maidong-brand-soft)] text-primary flex items-center justify-center">3</span>
+                        <div>
+                            <p class="type-body font-semibold">成交后回到我的页做订阅和复购承接</p>
+                            <p class="type-caption text-muted-foreground mt-1">把巡田提醒、专家加急和阶段包复购统一到个人服务中心。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="grid grid-cols-2 gap-3">
+                <a href="#" data-dom-id="cta-ai-diagnosis-secondary" class="rounded-[16px] border border-border/80 bg-card p-4 shadow-[var(--shadow-1)] active:bg-muted/60">
+                    <div class="h-10 w-10 rounded-full bg-[var(--maidong-brand-soft)] text-primary flex items-center justify-center">
+                        <i data-lucide="scan-line" class="w-5 h-5"></i>
+                    </div>
+                    <p class="type-body font-semibold mt-3">AI 识别入口</p>
+                    <p class="type-caption mt-1 text-muted-foreground">拍照后直接出配货建议</p>
+                </a>
+                <a href="#" data-dom-id="cta-expert-secondary" class="rounded-[16px] border border-border/80 bg-card p-4 shadow-[var(--shadow-1)] active:bg-muted/60">
+                    <div class="h-10 w-10 rounded-full bg-[var(--maidong-brand-soft)] text-primary flex items-center justify-center">
+                        <i data-lucide="stethoscope" class="w-5 h-5"></i>
+                    </div>
+                    <p class="type-body font-semibold mt-3">顾问快速跟进</p>
+                    <p class="type-caption mt-1 text-muted-foreground">复杂样本直接转人工</p>
+                </a>
+            </section>
+
+            <nav data-mobile-nav="global" class="mt-6 border border-border/80 bg-card rounded-[16px] shadow-[var(--shadow-1)] h-[64px]">
+                <div class="w-full grid grid-cols-5 h-full">
+                    <a href="#" data-nav-key="home" data-active="true" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-primary font-semibold">
+                        <i data-lucide="house" class="w-5 h-5 shrink-0"></i>
+                        <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">首页</span>
+                    </a>
+                    <a href="#" data-nav-key="fields" data-dom-id="nav-fields" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground">
+                        <i data-lucide="map" class="w-5 h-5 shrink-0"></i>
+                        <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">地块</span>
+                    </a>
+                    <a href="#" data-nav-key="ai" data-dom-id="nav-ai-diagnosis" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground">
+                        <i data-lucide="scan-line" class="w-5 h-5 shrink-0"></i>
+                        <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">识别</span>
+                    </a>
+                    <a href="#" data-nav-key="plan" data-dom-id="nav-plan" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground">
+                        <i data-lucide="clipboard-list" class="w-5 h-5 shrink-0"></i>
+                        <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">方案</span>
+                    </a>
+                    <a href="#" data-nav-key="mine" data-dom-id="nav-mine" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground">
+                        <i data-lucide="user-round" class="w-5 h-5 shrink-0"></i>
+                        <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">我的</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </main>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

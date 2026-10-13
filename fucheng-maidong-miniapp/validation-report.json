@@ -1,0 +1,113 @@
+{
+  "success": true,
+  "outcome": "passed",
+  "repairable": true,
+  "terminalViolations": [],
+  "terminalBlockingSummary": null,
+  "skillProvenance": {
+    "name": "solo-design",
+    "version": "2026.08.06.19.15.08",
+    "version_source": "skill-release-manifest.json",
+    "runtime_skill_dir": null,
+    "recorded_at": null,
+    "expected_version": "2026.08.06.19.15.08",
+    "status": "matched",
+    "read_status": "ok"
+  },
+  "operatingMode": "free-explore",
+  "renderBlockingErrorCount": 0,
+  "softWarningCount": 4,
+  "renderBlockingErrors": [],
+  "errorSignatures": [],
+  "softWarnings": [
+    "[repair-ledger] validationRepairLedger[0].repairActions[] is missing",
+    "[repair-ledger] validationRepairLedger[0].revalidationReportPath is missing",
+    "[repair-ledger] validationRepairLedger[0].revalidationReportHash is missing",
+    "[repair-ledger] validationRepairLedger[0].revalidationSuccess should be a boolean"
+  ],
+  "repairPlanHints": [],
+  "repairActionTable": [],
+  "errorCount": 0,
+  "warningCount": 4,
+  "errors": [],
+  "warnings": [
+    "[repair-ledger] validationRepairLedger[0].repairActions[] is missing",
+    "[repair-ledger] validationRepairLedger[0].revalidationReportPath is missing",
+    "[repair-ledger] validationRepairLedger[0].revalidationReportHash is missing",
+    "[repair-ledger] validationRepairLedger[0].revalidationSuccess should be a boolean"
+  ],
+  "validationRunDisciplineStatus": {
+    "declared": true,
+    "restoreMode": false,
+    "maxFullValidationRuns": 2,
+    "validationHistoryCount": 1,
+    "repairLedgerCount": 1,
+    "softWarningsTriggerRepair": false,
+    "terminalState": null,
+    "nextAction": null,
+    "violations": [],
+    "success": true
+  },
+  "terminalState": null,
+  "nextCheck": {
+    "type": "finish-readiness",
+    "command": "node '/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-finish-readiness.mjs' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp' --check=all",
+    "fullValidationAllowed": false,
+    "reason": "workspace validation passed; run complete finish readiness before final delivery"
+  },
+  "repairBatch": [],
+  "repairContextPacket": {
+    "schema_version": "1.0",
+    "purpose": "small-context repair packet; read this before full validation-report.json",
+    "success": true,
+    "terminalState": null,
+    "skillProvenance": {
+      "name": "solo-design",
+      "version": "2026.08.06.19.15.08",
+      "version_source": "skill-release-manifest.json",
+      "runtime_skill_dir": null,
+      "recorded_at": null,
+      "expected_version": "2026.08.06.19.15.08",
+      "status": "matched",
+      "read_status": "ok"
+    },
+    "renderBlockingErrorCount": 0,
+    "softWarningCount": 4,
+    "renderBlockingErrors": [],
+    "repairActionTable": [],
+    "nextCheck": {
+      "type": "finish-readiness",
+      "command": "node '/Users/bytedance/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-finish-readiness.mjs' '/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp' --check=all",
+      "fullValidationAllowed": false,
+      "reason": "workspace validation passed; run complete finish readiness before final delivery"
+    },
+    "forbidden": [
+      "do not read validator source",
+      "do not rerun full validation when nextCheck.fullValidationAllowed=false",
+      "do not start preview/browser unless user explicitly asks",
+      "do not hand-edit repair ledger fields"
+    ]
+  },
+  "projectFileHashes": {
+    "fucheng-maidong-miniapp.design": "b9023ad5ef8839108fd92c5e878c29e1652339a3ad3c65f5890931e6d3b77622",
+    "colors_and_type.css": "f85881b402d4566fc114c93269c186d4546717d803b83bd8c313cfd85172f95e",
+    "runtime-orchestration-summary.json": "e26c1b40838e81824c52dad2f1e909b08e93e50978896e225d3f1b1828744aef",
+    "pages/ai-diagnosis-farmer-tool.html": "28fdd7512af307455cddb53560feffbb91cc778fb9c014d918bd56f860ed17e8",
+    "pages/ai-diagnosis.html": "0a8049c5da473a1c0f2c1ddcf6a5fb078dba69ea4d644f9242b872d4aad6968b",
+    "pages/expert-farmer-tool.html": "7a4222ce10a42ac613fcbb4164a0e1f0ffd96acbfc4fd14d0e18d8b39f5b31e0",
+    "pages/expert.html": "267f0587c4a857eba1ab7521923e105a22a5a90d891b02ef1566017a446714c8",
+    "pages/fields-farmer-tool.html": "4cc15b723fdeb5ef5a6868edbde2846f5f8a4167c38b2f2ad97147e7e439b985",
+    "pages/fields.html": "1f8e2fb20326cf25fb5b4ce1741663a33d47cd5f93a952e830258459b25e93f2",
+    "pages/home-conversion.html": "6387a685bf02f19e94a06e5aec2d4ae0d69308ea678980a2a399a2e4df0716cf",
+    "pages/home-farmer-tool.html": "d6563366c02640e50caca0610677d82d56a030b8d489f4a004d59d11256879c7",
+    "pages/home.html": "c46a1684836eb997d8100433b72d8027d10d66b5a35acfdc959e601c3072a474",
+    "pages/mine-farmer-tool.html": "3bfbe0873369cbf1bea2e114fbf42a0462f51061c16e314436a00fa7da916a16",
+    "pages/mine.html": "a221fe5d8ecbac98b84c5994263467cf1c65b77b085f54cc266f04e0a771b203",
+    "pages/plan-farmer-tool.html": "9b407a598b4ef11b3bb1cd6aee0c145fbcb06de74f9e1a551ed01c6672d725e9",
+    "pages/plan.html": "08b9f2fec9419338e6ddaa8778dac3117e294d9438e430fa5367db8e58550055"
+  },
+  "designDir": "/Users/bytedance/Library/Application Support/TRAE SOLO CN/ModularData/ai-agent/work-mode-projects/6aa378a9ef5cf5405d296f87/fucheng-maidong-miniapp",
+  "expectedPages": 13,
+  "requireInteractions": null,
+  "checkedAt": "2026-10-12T06:54:35.039Z"
+}

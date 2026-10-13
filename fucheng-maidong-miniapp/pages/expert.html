@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专家诊断</title>
+    <style id="theme-vars">
+:root {
+  color-scheme: light;
+  --maidong-background: #f6f3ea;
+  --maidong-foreground: #1d2a1f;
+  --maidong-card: #fffdf8;
+  --maidong-card-foreground: #1d2a1f;
+  --maidong-popover: #fffdf8;
+  --maidong-popover-foreground: #1d2a1f;
+  --maidong-primary: #567a38;
+  --maidong-primary-foreground: #f9fff2;
+  --maidong-muted: #ebe4d6;
+  --maidong-muted-foreground: #6c7567;
+  --maidong-border: #d9d2c1;
+  --maidong-input: #d9d2c1;
+  --maidong-ring: #7aa352;
+  --maidong-surface-2: #f1ecdf;
+  --maidong-surface-3: #e7e0d0;
+  --maidong-brand-soft: #e4efd8;
+  --maidong-brand-soft-2: #d4e4c0;
+  --maidong-warning: #b67c27;
+  --maidong-warning-foreground: #fff8ea;
+  --maidong-danger: #b24736;
+  --maidong-danger-foreground: #fff5f2;
+  --maidong-success: #4e7b49;
+  --maidong-success-foreground: #f5fff4;
+  --state-success: #4e7b49;
+  --state-warning: #b67c27;
+  --state-error: #b24736;
+  --state-info: #567a38;
+  --maidong-radius-small: 4px;
+  --maidong-radius-medium: 10px;
+  --maidong-radius-large: 16px;
+  --maidong-radius-full: 9999px;
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+  --shadow-1: 0 1px 2px rgba(30, 42, 28, 0.04), 0 6px 20px rgba(30, 42, 28, 0.03);
+  --shadow-2: 0 16px 40px rgba(30, 42, 28, 0.08);
+  --font-sans: Inter, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+.theme-light {
+  --background: var(--maidong-background);
+  --foreground: var(--maidong-foreground);
+  --card: var(--maidong-card);
+  --card-foreground: var(--maidong-card-foreground);
+  --popover: var(--maidong-popover);
+  --popover-foreground: var(--maidong-popover-foreground);
+  --primary: var(--maidong-primary);
+  --primary-foreground: var(--maidong-primary-foreground);
+  --muted: var(--maidong-muted);
+  --muted-foreground: var(--maidong-muted-foreground);
+  --border: var(--maidong-border);
+  --input: var(--maidong-input);
+  --ring: var(--maidong-ring);
+}
+
+html, body {
+  font-family: var(--font-sans);
+}
+
+body {
+  background: var(--maidong-background);
+  color: var(--maidong-foreground);
+}
+
+.type-display {
+  font-size: clamp(28px, 6vw, 34px);
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.type-h1 {
+  font-size: clamp(24px, 5vw, 28px);
+  line-height: 1.18;
+  font-weight: 700;
+}
+
+.type-h2 {
+  font-size: 20px;
+  line-height: 1.24;
+  font-weight: 700;
+}
+
+.type-h3 {
+  font-size: 17px;
+  line-height: 1.35;
+  font-weight: 600;
+}
+
+.type-body-lg {
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.type-body {
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.type-caption {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--maidong-background);
+    --color-foreground: var(--maidong-foreground);
+    --color-card: var(--maidong-card);
+    --color-card-foreground: var(--maidong-card-foreground);
+    --color-popover: var(--maidong-popover);
+    --color-popover-foreground: var(--maidong-popover-foreground);
+    --color-primary: var(--maidong-primary);
+    --color-primary-foreground: var(--maidong-primary-foreground);
+    --color-muted: var(--maidong-muted);
+    --color-muted-foreground: var(--maidong-muted-foreground);
+    --color-border: var(--maidong-border);
+    --color-input: var(--maidong-input);
+    --color-ring: var(--maidong-ring);
+    --radius-sm: var(--maidong-radius-small);
+    --radius-md: var(--maidong-radius-medium);
+    --radius-lg: var(--maidong-radius-large);
+  }
+  @layer base {
+    body { background: var(--maidong-background); color: var(--maidong-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--maidong-background); }
+      .text-background { color: var(--maidong-background); }
+      .border-background { border-color: var(--maidong-background); }
+      .ring-background { --tw-ring-color: var(--maidong-background); }
+      .bg-foreground { background-color: var(--maidong-foreground); }
+      .text-foreground { color: var(--maidong-foreground); }
+      .border-foreground { border-color: var(--maidong-foreground); }
+      .ring-foreground { --tw-ring-color: var(--maidong-foreground); }
+      .bg-card { background-color: var(--maidong-card); }
+      .text-card { color: var(--maidong-card); }
+      .border-card { border-color: var(--maidong-card); }
+      .ring-card { --tw-ring-color: var(--maidong-card); }
+      .bg-card-foreground { background-color: var(--maidong-card-foreground); }
+      .text-card-foreground { color: var(--maidong-card-foreground); }
+      .border-card-foreground { border-color: var(--maidong-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--maidong-card-foreground); }
+      .bg-popover { background-color: var(--maidong-popover); }
+      .text-popover { color: var(--maidong-popover); }
+      .border-popover { border-color: var(--maidong-popover); }
+      .ring-popover { --tw-ring-color: var(--maidong-popover); }
+      .bg-popover-foreground { background-color: var(--maidong-popover-foreground); }
+      .text-popover-foreground { color: var(--maidong-popover-foreground); }
+      .border-popover-foreground { border-color: var(--maidong-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--maidong-popover-foreground); }
+      .bg-primary { background-color: var(--maidong-primary); }
+      .text-primary { color: var(--maidong-primary); }
+      .border-primary { border-color: var(--maidong-primary); }
+      .ring-primary { --tw-ring-color: var(--maidong-primary); }
+      .bg-primary-foreground { background-color: var(--maidong-primary-foreground); }
+      .text-primary-foreground { color: var(--maidong-primary-foreground); }
+      .border-primary-foreground { border-color: var(--maidong-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--maidong-primary-foreground); }
+      .bg-muted { background-color: var(--maidong-muted); }
+      .text-muted { color: var(--maidong-muted); }
+      .border-muted { border-color: var(--maidong-muted); }
+      .ring-muted { --tw-ring-color: var(--maidong-muted); }
+      .bg-muted-foreground { background-color: var(--maidong-muted-foreground); }
+      .text-muted-foreground { color: var(--maidong-muted-foreground); }
+      .border-muted-foreground { border-color: var(--maidong-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--maidong-muted-foreground); }
+      .bg-border { background-color: var(--maidong-border); }
+      .text-border { color: var(--maidong-border); }
+      .border-border { border-color: var(--maidong-border); }
+      .ring-border { --tw-ring-color: var(--maidong-border); }
+      .bg-input { background-color: var(--maidong-input); }
+      .text-input { color: var(--maidong-input); }
+      .border-input { border-color: var(--maidong-input); }
+      .ring-input { --tw-ring-color: var(--maidong-input); }
+      .bg-ring { background-color: var(--maidong-ring); }
+      .text-ring { color: var(--maidong-ring); }
+      .border-ring { border-color: var(--maidong-ring); }
+      .ring-ring { --tw-ring-color: var(--maidong-ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <main>
+        <div class="px-4 pt-4 pb-6 space-y-4">
+            <header class="flex items-start justify-between gap-3">
+                <div class="flex items-start gap-2">
+                    <a href="#" data-dom-id="back-home" class="mt-0.5 h-9 w-9 rounded-full border border-border bg-card text-muted-foreground shadow-[var(--shadow-1)] active:bg-muted/70 flex items-center justify-center">
+                        <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                    </a>
+                    <div>
+                        <p class="type-caption text-muted-foreground">农技问诊与人工复核</p>
+                        <h1 class="type-h2 mt-1">专家诊断</h1>
+                    </div>
+                </div>
+                <div class="w-[88px] h-8 rounded-full border border-black/10 bg-white/90 text-black/75 flex items-center justify-between px-2">
+                    <button type="button" aria-label="更多" class="h-7 w-7 rounded-full flex items-center justify-center active:bg-black/5">
+                        <i data-lucide="ellipsis" class="w-4 h-4"></i>
+                    </button>
+                    <span class="w-px h-4 bg-black/10"></span>
+                    <button type="button" aria-label="关闭" class="h-7 w-7 rounded-full flex items-center justify-center active:bg-black/5">
+                        <i data-lucide="x" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </header>
+
+            <section id="region-expert-service" class="rounded-[16px] border border-border/80 bg-card p-4 shadow-[var(--shadow-1)] space-y-4">
+                <div class="flex items-start justify-between gap-3">
+                    <div>
+                        <p class="type-caption text-muted-foreground">服务流程</p>
+                        <h2 class="type-h3 mt-1">提交资料后进入专家诊断队列</h2>
+                    </div>
+                    <span class="inline-flex items-center rounded-full bg-[var(--maidong-brand-soft)] px-2.5 py-1 text-[11px] font-medium text-primary">线上问诊</span>
+                </div>
+                <div class="space-y-2">
+                    <div class="rounded-[12px] bg-background px-3 py-3 flex items-center justify-between gap-3">
+                        <div>
+                            <p class="type-body font-semibold">1. 提交问题</p>
+                            <p class="type-caption text-muted-foreground mt-1">简述长势异常、持续时间与天气背景</p>
+                        </div>
+                        <i data-lucide="file-text" class="w-5 h-5 text-primary shrink-0"></i>
+                    </div>
+                    <div class="rounded-[12px] bg-background px-3 py-3 flex items-center justify-between gap-3">
+                        <div>
+                            <p class="type-body font-semibold">2. 上传图片</p>
+                            <p class="type-caption text-muted-foreground mt-1">建议包含叶片近景、整体株丛、地面环境</p>
+                        </div>
+                        <i data-lucide="image" class="w-5 h-5 text-primary shrink-0"></i>
+                    </div>
+                    <div class="rounded-[12px] bg-background px-3 py-3 flex items-center justify-between gap-3">
+                        <div>
+                            <p class="type-body font-semibold">3. 选择地块</p>
+                            <p class="type-caption text-muted-foreground mt-1">关联档案后可同步查看历史作业与识别记录</p>
+                        </div>
+                        <i data-lucide="map" class="w-5 h-5 text-primary shrink-0"></i>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="rounded-[12px] border border-border/70 bg-background px-3 py-3">
+                        <p class="type-caption text-muted-foreground">预计响应时长</p>
+                        <p class="type-body font-semibold mt-1">20 分钟内首响</p>
+                    </div>
+                    <div class="rounded-[12px] border border-border/70 bg-background px-3 py-3">
+                        <p class="type-caption text-muted-foreground">当前队列</p>
+                        <p class="type-body font-semibold mt-1">前方 3 单</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="rounded-[16px] border border-border/80 bg-card p-4 shadow-[var(--shadow-1)] space-y-3">
+                <div class="flex items-center justify-between">
+                    <h2 class="type-h3">当前值班专家</h2>
+                    <span class="text-[11px] text-success font-medium">在线</span>
+                </div>
+                <div class="rounded-[14px] bg-background p-3 flex gap-3">
+                    <div class="h-14 w-14 rounded-full bg-[var(--maidong-brand-soft)] text-primary flex items-center justify-center shrink-0">
+                        <i data-lucide="stethoscope" class="w-6 h-6"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="type-body font-semibold">李农技 · 麦冬栽培方向</p>
+                        <p class="type-caption text-muted-foreground mt-1">擅长叶部病害、湿害辨别、采前管理建议</p>
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            <span class="inline-flex items-center rounded-full bg-card px-2.5 py-1 text-[11px] font-medium text-muted-foreground border border-border">服务 8 年</span>
+                            <span class="inline-flex items-center rounded-full bg-card px-2.5 py-1 text-[11px] font-medium text-muted-foreground border border-border">近 30 日好评 98%</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="space-y-3">
+                <div class="flex items-center justify-between">
+                    <h2 class="type-h3">最近咨询</h2>
+                    <span class="text-[11px] text-muted-foreground">保留近三条</span>
+                </div>
+                <div class="space-y-2">
+                    <div class="rounded-[14px] border border-border/80 bg-card p-3 shadow-[var(--shadow-1)]">
+                        <div class="flex items-center justify-between gap-3">
+                            <p class="type-body font-semibold">叶背斑点扩展是否需要立即处理</p>
+                            <span class="text-[11px] text-success font-medium">已回复</span>
+                        </div>
+                        <p class="type-caption text-muted-foreground mt-2">地块：石塘村示范田 · 专家建议先分区复查高湿区。</p>
+                    </div>
+                    <div class="rounded-[14px] border border-border/80 bg-card p-3 shadow-[var(--shadow-1)]">
+                        <div class="flex items-center justify-between gap-3">
+                            <p class="type-body font-semibold">块根膨大期是否需要补充叶面营养</p>
+                            <span class="text-[11px] text-warning font-medium">待跟进</span>
+                        </div>
+                        <p class="type-caption text-muted-foreground mt-2">地块：杨家桥 2 号田 · 已提交近景图与土壤湿度记录。</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="grid grid-cols-2 gap-3">
+                <a href="#" data-dom-id="shortcut-ai-diagnosis" class="rounded-[16px] border border-border/80 bg-card p-4 shadow-[var(--shadow-1)] active:bg-muted/60">
+                    <div class="h-10 w-10 rounded-full bg-[var(--maidong-brand-soft)] text-primary flex items-center justify-center">
+                        <i data-lucide="scan-line" class="w-5 h-5"></i>
+                    </div>
+                    <p class="type-body font-semibold mt-3">先做 AI 识别</p>
+                    <p class="type-caption mt-1 text-muted-foreground">补充初步判断</p>
+                </a>
+                <a href="#" data-dom-id="shortcut-plan" class="rounded-[16px] border border-border/80 bg-card p-4 shadow-[var(--shadow-1)] active:bg-muted/60">
+                    <div class="h-10 w-10 rounded-full bg-[var(--maidong-brand-soft)] text-primary flex items-center justify-center">
+                        <i data-lucide="clipboard-list" class="w-5 h-5"></i>
+                    </div>
+                    <p class="type-body font-semibold mt-3">查看阶段方案</p>
+                    <p class="type-caption mt-1 text-muted-foreground">对照管理节点</p>
+                </a>
+            </section>
+
+            <a href="#" data-dom-id="cta-submit-consult" class="block rounded-[16px] bg-primary text-primary-foreground p-4 shadow-[var(--shadow-1)] active:opacity-90">
+                <div class="flex items-center justify-between gap-3">
+                    <div>
+                        <p class="type-body font-semibold">立即提交专家诊断</p>
+                        <p class="type-caption mt-1 text-primary-foreground/80">上传图像、选择地块并说明问题，进入问诊队列</p>
+                    </div>
+                    <i data-lucide="chevron-right" class="w-5 h-5 shrink-0"></i>
+                </div>
+            </a>
+
+            <nav data-mobile-nav="global" class="mt-6 border border-border/80 bg-card rounded-[16px] shadow-[var(--shadow-1)] h-[64px]">
+                <div class="w-full grid grid-cols-5 h-full">
+                    <a href="#" data-nav-key="home" data-dom-id="nav-home" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground">
+                        <i data-lucide="house" class="w-5 h-5 shrink-0"></i>
+                        <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">首页</span>
+                    </a>
+                    <a href="#" data-nav-key="fields" data-dom-id="nav-fields" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground">
+                        <i data-lucide="map" class="w-5 h-5 shrink-0"></i>
+                        <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">地块</span>
+                    </a>
+                    <a href="#" data-nav-key="ai" data-dom-id="nav-ai-diagnosis" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground">
+                        <i data-lucide="scan-line" class="w-5 h-5 shrink-0"></i>
+                        <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">识别</span>
+                    </a>
+                    <a href="#" data-nav-key="plan" data-dom-id="nav-plan" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground">
+                        <i data-lucide="clipboard-list" class="w-5 h-5 shrink-0"></i>
+                        <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">方案</span>
+                    </a>
+                    <a href="#" data-nav-key="mine" data-active="true" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-primary font-semibold">
+                        <i data-lucide="user-round" class="w-5 h-5 shrink-0"></i>
+                        <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">我的</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </main>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

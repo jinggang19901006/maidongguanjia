@@ -1,0 +1,926 @@
+{
+  "data": [
+    {
+      "id": "page-home",
+      "title": "首页",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1791626000000,
+      "canvasData": {
+        "x": 0,
+        "y": 0,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 1541,
+          "viewportWidth": 375,
+          "sourceHash": "fnv1a-2b066d43",
+          "measuredAt": 1791626724481
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/home.html",
+        "interactions": [
+          {
+            "domId": "cta-ai-diagnosis",
+            "targetPageId": "page-ai-diagnosis",
+            "transitionLabel": "查看识别结果"
+          },
+          {
+            "domId": "cta-plan",
+            "targetPageId": "page-plan",
+            "transitionLabel": "查看方案"
+          },
+          {
+            "domId": "cta-expert",
+            "targetPageId": "page-expert",
+            "transitionLabel": "进入专家诊断"
+          },
+          {
+            "domId": "nav-fields",
+            "targetPageId": "page-fields",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-ai-diagnosis",
+            "targetPageId": "page-ai-diagnosis",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-plan",
+            "targetPageId": "page-plan",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-mine",
+            "targetPageId": "page-mine",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-fields",
+      "title": "地块档案",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1791626000000,
+      "canvasData": {
+        "x": 0,
+        "y": 692,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 1263,
+          "viewportWidth": 375,
+          "sourceHash": "fnv1a-0d05d889",
+          "measuredAt": 1791626724481
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/fields.html",
+        "interactions": [
+          {
+            "domId": "link-home",
+            "targetPageId": "page-home",
+            "hideEdge": true,
+            "transitionLabel": "返回首页"
+          },
+          {
+            "domId": "link-ai-diagnosis",
+            "targetPageId": "page-ai-diagnosis",
+            "transitionLabel": "去识别"
+          },
+          {
+            "domId": "link-plan",
+            "targetPageId": "page-plan",
+            "transitionLabel": "查看方案"
+          },
+          {
+            "domId": "link-mine",
+            "targetPageId": "page-mine",
+            "hideEdge": true,
+            "transitionLabel": "查看个人中心"
+          },
+          {
+            "domId": "nav-home",
+            "targetPageId": "page-home",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-ai-diagnosis",
+            "targetPageId": "page-ai-diagnosis",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-plan",
+            "targetPageId": "page-plan",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-mine",
+            "targetPageId": "page-mine",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-ai-diagnosis",
+      "title": "AI识别",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1791626000000,
+      "canvasData": {
+        "x": 169,
+        "y": 0,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 1331,
+          "viewportWidth": 375,
+          "sourceHash": "fnv1a-e16a3c91",
+          "measuredAt": 1791626724481
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/ai-diagnosis.html",
+        "interactions": [
+          {
+            "domId": "back-home",
+            "targetPageId": "page-home",
+            "hideEdge": true,
+            "transitionLabel": "返回首页"
+          },
+          {
+            "domId": "cta-expert",
+            "targetPageId": "page-expert",
+            "transitionLabel": "转专家诊断"
+          },
+          {
+            "domId": "cta-plan",
+            "targetPageId": "page-plan",
+            "transitionLabel": "查看阶段方案"
+          },
+          {
+            "domId": "nav-home",
+            "targetPageId": "page-home",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-fields",
+            "targetPageId": "page-fields",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-plan",
+            "targetPageId": "page-plan",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-mine",
+            "targetPageId": "page-mine",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-plan",
+      "title": "管理方案",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1791626000000,
+      "canvasData": {
+        "x": 169,
+        "y": 692,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 1936,
+          "viewportWidth": 375,
+          "sourceHash": "fnv1a-9dec5fe4",
+          "measuredAt": 1791626724481
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/plan.html",
+        "interactions": [
+          {
+            "domId": "back-home",
+            "targetPageId": "page-home",
+            "hideEdge": true,
+            "transitionLabel": "返回首页"
+          },
+          {
+            "domId": "cta-expert",
+            "targetPageId": "page-expert",
+            "transitionLabel": "请专家复核"
+          },
+          {
+            "domId": "cta-ai-diagnosis",
+            "targetPageId": "page-ai-diagnosis",
+            "transitionLabel": "去做识别"
+          },
+          {
+            "domId": "nav-home",
+            "targetPageId": "page-home",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-fields",
+            "targetPageId": "page-fields",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-ai-diagnosis",
+            "targetPageId": "page-ai-diagnosis",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-mine",
+            "targetPageId": "page-mine",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-expert",
+      "title": "专家诊断",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1791626000000,
+      "canvasData": {
+        "x": 180,
+        "y": 408,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 1238,
+          "viewportWidth": 375,
+          "sourceHash": "fnv1a-0a02d5da",
+          "measuredAt": 1791626724481
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/expert.html",
+        "interactions": [
+          {
+            "domId": "back-home",
+            "targetPageId": "page-home",
+            "hideEdge": true,
+            "transitionLabel": "返回首页"
+          },
+          {
+            "domId": "cta-submit-consult",
+            "targetPageId": "page-mine",
+            "transitionLabel": "提交后查看订单"
+          },
+          {
+            "domId": "shortcut-ai-diagnosis",
+            "targetPageId": "page-ai-diagnosis",
+            "hideEdge": true,
+            "transitionLabel": "辅助入口"
+          },
+          {
+            "domId": "shortcut-plan",
+            "targetPageId": "page-plan",
+            "hideEdge": true,
+            "transitionLabel": "辅助入口"
+          },
+          {
+            "domId": "nav-home",
+            "targetPageId": "page-home",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-fields",
+            "targetPageId": "page-fields",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-ai-diagnosis",
+            "targetPageId": "page-ai-diagnosis",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-plan",
+            "targetPageId": "page-plan",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-mine",
+      "title": "我的",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1791626000000,
+      "canvasData": {
+        "x": 0,
+        "y": 456,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 1175,
+          "viewportWidth": 375,
+          "sourceHash": "fnv1a-d5fee1f7",
+          "measuredAt": 1791626724481
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/mine.html",
+        "interactions": [
+          {
+            "domId": "cta-expert",
+            "targetPageId": "page-expert",
+            "transitionLabel": "进入专家诊断"
+          },
+          {
+            "domId": "shortcut-fields",
+            "targetPageId": "page-fields",
+            "hideEdge": true,
+            "transitionLabel": "快捷入口"
+          },
+          {
+            "domId": "shortcut-ai-diagnosis",
+            "targetPageId": "page-ai-diagnosis",
+            "hideEdge": true,
+            "transitionLabel": "快捷入口"
+          },
+          {
+            "domId": "shortcut-plan",
+            "targetPageId": "page-plan",
+            "hideEdge": true,
+            "transitionLabel": "快捷入口"
+          },
+          {
+            "domId": "nav-home",
+            "targetPageId": "page-home",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-fields",
+            "targetPageId": "page-fields",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-ai-diagnosis",
+            "targetPageId": "page-ai-diagnosis",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-plan",
+            "targetPageId": "page-plan",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-home-conversion",
+      "title": "首页·农资转化版",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1791786512311,
+      "canvasData": {
+        "x": 352,
+        "y": 0,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 2037,
+          "viewportWidth": 375,
+          "sourceHash": "fnv1a-790415d3",
+          "measuredAt": 1791786783782
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/home-conversion.html",
+        "interactions": [
+          {
+            "domId": "switch-original-home",
+            "targetPageId": "page-home",
+            "transitionLabel": "查看原管理型首页"
+          },
+          {
+            "domId": "cta-ai-diagnosis",
+            "targetPageId": "page-ai-diagnosis",
+            "transitionLabel": "拍照识别拿建议"
+          },
+          {
+            "domId": "cta-expert",
+            "targetPageId": "page-expert",
+            "transitionLabel": "联系农技顾问"
+          },
+          {
+            "domId": "cta-fields",
+            "targetPageId": "page-fields",
+            "transitionLabel": "查看全部地块商机"
+          },
+          {
+            "domId": "cta-plan",
+            "targetPageId": "page-plan",
+            "transitionLabel": "查看完整阶段方案"
+          },
+          {
+            "domId": "cta-ai-diagnosis-secondary",
+            "targetPageId": "page-ai-diagnosis",
+            "hideEdge": true,
+            "transitionLabel": "辅助入口"
+          },
+          {
+            "domId": "cta-expert-secondary",
+            "targetPageId": "page-expert",
+            "hideEdge": true,
+            "transitionLabel": "辅助入口"
+          },
+          {
+            "domId": "nav-fields",
+            "targetPageId": "page-fields",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-ai-diagnosis",
+            "targetPageId": "page-ai-diagnosis",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-plan",
+            "targetPageId": "page-plan",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-mine",
+            "targetPageId": "page-mine",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-home-farmer-tool",
+      "title": "首页·农户工具版",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1791787133536,
+      "canvasData": {
+        "x": 352,
+        "y": 720,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 1521,
+          "viewportWidth": 375,
+          "sourceHash": "fnv1a-e7c48ff0",
+          "measuredAt": 1791787997843
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/home-farmer-tool.html",
+        "interactions": [
+          {
+            "domId": "cta-ai-diagnosis",
+            "targetPageId": "page-ai-diagnosis-farmer-tool",
+            "transitionLabel": "拍照识别"
+          },
+          {
+            "domId": "cta-plan",
+            "targetPageId": "page-plan-farmer-tool",
+            "transitionLabel": "看今天建议"
+          },
+          {
+            "domId": "cta-expert",
+            "targetPageId": "page-expert-farmer-tool",
+            "transitionLabel": "找专家帮看"
+          },
+          {
+            "domId": "cta-fields",
+            "targetPageId": "page-fields-farmer-tool",
+            "transitionLabel": "看全部地块"
+          },
+          {
+            "domId": "switch-original-home",
+            "targetPageId": "page-home",
+            "transitionLabel": "查看原管理版"
+          },
+          {
+            "domId": "switch-conversion-home",
+            "targetPageId": "page-home-conversion",
+            "transitionLabel": "查看转化版"
+          },
+          {
+            "domId": "nav-fields",
+            "targetPageId": "page-fields-farmer-tool",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-ai-diagnosis",
+            "targetPageId": "page-ai-diagnosis-farmer-tool",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-plan",
+            "targetPageId": "page-plan-farmer-tool",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-mine",
+            "targetPageId": "page-mine-farmer-tool",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-fields-farmer-tool",
+      "title": "地块·农户工具版",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1791787897350,
+      "canvasData": {
+        "x": 760,
+        "y": 720,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 1442,
+          "viewportWidth": 375,
+          "sourceHash": "fnv1a-2a316ad7",
+          "measuredAt": 1791787997843
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/fields-farmer-tool.html",
+        "interactions": [
+          {
+            "domId": "cta-ai-diagnosis",
+            "targetPageId": "page-ai-diagnosis-farmer-tool",
+            "transitionLabel": "拍一张看看"
+          },
+          {
+            "domId": "cta-plan",
+            "targetPageId": "page-plan-farmer-tool",
+            "transitionLabel": "看今天怎么做"
+          },
+          {
+            "domId": "cta-expert",
+            "targetPageId": "page-expert-farmer-tool",
+            "transitionLabel": "不会判断就找人"
+          },
+          {
+            "domId": "nav-home",
+            "targetPageId": "page-home-farmer-tool",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-fields",
+            "targetPageId": "page-fields-farmer-tool",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-ai-diagnosis",
+            "targetPageId": "page-ai-diagnosis-farmer-tool",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-plan",
+            "targetPageId": "page-plan-farmer-tool",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-mine",
+            "targetPageId": "page-mine-farmer-tool",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-ai-diagnosis-farmer-tool",
+      "title": "识别·农户工具版",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1791787897350,
+      "canvasData": {
+        "x": 1168,
+        "y": 720,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 1598,
+          "viewportWidth": 375,
+          "sourceHash": "fnv1a-50b1f09b",
+          "measuredAt": 1791787997843
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/ai-diagnosis-farmer-tool.html",
+        "interactions": [
+          {
+            "domId": "cta-expert",
+            "targetPageId": "page-expert-farmer-tool",
+            "transitionLabel": "不会看就找专家"
+          },
+          {
+            "domId": "nav-home",
+            "targetPageId": "page-home-farmer-tool",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-fields",
+            "targetPageId": "page-fields-farmer-tool",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-ai-diagnosis",
+            "targetPageId": "page-ai-diagnosis-farmer-tool",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-plan",
+            "targetPageId": "page-plan-farmer-tool",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-mine",
+            "targetPageId": "page-mine-farmer-tool",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-plan-farmer-tool",
+      "title": "方案·农户工具版",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1791787897350,
+      "canvasData": {
+        "x": 1576,
+        "y": 720,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 1546,
+          "viewportWidth": 375,
+          "sourceHash": "fnv1a-e2b22475",
+          "measuredAt": 1791787997843
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/plan-farmer-tool.html",
+        "interactions": [
+          {
+            "domId": "cta-fields",
+            "targetPageId": "page-fields-farmer-tool",
+            "transitionLabel": "回地块页再看一眼"
+          },
+          {
+            "domId": "cta-ai-diagnosis",
+            "targetPageId": "page-ai-diagnosis-farmer-tool",
+            "transitionLabel": "先做一次识别"
+          },
+          {
+            "domId": "cta-expert",
+            "targetPageId": "page-expert-farmer-tool",
+            "transitionLabel": "不会判断就问人"
+          },
+          {
+            "domId": "nav-home",
+            "targetPageId": "page-home-farmer-tool",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-fields",
+            "targetPageId": "page-fields-farmer-tool",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-ai-diagnosis",
+            "targetPageId": "page-ai-diagnosis-farmer-tool",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-plan",
+            "targetPageId": "page-plan-farmer-tool",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-mine",
+            "targetPageId": "page-mine-farmer-tool",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-expert-farmer-tool",
+      "title": "专家·农户工具版",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1791787897350,
+      "canvasData": {
+        "x": 1984,
+        "y": 720,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 1450,
+          "viewportWidth": 375,
+          "sourceHash": "fnv1a-51f86327",
+          "measuredAt": 1791787997843
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/expert-farmer-tool.html",
+        "interactions": [
+          {
+            "domId": "cta-ai-diagnosis",
+            "targetPageId": "page-ai-diagnosis-farmer-tool",
+            "transitionLabel": "先把照片传上来"
+          },
+          {
+            "domId": "cta-fields",
+            "targetPageId": "page-fields-farmer-tool",
+            "transitionLabel": "把地块也一起带上"
+          },
+          {
+            "domId": "nav-home",
+            "targetPageId": "page-home-farmer-tool",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-fields",
+            "targetPageId": "page-fields-farmer-tool",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-ai-diagnosis",
+            "targetPageId": "page-ai-diagnosis-farmer-tool",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-plan",
+            "targetPageId": "page-plan-farmer-tool",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-mine",
+            "targetPageId": "page-mine-farmer-tool",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-mine-farmer-tool",
+      "title": "我的·农户工具版",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1791787897350,
+      "canvasData": {
+        "x": 2392,
+        "y": 720,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 1530,
+          "viewportWidth": 375,
+          "sourceHash": "fnv1a-a51f1105",
+          "measuredAt": 1791787897350
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/mine-farmer-tool.html",
+        "interactions": [
+          {
+            "domId": "cta-fields",
+            "targetPageId": "page-fields-farmer-tool",
+            "transitionLabel": "看我的地块"
+          },
+          {
+            "domId": "cta-ai-diagnosis",
+            "targetPageId": "page-ai-diagnosis-farmer-tool",
+            "transitionLabel": "看最近识别"
+          },
+          {
+            "domId": "cta-expert",
+            "targetPageId": "page-expert-farmer-tool",
+            "transitionLabel": "看常用入口"
+          },
+          {
+            "domId": "quick-fields",
+            "targetPageId": "page-fields-farmer-tool",
+            "transitionLabel": "快捷入口"
+          },
+          {
+            "domId": "quick-plan",
+            "targetPageId": "page-plan-farmer-tool",
+            "transitionLabel": "快捷入口"
+          },
+          {
+            "domId": "quick-ai",
+            "targetPageId": "page-ai-diagnosis-farmer-tool",
+            "transitionLabel": "快捷入口"
+          },
+          {
+            "domId": "quick-expert",
+            "targetPageId": "page-expert-farmer-tool",
+            "transitionLabel": "快捷入口"
+          },
+          {
+            "domId": "nav-home",
+            "targetPageId": "page-home-farmer-tool",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-fields",
+            "targetPageId": "page-fields-farmer-tool",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-ai-diagnosis",
+            "targetPageId": "page-ai-diagnosis-farmer-tool",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-plan",
+            "targetPageId": "page-plan-farmer-tool",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          },
+          {
+            "domId": "nav-mine",
+            "targetPageId": "page-mine-farmer-tool",
+            "hideEdge": true,
+            "transitionLabel": "底部导航"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "autoLayout": false,
+    "deviceType": "mobile",
+    "projectName": "川麦冬全周期管理小程序",
+    "showEdge": false
+  }
+}

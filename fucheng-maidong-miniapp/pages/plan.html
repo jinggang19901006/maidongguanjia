@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理方案</title>
+    <style id="theme-vars">
+:root {
+  color-scheme: light;
+  --maidong-background: #f6f3ea;
+  --maidong-foreground: #1d2a1f;
+  --maidong-card: #fffdf8;
+  --maidong-card-foreground: #1d2a1f;
+  --maidong-popover: #fffdf8;
+  --maidong-popover-foreground: #1d2a1f;
+  --maidong-primary: #567a38;
+  --maidong-primary-foreground: #f9fff2;
+  --maidong-muted: #ebe4d6;
+  --maidong-muted-foreground: #6c7567;
+  --maidong-border: #d9d2c1;
+  --maidong-input: #d9d2c1;
+  --maidong-ring: #7aa352;
+  --maidong-surface-2: #f1ecdf;
+  --maidong-surface-3: #e7e0d0;
+  --maidong-brand-soft: #e4efd8;
+  --maidong-brand-soft-2: #d4e4c0;
+  --maidong-warning: #b67c27;
+  --maidong-warning-foreground: #fff8ea;
+  --maidong-danger: #b24736;
+  --maidong-danger-foreground: #fff5f2;
+  --maidong-success: #4e7b49;
+  --maidong-success-foreground: #f5fff4;
+  --state-success: #4e7b49;
+  --state-warning: #b67c27;
+  --state-error: #b24736;
+  --state-info: #567a38;
+  --maidong-radius-small: 4px;
+  --maidong-radius-medium: 10px;
+  --maidong-radius-large: 16px;
+  --maidong-radius-full: 9999px;
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+  --shadow-1: 0 1px 2px rgba(30, 42, 28, 0.04), 0 6px 20px rgba(30, 42, 28, 0.03);
+  --shadow-2: 0 16px 40px rgba(30, 42, 28, 0.08);
+  --font-sans: Inter, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+.theme-light {
+  --background: var(--maidong-background);
+  --foreground: var(--maidong-foreground);
+  --card: var(--maidong-card);
+  --card-foreground: var(--maidong-card-foreground);
+  --popover: var(--maidong-popover);
+  --popover-foreground: var(--maidong-popover-foreground);
+  --primary: var(--maidong-primary);
+  --primary-foreground: var(--maidong-primary-foreground);
+  --muted: var(--maidong-muted);
+  --muted-foreground: var(--maidong-muted-foreground);
+  --border: var(--maidong-border);
+  --input: var(--maidong-input);
+  --ring: var(--maidong-ring);
+}
+
+html, body {
+  font-family: var(--font-sans);
+}
+
+body {
+  background: var(--maidong-background);
+  color: var(--maidong-foreground);
+}
+
+.type-display {
+  font-size: clamp(28px, 6vw, 34px);
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.type-h1 {
+  font-size: clamp(24px, 5vw, 28px);
+  line-height: 1.18;
+  font-weight: 700;
+}
+
+.type-h2 {
+  font-size: 20px;
+  line-height: 1.24;
+  font-weight: 700;
+}
+
+.type-h3 {
+  font-size: 17px;
+  line-height: 1.35;
+  font-weight: 600;
+}
+
+.type-body-lg {
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.type-body {
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.type-caption {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--maidong-background);
+    --color-foreground: var(--maidong-foreground);
+    --color-card: var(--maidong-card);
+    --color-card-foreground: var(--maidong-card-foreground);
+    --color-popover: var(--maidong-popover);
+    --color-popover-foreground: var(--maidong-popover-foreground);
+    --color-primary: var(--maidong-primary);
+    --color-primary-foreground: var(--maidong-primary-foreground);
+    --color-muted: var(--maidong-muted);
+    --color-muted-foreground: var(--maidong-muted-foreground);
+    --color-border: var(--maidong-border);
+    --color-input: var(--maidong-input);
+    --color-ring: var(--maidong-ring);
+    --radius-sm: var(--maidong-radius-small);
+    --radius-md: var(--maidong-radius-medium);
+    --radius-lg: var(--maidong-radius-large);
+  }
+  @layer base {
+    body { background: var(--maidong-background); color: var(--maidong-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--maidong-background); }
+      .text-background { color: var(--maidong-background); }
+      .border-background { border-color: var(--maidong-background); }
+      .ring-background { --tw-ring-color: var(--maidong-background); }
+      .bg-foreground { background-color: var(--maidong-foreground); }
+      .text-foreground { color: var(--maidong-foreground); }
+      .border-foreground { border-color: var(--maidong-foreground); }
+      .ring-foreground { --tw-ring-color: var(--maidong-foreground); }
+      .bg-card { background-color: var(--maidong-card); }
+      .text-card { color: var(--maidong-card); }
+      .border-card { border-color: var(--maidong-card); }
+      .ring-card { --tw-ring-color: var(--maidong-card); }
+      .bg-card-foreground { background-color: var(--maidong-card-foreground); }
+      .text-card-foreground { color: var(--maidong-card-foreground); }
+      .border-card-foreground { border-color: var(--maidong-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--maidong-card-foreground); }
+      .bg-popover { background-color: var(--maidong-popover); }
+      .text-popover { color: var(--maidong-popover); }
+      .border-popover { border-color: var(--maidong-popover); }
+      .ring-popover { --tw-ring-color: var(--maidong-popover); }
+      .bg-popover-foreground { background-color: var(--maidong-popover-foreground); }
+      .text-popover-foreground { color: var(--maidong-popover-foreground); }
+      .border-popover-foreground { border-color: var(--maidong-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--maidong-popover-foreground); }
+      .bg-primary { background-color: var(--maidong-primary); }
+      .text-primary { color: var(--maidong-primary); }
+      .border-primary { border-color: var(--maidong-primary); }
+      .ring-primary { --tw-ring-color: var(--maidong-primary); }
+      .bg-primary-foreground { background-color: var(--maidong-primary-foreground); }
+      .text-primary-foreground { color: var(--maidong-primary-foreground); }
+      .border-primary-foreground { border-color: var(--maidong-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--maidong-primary-foreground); }
+      .bg-muted { background-color: var(--maidong-muted); }
+      .text-muted { color: var(--maidong-muted); }
+      .border-muted { border-color: var(--maidong-muted); }
+      .ring-muted { --tw-ring-color: var(--maidong-muted); }
+      .bg-muted-foreground { background-color: var(--maidong-muted-foreground); }
+      .text-muted-foreground { color: var(--maidong-muted-foreground); }
+      .border-muted-foreground { border-color: var(--maidong-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--maidong-muted-foreground); }
+      .bg-border { background-color: var(--maidong-border); }
+      .text-border { color: var(--maidong-border); }
+      .border-border { border-color: var(--maidong-border); }
+      .ring-border { --tw-ring-color: var(--maidong-border); }
+      .bg-input { background-color: var(--maidong-input); }
+      .text-input { color: var(--maidong-input); }
+      .border-input { border-color: var(--maidong-input); }
+      .ring-input { --tw-ring-color: var(--maidong-input); }
+      .bg-ring { background-color: var(--maidong-ring); }
+      .text-ring { color: var(--maidong-ring); }
+      .border-ring { border-color: var(--maidong-ring); }
+      .ring-ring { --tw-ring-color: var(--maidong-ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <main>
+        <div class="px-4 pt-4 pb-6 space-y-4">
+            <header class="flex items-start justify-between gap-3">
+                <div class="flex items-start gap-2">
+                    <a href="#" data-dom-id="back-home" class="mt-0.5 h-9 w-9 rounded-full border border-border bg-card text-muted-foreground shadow-[var(--shadow-1)] active:bg-muted/70 flex items-center justify-center">
+                        <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                    </a>
+                    <div>
+                        <p class="type-caption text-muted-foreground">川麦冬分阶段农事路线图</p>
+                        <h1 class="type-h2 mt-1">管理方案</h1>
+                    </div>
+                </div>
+                <div class="w-[88px] h-8 rounded-full border border-black/10 bg-white/90 text-black/75 flex items-center justify-between px-2">
+                    <button type="button" aria-label="更多" class="h-7 w-7 rounded-full flex items-center justify-center active:bg-black/5">
+                        <i data-lucide="ellipsis" class="w-4 h-4"></i>
+                    </button>
+                    <span class="w-px h-4 bg-black/10"></span>
+                    <button type="button" aria-label="关闭" class="h-7 w-7 rounded-full flex items-center justify-center active:bg-black/5">
+                        <i data-lucide="x" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </header>
+
+            <section class="rounded-[16px] border border-border/80 bg-card p-4 shadow-[var(--shadow-1)]">
+                <div class="flex items-start justify-between gap-3">
+                    <div>
+                        <p class="type-caption text-muted-foreground">当前建议焦点</p>
+                        <h2 class="type-h3 mt-1">块根膨大期执行窗口</h2>
+                        <p class="type-body mt-1 text-muted-foreground">先稳水分与通风，再做阶段性营养补充，避免药肥叠加过密。</p>
+                    </div>
+                    <span class="inline-flex items-center rounded-full bg-[var(--maidong-brand-soft)] px-2.5 py-1 text-[11px] font-medium text-primary">本周重点</span>
+                </div>
+            </section>
+
+            <section id="region-lifecycle-plan" class="space-y-3">
+                <article class="rounded-[16px] border border-border/80 bg-card p-4 shadow-[var(--shadow-1)]">
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 rounded-full bg-[var(--maidong-brand-soft)] text-primary flex items-center justify-center shrink-0">1</div>
+                        <div class="flex-1 space-y-3">
+                            <div class="flex items-center justify-between gap-3">
+                                <div>
+                                    <h2 class="type-h3">建苗期</h2>
+                                    <p class="type-caption text-muted-foreground mt-1">移栽后至缓苗稳定</p>
+                                </div>
+                                <span class="inline-flex items-center rounded-full bg-background px-2.5 py-1 text-[11px] font-medium text-muted-foreground border border-border">执行时机：定植后 1-20 天</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div class="rounded-[12px] bg-background p-3">
+                                    <p class="type-caption text-muted-foreground">阶段目标</p>
+                                    <p class="type-body font-semibold mt-1">促缓苗、稳根系、保整齐度</p>
+                                </div>
+                                <div class="rounded-[12px] bg-background p-3">
+                                    <p class="type-caption text-muted-foreground">风险提醒</p>
+                                    <p class="type-body font-semibold mt-1">积水闷根、缺苗断垄</p>
+                                </div>
+                            </div>
+                            <div class="rounded-[12px] border border-border/70 bg-background p-3 space-y-2">
+                                <p class="type-body font-semibold">肥药建议</p>
+                                <p class="type-caption text-muted-foreground">以低浓度、轻负荷管理为主，可结合根系恢复需求做基础养分补充；病虫防控以田间清洁、苗床通风和早期巡查为先。</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="rounded-[16px] border border-border/80 bg-card p-4 shadow-[var(--shadow-1)]">
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 rounded-full bg-[var(--maidong-brand-soft)] text-primary flex items-center justify-center shrink-0">2</div>
+                        <div class="flex-1 space-y-3">
+                            <div class="flex items-center justify-between gap-3">
+                                <div>
+                                    <h2 class="type-h3">旺长期</h2>
+                                    <p class="type-caption text-muted-foreground mt-1">叶丛扩展与根系持续生长</p>
+                                </div>
+                                <span class="inline-flex items-center rounded-full bg-background px-2.5 py-1 text-[11px] font-medium text-muted-foreground border border-border">执行时机：苗稳后至封行前</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div class="rounded-[12px] bg-background p-3">
+                                    <p class="type-caption text-muted-foreground">阶段目标</p>
+                                    <p class="type-body font-semibold mt-1">养叶壮根、提群体整齐度</p>
+                                </div>
+                                <div class="rounded-[12px] bg-background p-3">
+                                    <p class="type-caption text-muted-foreground">风险提醒</p>
+                                    <p class="type-body font-semibold mt-1">杂草压苗、雨后病斑</p>
+                                </div>
+                            </div>
+                            <div class="rounded-[12px] border border-border/70 bg-background p-3 space-y-2">
+                                <p class="type-body font-semibold">肥药建议</p>
+                                <p class="type-caption text-muted-foreground">以均衡养分供应和中耕保墒为主，避免偏施导致徒长；病虫防控遵循“先查再管”，优先处理高湿、密闭和杂草竞争问题。</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="rounded-[16px] border border-border/80 bg-card p-4 shadow-[var(--shadow-1)]">
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center shrink-0">3</div>
+                        <div class="flex-1 space-y-3">
+                            <div class="flex items-center justify-between gap-3">
+                                <div>
+                                    <h2 class="type-h3">块根膨大期</h2>
+                                    <p class="type-caption text-muted-foreground mt-1">产量形成关键阶段</p>
+                                </div>
+                                <span class="inline-flex items-center rounded-full bg-[var(--maidong-brand-soft)] px-2.5 py-1 text-[11px] font-medium text-primary">当前阶段</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div class="rounded-[12px] bg-background p-3">
+                                    <p class="type-caption text-muted-foreground">阶段目标</p>
+                                    <p class="type-body font-semibold mt-1">促块根充实、稳叶色与通风</p>
+                                </div>
+                                <div class="rounded-[12px] bg-background p-3">
+                                    <p class="type-caption text-muted-foreground">风险提醒</p>
+                                    <p class="type-body font-semibold mt-1">秋涝、湿害、叶部病害</p>
+                                </div>
+                            </div>
+                            <div class="rounded-[12px] border border-border/70 bg-background p-3 space-y-2">
+                                <p class="type-body font-semibold">肥药建议</p>
+                                <p class="type-caption text-muted-foreground">宜采用以稳产为目标的阶段性补充策略，避免一次性高浓度施用；药剂管理强调轮换思路和病斑初发即控，尽量减少与叶面营养同日重叠。</p>
+                            </div>
+                            <div class="rounded-[12px] border border-border/70 bg-[var(--maidong-warning-foreground)] p-3">
+                                <p class="type-body font-semibold">执行时机</p>
+                                <p class="type-caption text-muted-foreground mt-1">连续阴雨后先看排水与病斑，再决定是否补充营养；晴好天气可安排早晚巡田与叶面复查。</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="rounded-[16px] border border-border/80 bg-card p-4 shadow-[var(--shadow-1)]">
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 rounded-full bg-[var(--maidong-brand-soft)] text-primary flex items-center justify-center shrink-0">4</div>
+                        <div class="flex-1 space-y-3">
+                            <div class="flex items-center justify-between gap-3">
+                                <div>
+                                    <h2 class="type-h3">采前管理</h2>
+                                    <p class="type-caption text-muted-foreground mt-1">收获前品质与地块整理</p>
+                                </div>
+                                <span class="inline-flex items-center rounded-full bg-background px-2.5 py-1 text-[11px] font-medium text-muted-foreground border border-border">执行时机：采挖前 15-30 天</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div class="rounded-[12px] bg-background p-3">
+                                    <p class="type-caption text-muted-foreground">阶段目标</p>
+                                    <p class="type-body font-semibold mt-1">稳品质、控水分、便于采挖</p>
+                                </div>
+                                <div class="rounded-[12px] bg-background p-3">
+                                    <p class="type-caption text-muted-foreground">风险提醒</p>
+                                    <p class="type-body font-semibold mt-1">突发倒伏、采前病斑回潮</p>
+                                </div>
+                            </div>
+                            <div class="rounded-[12px] border border-border/70 bg-background p-3 space-y-2">
+                                <p class="type-body font-semibold">肥药建议</p>
+                                <p class="type-caption text-muted-foreground">以收口管理为主，减少不必要投入，重点做好清沟、记录留档和采收前观察；所有投入需预留安全间隔并遵从当地农技要求。</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </section>
+
+            <section class="grid grid-cols-2 gap-3">
+                <a href="#" data-dom-id="cta-ai-diagnosis" class="rounded-[16px] border border-border/80 bg-card p-4 shadow-[var(--shadow-1)] active:bg-muted/60">
+                    <div class="h-10 w-10 rounded-full bg-[var(--maidong-brand-soft)] text-primary flex items-center justify-center">
+                        <i data-lucide="scan-line" class="w-5 h-5"></i>
+                    </div>
+                    <p class="type-body font-semibold mt-3">去做 AI 识别</p>
+                    <p class="type-caption text-muted-foreground mt-1">先判读样本再定措施</p>
+                </a>
+                <a href="#" data-dom-id="cta-expert" class="rounded-[16px] bg-primary text-primary-foreground p-4 shadow-[var(--shadow-1)] active:opacity-90">
+                    <div class="h-10 w-10 rounded-full bg-primary-foreground/15 flex items-center justify-center">
+                        <i data-lucide="stethoscope" class="w-5 h-5"></i>
+                    </div>
+                    <p class="type-body font-semibold mt-3">请专家复核</p>
+                    <p class="type-caption mt-1 text-primary-foreground/80">方案落地更稳妥</p>
+                </a>
+            </section>
+
+            <nav data-mobile-nav="global" class="mt-6 border border-border/80 bg-card rounded-[16px] shadow-[var(--shadow-1)] h-[64px]">
+                <div class="w-full grid grid-cols-5 h-full">
+                    <a href="#" data-nav-key="home" data-dom-id="nav-home" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground">
+                        <i data-lucide="house" class="w-5 h-5 shrink-0"></i>
+                        <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">首页</span>
+                    </a>
+                    <a href="#" data-nav-key="fields" data-dom-id="nav-fields" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground">
+                        <i data-lucide="map" class="w-5 h-5 shrink-0"></i>
+                        <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">地块</span>
+                    </a>
+                    <a href="#" data-nav-key="ai" data-dom-id="nav-ai-diagnosis" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground">
+                        <i data-lucide="scan-line" class="w-5 h-5 shrink-0"></i>
+                        <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">识别</span>
+                    </a>
+                    <a href="#" data-nav-key="plan" data-active="true" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-primary font-semibold">
+                        <i data-lucide="clipboard-list" class="w-5 h-5 shrink-0"></i>
+                        <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">方案</span>
+                    </a>
+                    <a href="#" data-nav-key="mine" data-dom-id="nav-mine" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-muted-foreground">
+                        <i data-lucide="user-round" class="w-5 h-5 shrink-0"></i>
+                        <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">我的</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </main>
+    <script>lucide.createIcons();</script>
+</body>
+</html>
