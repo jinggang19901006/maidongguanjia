@@ -1,0 +1,79 @@
+<view class="root {{ elder ? 'elder' : '' }}">
+  <view class="topbar">
+    <view class="h1">生命周期</view>
+    <view class="badge-geo">🌱 约 12 个月</view>
+  </view>
+
+  <block wx:if="{{ empty }}">
+    <view class="card" style="text-align:center">
+      <view style="font-size:32rpx;font-weight:700">还没有地块</view>
+      <view class="muted mts">请先添加地块并登记栽种日，生成农事日历</view>
+      <button class="btn block mtx" bindtap="goAdd">+ 添加地块</button>
+    </view>
+  </block>
+
+  <block wx:else>
+    <view class="card tight" style="margin-top:20rpx">
+      <view class="row between">
+        <view class="bold ink" style="font-size:32rpx">{{ landName }}</view>
+        <view class="pill amber">{{ curStage }}</view>
+      </view>
+      <view class="bar mtx"><i style="width:{{ progress }}%"></i></view>
+      <view class="muted xs mts">栽种 {{ plantDate }} · 预计采收 {{ harvestDate }}</view>
+    </view>
+
+    <view class="tl">
+      <view wx:for="{{ stages }}" wx:key="id" class="tl-item {{ item.status }}">
+        <view class="tl-dot"></view>
+        <view class="tl-card" data-id="{{ item.id }}" bindtap="openStage">
+          <view class="row between">
+            <view class="t">{{ item.id }}. {{ item.name }}</view>
+            <view class="go">详情 ›</view>
+          </view>
+          <view class="d">{{ item.time }}</view>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 阶段详情抽屉（方案卡核心） -->
+  <view class="mask" wx:if="{{ sheetVisible }}" bindtap="closeSheet"></view>
+  <view class="sheet" wx:if="{{ sheetVisible }}">
+    <view class="closex" bindtap="closeSheet">×</view>
+    <view class="pill {{ sheet.status === 'cur' ? 'amber' : 'green' }}">{{ sheet.status === 'cur' ? '当前阶段' : (sheet.status === 'done' ? '已完成' : '待开始') }}</view>
+    <view class="h2" style="margin-top:16rpx">{{ sheet.id }}. {{ sheet.name }}</view>
+    <view class="muted sm mts">⏱ {{ sheet.time }}</view>
+
+    <view class="card tight" style="margin:24rpx 0 0;box-shadow:none;border:1rpx solid #e9ede9">
+      <view class="bold ink sm">🌾 农事操作</view>
+      <view class="muted sm mts" style="line-height:1.55">{{ sheet.farm }}</view>
+    </view>
+
+    <view class="sol">
+      <view class="h">🟢 用肥方案</view>
+      <block wx:if="{{ sheet.fert.length }}">
+        <view wx:for="{{ sheet.fert }}" wx:key="n" class="item">
+          <view><view class="name">{{ item.n }}</view><view class="spec">{{ item.s }}</view></view>
+          <view class="buy" data-id="{{ item.buy }}" data-use="{{ item.n }}" bindtap="goBuy">去购买</view>
+        </view>
+      </block>
+      <view wx:else class="muted sm" style="padding:18rpx 0">本阶段以农事操作为主</view>
+    </view>
+
+    <view class="sol">
+      <view class="h">💊 用药 / 植保方案</view>
+      <block wx:if="{{ sheet.med.length }}">
+        <view wx:for="{{ sheet.med }}" wx:key="n" class="item">
+          <view><view class="name">{{ item.n }}</view><view class="spec">{{ item.s }}</view></view>
+          <view class="buy" data-id="{{ item.buy }}" data-use="{{ item.n }}" bindtap="goBuy">去购买</view>
+        </view>
+      </block>
+      <view wx:else class="muted sm" style="padding:18rpx 0">本阶段无化学用药</view>
+    </view>
+
+    <view class="risk">🛡 所有药剂均经合规校验：屏蔽 47 种禁用农药、多效唑红线、采收前 30 天安全间隔。请严格按标签与安全间隔使用，本方案仅供参考。</view>
+    <button class="btn block mtx" bindtap="joinTodo">加入我的农事待办</button>
+  </view>
+
+  <view style="height:30rpx"></view>
+</view>

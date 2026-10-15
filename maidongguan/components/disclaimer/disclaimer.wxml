@@ -1,0 +1,17 @@
+<view class="disc-overlay" wx:if="{{ visible }}">
+  <view class="h2">温馨提示 · 使用前请阅读</view>
+  <view class="sub">川麦冬管家 · 免费功能说明与免责声明</view>
+  <view class="disc-box">
+    本平台的<text class="b">生命周期方案建议、AI 病虫害识别</text>均为<text class="b">免费参考工具</text>，请注意：
+    <view style="margin-top:16rpx"></view>
+    1. 方案与识别结果<text class="b">仅供参考</text>，不构成种植或用药的最终依据，请结合地块实地情况并咨询农技人员/专家后实施。
+    2. AI 识别为<text class="b">第一道筛查</text>，非最终诊断；复杂或毁灭性病害请以专家复核与病原检测为准。
+    3. 所有用肥用药须严格遵循<text class="b">农药标签、安全间隔期及当地法规</text>；因使用不当造成的作物损失，平台不承担责任。
+    4. 2025 版《中国药典》对多效唑等设残留限量，禁用农药已扩至 47 种，请务必合规使用。
+  </view>
+  <view class="disc-check {{ checked ? 'on' : '' }}" bindtap="toggle">
+    <view class="box">{{ checked ? '✓' : '' }}</view>
+    <view>我已阅读并理解上述《免责声明与风险提示》</view>
+  </view>
+  <button class="disc-enter {{ checked ? 'on' : '' }}" bindtap="confirm">同意并进入</button>
+</view>

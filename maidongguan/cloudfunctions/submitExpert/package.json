@@ -1,0 +1,9 @@
+{
+  "name": "submitExpert",
+  "version": "1.0.0",
+  "description": "专家问诊派单（写入云库 expertTickets 集合）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

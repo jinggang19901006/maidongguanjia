@@ -1,0 +1,58 @@
+<view class="root {{ elder ? 'elder' : '' }}">
+  <view class="topbar">
+    <view class="h1">我的麦冬地</view>
+    <view class="row">
+      <view class="badge-geo">📍 三台·涪城</view>
+      <view style="margin-left:18rpx;font-size:40rpx" bindtap="goMine">👤</view>
+    </view>
+  </view>
+
+  <disclaimer visible="{{ discVisible }}" bind:confirm="onDiscConfirm" />
+
+  <view class="disc-bar">⚠️ 本平台方案与 AI 识别结果<b>仅供参考</b>，不构成种植/用药最终依据，请结合实地并咨询农技人员。</view>
+
+  <view class="hero" style="position:relative;overflow:hidden">
+    <view class="h2">川麦冬全生命周期管家</view>
+    <view class="p">按时推送农事与用肥用药方案，AI 识别 + 专家诊断双重把关，帮您顺利用过新药典。</view>
+    <image class="hero-plant" src="/assets/img/plant.png" mode="aspectFit" />
+    <view class="stat">
+      <view class="s"><view class="n">{{ summary.count }}</view><view class="l">地块</view></view>
+      <view class="s"><view class="n">{{ summary.area }}</view><view class="l">亩</view></view>
+      <view class="s"><view class="n">{{ summary.todos }}</view><view class="l">待办农事</view></view>
+    </view>
+  </view>
+
+  <banner items="{{ banners }}" bind:select="onBannerSelect" />
+
+  <block wx:if="{{ lands.length === 0 }}">
+    <view class="card" style="text-align:center">
+      <image class="empty-img" src="/assets/img/empty.png" mode="aspectFit" />
+      <view style="font-size:32rpx;font-weight:700">还没有地块</view>
+      <view class="muted mts">添加第一块麦冬地，开始全生命周期管理</view>
+      <button class="btn block mtx" bindtap="goAddLand">+ 添加我的第一块麦冬地</button>
+    </view>
+  </block>
+
+  <block wx:else>
+    <view wx:for="{{ lands }}" wx:key="_id"
+          class="land {{ index % 2 === 1 ? 'alt' : '' }}"
+          data-id="{{ item._id }}" bindtap="goLand">
+      <view class="stage">当前：{{ item.curStage }}</view>
+      <view class="h3">{{ item.name }}</view>
+      <view class="meta">{{ item.area }} 亩 · {{ item.variety }} · {{ item.plantDate }} 栽种</view>
+      <view class="next">⏰ {{ item.next }}</view>
+      <view class="row mts"><view class="xs" style="color:rgba(255,255,255,.85)">全周期进度 {{ item.progress }}%</view></view>
+      <view class="bar"><i style="width:{{ item.progress }}%"></i></view>
+    </view>
+  </block>
+
+  <view class="card tight row between" bindtap="goCalendar">
+    <view>
+      <view class="bold ink" style="font-size:32rpx">查看全生命周期日历</view>
+      <view class="muted sm mts">10 个阶段 · 当前：{{ lands[0].curStage || '—' }}</view>
+    </view>
+    <view class="green" style="font-size:44rpx">›</view>
+  </view>
+
+  <view style="height:30rpx"></view>
+</view>

@@ -1,0 +1,59 @@
+<view class="root {{ elder ? 'elder' : '' }}">
+  <view class="topbar">
+    <view class="h1">AI 识别</view>
+    <view class="badge-geo">苗情·病虫害·缺素</view>
+  </view>
+
+  <view class="card">
+    <view class="cam" bindtap="takePhoto">
+      <view wx:if="{{ status !== 'loading' }}" style="font-size:80rpx">📷</view>
+      <view wx:else class="loading"></view>
+      <view class="bold">{{ status === 'loading' ? 'AI 识别中…' : '拍照 / 上传叶片照片' }}</view>
+      <view class="sm" style="opacity:.85">支持苗情、病虫害、缺素识别</view>
+    </view>
+
+    <view wx:if="{{ status === 'result' }}">
+      <view class="dcard">
+        <view class="row between">
+          <view class="bold ink" style="font-size:33rpx">{{ result.disease }}
+            <text wx:if="{{ result.complex }}" class="pill red" style="margin-left:12rpx;font-size:22rpx">复杂/毁灭性</text>
+          </view>
+          <view class="pill {{ result.confidence >= 85 ? 'green' : 'amber' }}">置信度 {{ result.confidence }}%</view>
+        </view>
+        <view wx:if="{{ result.mock }}" class="demo-hint">ⓘ 当前未接入在线识别模型，以下为智能示例结果，仅供参考</view>
+        <view class="muted sm mts" style="line-height:1.55">{{ result.symptom }}</view>
+
+        <view class="sol mtx">
+          <view class="h">💊 防治建议（合规）</view>
+          <view wx:for="{{ result.items }}" wx:key="n" class="item">
+            <view><view class="name">{{ item.n }}</view><view class="spec">{{ item.s }}</view></view>
+            <view class="buy" data-id="{{ item.buy }}" data-use="{{ item.n }}" bindtap="goBuy">去购买</view>
+          </view>
+        </view>
+
+        <view class="risk">⚠️ AI 识别仅供参考，为第一道筛查而非最终诊断；复杂或毁灭性病害请转专家复核，用药前请核对标签与安全间隔期。</view>
+
+        <view wx:if="{{ result.complex }}" class="pill red" style="margin-top:16rpx">⚠ 命中复杂/毁灭性标签，建议优先转专家复核</view>
+
+        <view class="row between mtx">
+          <view class="xs muted">不确定？让专家帮您看</view>
+          <view class="btn ghost sm" style="min-height:80rpx;font-size:28rpx" bindtap="goExpert">转专家诊断</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section-title">识别记录</view>
+  <view wx:if="{{ history.length }}">
+    <view wx:for="{{ history }}" wx:key="ts" class="rec" bindtap="goExpert">
+      <view class="r-emoji">{{ item.confidence >= 85 ? '✅' : '⚠️' }}</view>
+      <view class="r-info">
+        <view class="r-name">{{ item.disease }}</view>
+        <view class="r-sym xs muted">{{ item.symptom }}</view>
+      </view>
+      <view class="r-cf">{{ item.confidence }}%</view>
+    </view>
+  </view>
+  <view wx:else class="card tight"><view class="muted sm">暂无识别记录，拍照后将自动保存</view></view>
+  <view style="height:30rpx"></view>
+</view>

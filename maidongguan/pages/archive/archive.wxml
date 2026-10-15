@@ -1,0 +1,74 @@
+<view class="root {{ elder ? 'elder' : '' }}">
+  <view class="topbar">
+    <view class="h1">种植档案 / 溯源</view>
+    <view class="badge-geo">🛡 全程合规</view>
+  </view>
+
+  <view wx:if="{{ loading }}" class="center"><view class="loading"></view></view>
+
+  <block wx:elif="{{ !land }}">
+    <view class="empty">
+      <image class="empty-img" src="/assets/img/empty.png" mode="aspectFit" />
+      <view class="et">还没有地块档案</view>
+      <view class="em">先在首页添加麦冬地，即可生成种植档案与溯源码</view>
+    </view>
+  </block>
+
+  <block wx:else>
+    <view wx:if="{{ lands.length > 1 }}" class="landpick">
+      <view wx:for="{{ lands }}" wx:key="_id"
+            class="lp {{ item._id === currentId ? 'on' : '' }}" data-id="{{ item._id }}" bindtap="selectLand">
+        {{ item.name }}
+      </view>
+    </view>
+
+    <view class="acard">
+      <view class="row between">
+        <view class="bold ink" style="font-size:34rpx">{{ land.name }}</view>
+        <view class="pill green">{{ cal.currentStage.name }}</view>
+      </view>
+      <view class="grid">
+        <view class="g"><view class="gl">面积</view><view class="gv">{{ land.area }} 亩</view></view>
+        <view class="g"><view class="gl">品种</view><view class="gv">{{ land.variety }}</view></view>
+        <view class="g"><view class="gl">栽种日</view><view class="gv">{{ land.plantDate }}</view></view>
+        <view class="g"><view class="gl">预计采收</view><view class="gv">{{ cal.harvestDate }}</view></view>
+      </view>
+      <view class="bar mtx"><i style="width:{{ cal.progress * 100 }}%"></i></view>
+      <view class="xs muted mts">全周期进度 {{ (cal.progress*100).toFixed(0) }}%</view>
+    </view>
+
+    <view class="section-title">农事时间线</view>
+    <view class="tl">
+      <view wx:for="{{ cal.stages }}" wx:key="id" class="tl-item {{ item.status }}">
+        <view class="tl-dot"></view>
+        <view class="tl-card">
+          <view class="row between">
+            <view class="t">{{ index+1 }}. {{ item.name }}</view>
+            <view class="st {{ item.status }}">{{ item.status === 'done' ? '已完成' : item.status === 'cur' ? '进行中' : '待开始' }}</view>
+          </view>
+          <view class="d">{{ item.time }} · {{ item.start }} ~ {{ item.end }}</view>
+          <view class="farm">{{ item.farm }}</view>
+          <view wx:if="{{ item.fert.length }}" class="chips">
+            <text wx:for="{{ item.fert }}" wx:for-item="f" wx:key="n" class="chip green">🟢 {{ f.n }}</text>
+          </view>
+          <view wx:if="{{ item.med.length }}" class="chips">
+            <text wx:for="{{ item.med }}" wx:for-item="m" wx:key="n" class="chip amber">🟠 {{ m.n }}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="section-title">溯源码</view>
+    <view class="trace">
+      <view class="qr">{{ traceCode }}</view>
+      <view class="tinfo">
+        <view class="bold ink" style="font-size:30rpx">川麦冬质量溯源</view>
+        <view class="xs muted mts">产地：四川·三台·涪城 ｜ 合规检测：多效唑 ≤0.1mg/kg</view>
+        <view class="xs muted">扫码可查全程农事与用药记录（演示）</view>
+      </view>
+    </view>
+
+    <button class="btn ghost block mtx" bindtap="goCalendar">查看当前阶段方案卡</button>
+    <view style="height:40rpx"></view>
+  </block>
+</view>

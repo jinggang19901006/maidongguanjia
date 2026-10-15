@@ -1,0 +1,31 @@
+<view class="root {{ elder ? 'elder' : '' }}">
+  <view class="topbar">
+    <view class="h1">农技学堂</view>
+    <view class="badge-geo">📚 免费学</view>
+  </view>
+
+  <view class="card intro">
+    <view class="bold ink" style="font-size:30rpx">政策·病害·施肥 一手掌握</view>
+    <view class="muted sm mts" style="line-height:1.5">围绕 2025 药典合规与生态种植，帮您用对肥、用对药、卖好价。</view>
+  </view>
+
+  <view wx:for="{{ articles }}" wx:key="id" class="acard" data-id="{{ item.id }}" bindtap="openArticle">
+    <view class="row between">
+      <view class="cat {{ item.cat === '视频' ? 'blue' : 'green' }}">{{ item.cat }}</view>
+      <view wx:if="{{ item.hot }}" class="hot">🔥 热读</view>
+    </view>
+    <view class="at">{{ item.title }}</view>
+    <view class="as">{{ item.summary }}</view>
+    <view class="xs muted mts">{{ item.read }} 人已读 · 点开阅读</view>
+  </view>
+
+  <view style="height:40rpx"></view>
+
+  <view class="mask" wx:if="{{ sheetVisible }}" bindtap="closeSheet"></view>
+  <view class="sheet" wx:if="{{ sheetVisible }}">
+    <view class="closex" bindtap="closeSheet">×</view>
+    <view class="h2">{{ cur.title }}</view>
+    <view class="xs muted mts">{{ cur.cat }} · {{ cur.read }} 人已读</view>
+    <view class="body mtx">{{ cur.body }}</view>
+  </view>
+</view>

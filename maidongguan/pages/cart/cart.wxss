@@ -1,0 +1,15 @@
+.root { padding-bottom: calc(40rpx + env(safe-area-inset-bottom)); }
+.citem { display:flex; gap:20rpx; background:#fff; border-radius:24rpx; padding:22rpx 24rpx; margin:20rpx 28rpx; align-items:center; box-shadow:0 4rpx 20rpx rgba(31,42,36,.05); position:relative; }
+.thumb { width:100rpx; height:100rpx; border-radius:18rpx; background:linear-gradient(135deg,#e8f6ee,#cdeed8); display:flex; align-items:center; justify-content:center; font-size:48rpx; flex:0 0 auto; }
+.info { flex:1; }
+.pname { font-size:30rpx; font-weight:700; color:var(--ink); }
+.price { color:var(--red); font-weight:700; font-size:30rpx; }
+.stepper { display:flex; align-items:center; gap:6rpx; }
+.sbtn { width:56rpx; height:56rpx; border-radius:50%; background:var(--bg); color:var(--ink); display:flex; align-items:center; justify-content:center; font-size:34rpx; font-weight:700; }
+.qty { min-width:48rpx; text-align:center; font-size:30rpx; font-weight:700; }
+.del { position:absolute; right:20rpx; bottom:18rpx; font-size:22rpx; color:var(--sub); }
+.barfoot { position:fixed; left:0; right:0; bottom:0; background:#fff; display:flex; align-items:center; justify-content:space-between; padding:18rpx 32rpx calc(18rpx + env(safe-area-inset-bottom)); box-shadow:0 -4rpx 20rpx rgba(31,42,36,.08); }
+.barfoot .btn { min-width:240rpx; margin:0; }
+.empty, .center { text-align:center; padding:120rpx 60rpx; color:var(--sub); }
+.empty .emoji { font-size:92rpx; } .empty .et { font-size:34rpx; font-weight:700; color:var(--ink); margin-top:18rpx; } .empty .em { font-size:26rpx; margin-top:10rpx; }
+.root.elder .pname, .root.elder .et { font-size:38rpx; } .root.elder .muted { font-size:30rpx; }

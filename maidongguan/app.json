@@ -1,0 +1,41 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/calendar/calendar",
+    "pages/recognize/recognize",
+    "pages/mall/mall",
+    "pages/expert/expert",
+    "pages/mine/mine",
+    "pages/addland/addland",
+    "pages/opp/opp",
+    "pages/orders/orders",
+    "pages/archive/archive",
+    "pages/school/school",
+    "pages/contact/contact",
+    "pages/cart/cart"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#1a9d4e",
+    "navigationBarTitleText": "川麦冬管家",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f3f6f3"
+  },
+  "tabBar": {
+    "color": "#5f6f66",
+    "selectedColor": "#1a9d4e",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      { "pagePath": "pages/home/home", "text": "麦冬地", "iconPath": "assets/tabbar/home.png", "selectedIconPath": "assets/tabbar/home_on.png" },
+      { "pagePath": "pages/calendar/calendar", "text": "生命周期", "iconPath": "assets/tabbar/cycle.png", "selectedIconPath": "assets/tabbar/cycle_on.png" },
+      { "pagePath": "pages/recognize/recognize", "text": "AI识别", "iconPath": "assets/tabbar/scan.png", "selectedIconPath": "assets/tabbar/scan_on.png" },
+      { "pagePath": "pages/mall/mall", "text": "农资", "iconPath": "assets/tabbar/shop.png", "selectedIconPath": "assets/tabbar/shop_on.png" },
+      { "pagePath": "pages/expert/expert", "text": "专家", "iconPath": "assets/tabbar/expert.png", "selectedIconPath": "assets/tabbar/expert_on.png" }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": { "desc": "用于属地专家派单与就近农资点" }
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

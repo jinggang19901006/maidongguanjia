@@ -1,0 +1,11 @@
+.root { padding-bottom: calc(40rpx + env(safe-area-inset-bottom)); }
+.rec { display: flex; align-items: center; gap: 18rpx; background: #fff; border-radius: 22rpx; padding: 20rpx 24rpx; margin: 16rpx 28rpx; box-shadow: 0 4rpx 18rpx rgba(31,42,36,.05); }
+.r-emoji { font-size: 40rpx; flex: 0 0 auto; }
+.r-info { flex: 1; min-width: 0; }
+.r-name { font-size: 29rpx; font-weight: 700; color: var(--ink); }
+.r-sym { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 420rpx; }
+.r-cf { font-size: 26rpx; font-weight: 700; color: var(--green-d); flex: 0 0 auto; }
+.rec:active { background: #f7faf7; }
+.root.elder .r-name { font-size: 34rpx; }
+.demo-hint { margin-top: 14rpx; background: #fff7e6; border: 1rpx solid #ffe1a8; color: #a4600a; font-size: 24rpx; border-radius: 14rpx; padding: 14rpx 18rpx; line-height: 1.4; }
+.root.elder .demo-hint { font-size: 28rpx; }

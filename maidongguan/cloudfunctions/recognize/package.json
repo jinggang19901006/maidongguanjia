@@ -1,0 +1,9 @@
+{
+  "name": "recognize",
+  "version": "1.0.0",
+  "description": "川麦冬 AI 病虫害/苗情识别云函数",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "latest"
+  }
+}

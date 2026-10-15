@@ -1,0 +1,11 @@
+.root { padding-bottom: calc(40rpx + env(safe-area-inset-bottom)); }
+.intro { background:linear-gradient(135deg,#e8f6ee,#d4efdf); margin-top:20rpx; }
+.acard { background:#fff; border-radius:28rpx; padding:26rpx 28rpx; margin:20rpx 28rpx; box-shadow:0 4rpx 20rpx rgba(31,42,36,.05); }
+.cat { font-size:22rpx; padding:6rpx 16rpx; border-radius:20rpx; font-weight:700; }
+.cat.green { background:var(--green-l); color:var(--green-d); }
+.cat.blue { background:#e7f0fb; color:#1f5fb0; }
+.hot { font-size:22rpx; color:var(--red); font-weight:700; }
+.at { font-size:32rpx; font-weight:700; color:var(--ink); margin-top:14rpx; line-height:1.4; }
+.as { font-size:26rpx; color:var(--sub); margin-top:10rpx; line-height:1.55; }
+.sheet .body { font-size:28rpx; color:var(--ink); line-height:1.8; white-space:pre-wrap; }
+.root.elder .at { font-size:38rpx; } .root.elder .as, .root.elder .body { font-size:30rpx; }

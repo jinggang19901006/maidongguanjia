@@ -1,0 +1,31 @@
+.root { padding-bottom: calc(40rpx + env(safe-area-inset-bottom)); }
+.landpick { display:flex; gap:14rpx; overflow-x:auto; padding:18rpx 28rpx 0; }
+.landpick::-webkit-scrollbar { display:none; }
+.lp { flex:0 0 auto; font-size:26rpx; padding:12rpx 24rpx; border-radius:30rpx; background:#fff; color:var(--sub); border:1rpx solid var(--line); }
+.lp.on { background:var(--green); color:#fff; border-color:var(--green); }
+
+.acard { background:#fff; border-radius:28rpx; padding:28rpx; margin:22rpx 28rpx; box-shadow:0 4rpx 20rpx rgba(31,42,36,.05); }
+.grid { display:flex; flex-wrap:wrap; gap:14rpx; margin-top:20rpx; }
+.g { width:calc(50% - 7rpx); background:var(--bg); border-radius:18rpx; padding:16rpx 18rpx; }
+.gl { font-size:22rpx; color:var(--sub); }
+.gv { font-size:28rpx; font-weight:700; color:var(--ink); margin-top:4rpx; }
+
+.st { font-size:22rpx; padding:4rpx 14rpx; border-radius:20rpx; }
+.st.done { background:#e8f6ee; color:var(--green-d); }
+.st.cur { background:#fdeede; color:#b9740a; }
+.st.todo { background:#eef1ee; color:#9aa6a0; }
+
+.farm { font-size:25rpx; color:var(--sub); margin-top:12rpx; line-height:1.5; }
+.chips { display:flex; flex-wrap:wrap; gap:10rpx; margin-top:10rpx; }
+.chip { font-size:22rpx; padding:6rpx 14rpx; border-radius:20rpx; }
+.chip.green { background:#e8f6ee; color:var(--green-d); }
+.chip.amber { background:#fdeede; color:#b9740a; }
+
+.trace { background:#fff; border-radius:28rpx; padding:28rpx; margin:0 28rpx; display:flex; gap:24rpx; align-items:center; box-shadow:0 4rpx 20rpx rgba(31,42,36,.05); }
+.qr { width:160rpx; height:160rpx; border-radius:18rpx; background:linear-gradient(135deg,#1a9d4e,#0f7a3a); color:#fff; font-size:22rpx; font-weight:700; letter-spacing:1rpx; display:flex; align-items:center; justify-content:center; text-align:center; padding:10rpx; box-sizing:border-box; flex:0 0 auto; line-height:1.35; }
+.tinfo { flex:1; }
+
+.empty, .center { text-align:center; padding:120rpx 60rpx; color:var(--sub); }
+.empty .emoji { font-size:92rpx; } .empty .et { font-size:34rpx; font-weight:700; color:var(--ink); margin-top:18rpx; } .empty .em { font-size:26rpx; margin-top:10rpx; }
+.root.elder .bold, .root.elder .t, .root.elder .et { font-size:38rpx; }
+.root.elder .farm, .root.elder .muted, .root.elder .gv { font-size:30rpx; }

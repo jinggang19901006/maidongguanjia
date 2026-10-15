@@ -1,0 +1,24 @@
+<view class="root">
+  <view class="card">
+    <view class="bold ink" style="font-size:32rpx">地块信息</view>
+    <view class="muted sm mts">登记栽种日将自动生成 10 阶段农事日历（R1）</view>
+
+    <view class="mts">地块名称</view>
+    <input class="field" placeholder="如：涪城村2号地" value="{{ name }}" bindinput="onName" />
+
+    <view class="mts">面积（亩）</view>
+    <input class="field" type="digit" placeholder="如：8.5" value="{{ area }}" bindinput="onArea" />
+
+    <view class="mts">品种</view>
+    <input class="field" value="{{ variety }}" bindinput="onVar" />
+
+    <view class="mts">栽种日期</view>
+    <picker mode="date" value="{{ plantDate }}" bindchange="onDate">
+      <view class="field">{{ plantDate }}</view>
+    </picker>
+  </view>
+
+  <button class="btn block mtx" style="margin:0 28rpx" bindtap="save">保存并生成日历</button>
+  <view class="risk" style="margin:20rpx 28rpx">提示：农事节点为综合规范合成版，须经属地农艺师与植保专家终审（PRD §15①）。</view>
+  <view style="height:30rpx"></view>
+</view>

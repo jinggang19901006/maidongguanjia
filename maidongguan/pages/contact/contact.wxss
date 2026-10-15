@@ -1,0 +1,8 @@
+.root { padding-bottom: calc(40rpx + env(safe-area-inset-bottom)); }
+.call { margin:22rpx 28rpx 0; }
+.fcard { background:#fff; border-radius:24rpx; margin:18rpx 28rpx; padding:0 26rpx; box-shadow:0 4rpx 20rpx rgba(31,42,36,.05); }
+.fq { display:flex; justify-content:space-between; align-items:center; padding:26rpx 0; }
+.fq .q { font-size:30rpx; font-weight:600; color:var(--ink); flex:1; padding-right:20rpx; line-height:1.45; }
+.ar { font-size:24rpx; color:var(--green-d); font-weight:700; flex:0 0 auto; }
+.fa { font-size:27rpx; color:var(--sub); line-height:1.65; padding:0 0 26rpx; border-top:1rpx solid var(--line); padding-top:20rpx; }
+.root.elder .q { font-size:36rpx; } .root.elder .fa { font-size:30rpx; }

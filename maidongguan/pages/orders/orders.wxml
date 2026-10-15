@@ -1,0 +1,35 @@
+<view class="root {{ elder ? 'elder' : '' }}">
+  <view class="topbar">
+    <view class="h1">我的订单</view>
+    <view class="badge-geo">🚚 最快 1 小时送达</view>
+  </view>
+
+  <view wx:if="{{ loading }}" class="center"><view class="loading"></view><view class="muted mts">加载中…</view></view>
+
+  <block wx:elif="{{ orders.length === 0 }}">
+    <view class="empty">
+      <image class="empty-img" src="/assets/img/empty.png" mode="aspectFit" />
+      <view class="et">还没有订单</view>
+      <view class="em">在「麦冬农资」选好合规农资即可下单</view>
+      <button class="btn block" style="margin-top:30rpx" bindtap="goMall">去逛逛农资</button>
+    </view>
+  </block>
+
+  <view wx:for="{{ orders }}" wx:key="id" class="ocard">
+    <view class="row between">
+      <view class="xs muted">订单号 {{ item.id }}</view>
+      <view class="ostatus">{{ item.status }}</view>
+    </view>
+    <view class="row between mts">
+      <view class="pname">{{ item.cover }}{{ item.items.length > 1 ? ' 等' + item.items.length + ' 件' : '' }}</view>
+      <view class="price">¥{{ item.total }}</view>
+    </view>
+    <view class="xs muted mts">{{ item.createdAt }}</view>
+    <view class="row between mts">
+      <view class="xs muted">含 {{ item.items.length }} 项 · 合计 ¥{{ item.total }}</view>
+      <view class="btn ghost sm" style="min-height:72rpx" data-items="{{ item.items }}" bindtap="rebuy">再次购买</view>
+    </view>
+  </view>
+
+  <view style="height:40rpx"></view>
+</view>

@@ -1,0 +1,42 @@
+<view class="root {{ elder ? 'elder' : '' }}">
+  <view class="topbar">
+    <view class="h1">购物车</view>
+    <view class="badge-geo">🛒 {{ items.length }} 件</view>
+  </view>
+
+  <view wx:if="{{ loading }}" class="center"><view class="loading"></view></view>
+
+  <block wx:elif="{{ items.length === 0 }}">
+    <view class="empty">
+      <image class="empty-img" src="/assets/img/empty.png" mode="aspectFit" />
+      <view class="et">购物车是空的</view>
+      <view class="em">去农资商城挑选合规好物吧</view>
+      <button class="btn block" style="margin-top:30rpx" bindtap="goMall">去逛逛</button>
+    </view>
+  </block>
+
+  <block wx:else>
+    <view wx:for="{{ items }}" wx:key="id" class="citem">
+      <view class="thumb">{{ item.emoji }}</view>
+      <view class="info">
+        <view class="pname">{{ item.name }}</view>
+        <view class="xs muted">{{ item.use }}</view>
+        <view class="row between mts">
+          <view class="price">¥{{ item.price }}</view>
+          <view class="stepper">
+            <view class="sbtn" data-id="{{ item.id }}" data-delta="{{-1}}" bindtap="changeQty">−</view>
+            <view class="qty">{{ item.qty }}</view>
+            <view class="sbtn" data-id="{{ item.id }}" data-delta="{{1}}" bindtap="changeQty">＋</view>
+          </view>
+        </view>
+      </view>
+      <view class="del" data-id="{{ item.id }}" bindtap="removeItem">删除</view>
+    </view>
+
+    <view class="barfoot">
+      <view>合计 <text class="price">¥{{ total }}</text></view>
+      <button class="btn" bindtap="checkout">去结算</button>
+    </view>
+    <view style="height:160rpx"></view>
+  </block>
+</view>

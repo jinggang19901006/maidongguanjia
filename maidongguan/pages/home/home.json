@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "我的麦冬地",
+  "usingComponents": {
+    "banner": "/components/banner/banner",
+    "disclaimer": "/components/disclaimer/disclaimer"
+  },
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
+}

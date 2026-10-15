@@ -1,0 +1,30 @@
+<view class="root">
+  <view class="topbar">
+    <view class="h1">{{ title }}</view>
+    <view class="badge-geo">{{ tag }}</view>
+  </view>
+
+  <view class="card">
+    <view class="muted sm" style="line-height:1.65">{{ intro }}</view>
+  </view>
+
+  <view class="section-title">方案要点</view>
+  <view wx:for="{{ items }}" wx:key="index" class="card tight">
+    <view class="bold ink">{{ item[0] }}</view>
+    <view class="muted sm mts" style="line-height:1.55">{{ item[1] }}</view>
+  </view>
+
+  <view class="risk" style="margin:8rpx 28rpx">{{ risk }}</view>
+
+  <view class="section-title">方案配套农资</view>
+  <view class="card tight">
+    <view class="row wrap" style="gap:16rpx;margin-top:8rpx">
+      <view wx:for="{{ buys }}" wx:key="id"
+            class="pill green" style="padding:14rpx 22rpx;font-size:26rpx"
+            data-id="{{ item.id }}" bindtap="goBuy">{{ item.name }} ›</view>
+    </view>
+  </view>
+
+  <button class="btn block mtx" style="margin:0 28rpx" bindtap="goMall">去商城选购配套农资</button>
+  <view style="height:30rpx"></view>
+</view>

@@ -1,0 +1,9 @@
+{
+  "name": "addLand",
+  "version": "1.0.0",
+  "description": "川麦冬地块建档（写入云库 lands 集合）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

@@ -1,0 +1,26 @@
+<view class="banner">
+  <view class="banner-track" style="transform: translateX(-{{ idx * 50 }}%)">
+    <view
+      wx:for="{{ items }}"
+      wx:key="key"
+      class="slide {{ index === 0 ? 'a' : 'b' }}"
+      data-key="{{ item.key }}"
+      bindtap="onTap"
+    >
+      <image class="slide-leaf" src="/assets/img/policy_leaf.png" mode="aspectFit" />
+      <view class="tag-hot">{{ item.tag }}</view>
+      <view class="h3">{{ item.title }}</view>
+      <view class="p">{{ item.desc }}</view>
+      <view class="go">查看方案 ›</view>
+    </view>
+  </view>
+  <view class="banner-dots">
+    <view
+      wx:for="{{ items }}"
+      wx:key="key"
+      class="dot {{ idx === index ? 'on' : '' }}"
+      data-i="{{ index }}"
+      bindtap="goBanner"
+    ></view>
+  </view>
+</view>

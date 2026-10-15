@@ -1,0 +1,5 @@
+.root { padding-bottom: 30rpx; }
+.searchbar { display: flex; align-items: center; gap: 14rpx; background: #fff; margin: 16rpx 28rpx; padding: 18rpx 24rpx; border-radius: 36rpx; border: 1rpx solid var(--line); }
+.searchbar .sicon { font-size: 32rpx; opacity: .6; }
+.searchbar .sinput { flex: 1; font-size: 28rpx; color: var(--ink); }
+.searchbar .sclear { font-size: 30rpx; color: var(--sub); padding: 4rpx 12rpx; }

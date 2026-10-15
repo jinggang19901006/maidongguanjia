@@ -1,0 +1,39 @@
+<view class="root {{ elder ? 'elder' : '' }}">
+  <!-- 品牌头部 -->
+  <view class="profile">
+    <view class="p-top">
+      <view class="p-avatar">🌿</view>
+      <view class="p-user">
+        <view class="p-name">麦冬种植户</view>
+        <view class="p-sub">积分 {{ points }} · {{ level }}</view>
+      </view>
+      <view class="p-setting" bindtap="openDisc">📜</view>
+    </view>
+    <view class="p-stats">
+      <view class="ps"><view class="ps-n">{{ landCount }}</view><view class="ps-l">我的地块</view></view>
+      <view class="ps" bindtap="go" data-t="order"><view class="ps-n">{{ orderCount }}</view><view class="ps-l">订单</view></view>
+      <view class="ps"><view class="ps-n">{{ points }}</view><view class="ps-l">积分</view></view>
+    </view>
+  </view>
+
+  <!-- 服务宫格 -->
+  <view class="grid2">
+    <view class="gi" data-t="calendar" bindtap="go"><view class="gi-ico" style="background:#e8f6ee;color:#1a9d4e">🌱</view><view class="gi-t">生命周期</view></view>
+    <view class="gi" data-t="cart" bindtap="go"><view class="gi-ico" style="background:#e7f0fb;color:#1f5fb0">🛒</view><view class="gi-t">购物车</view></view>
+    <view class="gi" data-t="archive" bindtap="go"><view class="gi-ico" style="background:#fdeede;color:#b9740a">📋</view><view class="gi-t">档案溯源</view></view>
+    <view class="gi" data-t="school" bindtap="go"><view class="gi-ico" style="background:#eafaf0;color:#0f7a3a">📚</view><view class="gi-t">农技学堂</view></view>
+    <view class="gi" data-t="home" bindtap="go"><view class="gi-ico" style="background:#f3eafb;color:#7a3ab9">🗺️</view><view class="gi-t">我的麦冬地</view></view>
+    <view class="gi" data-t="kefu" bindtap="go"><view class="gi-ico" style="background:#ffeef0;color:#c62f2f">💬</view><view class="gi-t">专家客服</view></view>
+  </view>
+
+  <!-- 设置 -->
+  <view class="section-title">设置</view>
+  <view class="list-item" bindtap="toggleElder">
+    <view>👴 长辈模式（放大字号）</view>
+    <view class="switch {{ elder ? 'on' : '' }}"><i></i></view>
+  </view>
+  <view class="list-item" bindtap="openDisc">📜 免责声明与风险提示 <view class="arrow">›</view></view>
+
+  <disclaimer visible="{{ discVisible }}" bind:confirm="onDiscConfirm" />
+  <view style="height:40rpx"></view>
+</view>

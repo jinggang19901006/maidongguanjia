@@ -1,0 +1,12 @@
+.root { padding-bottom: calc(40rpx + env(safe-area-inset-bottom)); }
+.ocard { background:#fff; border-radius:28rpx; padding:26rpx 28rpx; margin:22rpx 28rpx; box-shadow:0 4rpx 20rpx rgba(31,42,36,.05); }
+.ostatus { font-size:26rpx; color:var(--amber); font-weight:700; }
+.pname { font-size:30rpx; font-weight:700; color:var(--ink); }
+.price { color:var(--red); font-weight:700; font-size:32rpx; }
+.empty { text-align:center; padding:120rpx 60rpx; }
+.empty .emoji { font-size:96rpx; }
+.empty .et { font-size:34rpx; font-weight:700; margin-top:20rpx; color:var(--ink); }
+.empty .em { font-size:26rpx; color:var(--sub); margin-top:12rpx; }
+.center { text-align:center; padding:120rpx 0; color:var(--sub); }
+.root.elder .pname, .root.elder .et { font-size:38rpx; }
+.root.elder .em, .root.elder .muted { font-size:30rpx; }

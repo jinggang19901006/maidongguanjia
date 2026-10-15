@@ -1,0 +1,27 @@
+<view class="root {{ elder ? 'elder' : '' }}">
+  <view class="topbar">
+    <view class="h1">联系专家 / 客服</view>
+  </view>
+
+  <button class="call" bindtap="call">📞 一键电话咨询农技员</button>
+
+  <view class="card" style="margin-top:22rpx">
+    <view class="bold ink" style="font-size:32rpx">在线问诊</view>
+    <view class="muted sm mts" style="line-height:1.5">拍照上传 + 描述症状，AI 初诊即时，专家人工复核并出电子处方。</view>
+    <button class="btn block mtx" bindtap="goExpert">前往专家诊断</button>
+  </view>
+
+  <view class="section-title">常见问题</view>
+  <view wx:for="{{ faqs }}" wx:key="q" class="fcard">
+    <view class="fq" data-i="{{ index }}" bindtap="toggle">
+      <view class="q">{{ item.q }}</view>
+      <view class="ar {{ open === index ? 'up' : '' }}">{{ open === index ? '收起' : '展开' }}</view>
+    </view>
+    <view wx:if="{{ open === index }}" class="fa">{{ item.a }}</view>
+  </view>
+
+  <view class="card tight" style="margin-top:24rpx">
+    <view class="xs muted" style="line-height:1.6">服务时间：8:00–20:00（川渝地区）｜ 平台仅提供信息与撮合服务，不替代专业农技判断。</view>
+  </view>
+  <view style="height:40rpx"></view>
+</view>
